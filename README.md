@@ -50,6 +50,7 @@ Reach out to us:
 - **Phone/WhatsApp:** +91 97876 92116
 - **Email:** prof.balaji13@gmail.com
 - **LinkedIn:** https://www.linkedin.com/in/profdrsbalaji
+- **Website:** https://www.cbsedigest.github.io
 
 ---
 
