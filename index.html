@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prof. Dr. S. Balaji Science Academy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <div class="logo" onclick="scrollToSection('home')">PROF. DR. S. BALAJI SCIENCE ACADEMY</div>
+            
+            <nav class="nav-desktop">
+                <a href="#about-section" class="nav-link">About</a>
+                <a href="#courses-section" class="nav-link">Courses</a>
+                <a href="#faqs-section" class="nav-link">FAQs</a>
+                <a href="#blog-section" class="nav-link">Blog</a>
+                <a href="#contact-section" class="nav-link">Contact</a>
+                <a href="tel:+919787692116" class="nav-cta">Call</a>
+            </nav>
+
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <nav class="nav-mobile" id="navMobile">
+            <button class="close-menu" id="closeMenu">✕</button>
+            <a href="#about-section" class="nav-link-mobile">About</a>
+            <a href="#courses-section" class="nav-link-mobile">Courses</a>
+            <a href="#faqs-section" class="nav-link-mobile">FAQs</a>
+            <a href="#blog-section" class="nav-link-mobile">Blog</a>
+            <a href="#contact-section" class="nav-link-mobile">Contact</a>
+            <a href="tel:+919787692116" class="nav-link-mobile cta-mobile">Call</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-grid"></div>
+
+        <div class="hero-content">
+            <div class="hero-pill">CLASS 12 · CBSE & TN STATE BOARD</div>
+            
+            <h1 class="hero-title">
+                <span class="blue-text">Score High</span> in Board Exams
+            </h1>
+            
+            <p class="hero-description">
+                Syllabus is same! But, Board Exams and Entrance Exams needs different strategies to succeed. Most students realise this too late.
+            </p>
+            <p class="hero-description">
+                Most coaching is built for entrance exams. We're built for board exams — the one result that shapes your percentage, your college, and your future.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="tel:+919787692116" class="btn btn-primary">Book free demo</a>
+                <a href="#courses-section" class="btn btn-secondary">See Courses</a>
+            </div>
+
+            <!-- Separator -->
+            <div class="hero-separator">
+                <div class="separator-line"></div>
+                <div class="separator-text">The Best Physics & Chemistry Coaching for Class 12 Board Exams</div>
+                <div class="separator-line"></div>
+            </div>
+
+            <!-- Name Card -->
+            <div class="name-card">
+                <h3>Prof. Dr. S. Balaji</h3>
+                <p class="degree">M.Sc., Ph.D.</p>
+                <p class="meta">IIT Madras Postdoc · 25+ yrs teaching</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT THE PROF -->
+    <section class="about" id="about-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">ABOUT ME</p>
+                <h2 class="section-title">The mind behind the method.</h2>
+                <p class="section-subtitle">25+ years of teaching, an IIT Madras postdoc, and 50+ international publications — all in service of one goal: your board exam success.</p>
+            </div>
+            <div class="about-content">
+                <p>With a strong foundation in chemistry and a focus on electrochemistry and nanomaterials, I have cultivated a diverse academic and research career.</p>
+                <p>I hold a PhD in Physical Chemistry from the University of Madras (1999), following my Postdoctoral Fellowships at the prestigious Indian Institute of Technology (IIT) Madras (1998) and Sunchon National University in South Korea (2005–2007), where I worked in the Department of Chemical Engineering.</p>
+                
+                <div id="readMoreContent" class="read-more-content">
+                    <p>My research further expanded during a visiting scientist tenure at Jawaharlal Nehru Centre for Advanced Scientific Research (JNCASR), Bengaluru, focusing on nanomaterials and nanoelectrocatalysis in 2010.</p>
+                    <p>I was also honoured to be selected as a Brainpool Research Fellow at Sunchon National University from 2014 to 2015 — one of only 32 researchers worldwide chosen by the Government of South Korea for groundbreaking research in electrochemistry.</p>
+                    <p>My academic journey began with a Bachelor of Science in Chemistry from the University of Madras (1986–1989), where I graduated first in my class, and continued with a Master of Science in Applied Chemistry from Anna University (1989–1991), earning first-class distinction.</p>
+                </div>
+
+                <button class="read-more-btn" id="readMoreBtn">Read More</button>
+
+                <div class="about-cta">
+                    <a href="https://www.linkedin.com/in/profdrsbalaji" class="linkedin-btn">Connect via LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSES -->
+    <section class="courses" id="courses-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">COURSES OFFERED</p>
+                <h2 class="section-title">Find your course.</h2>
+                <p class="section-subtitle">Board-focused, concept-first coaching for Class 12 and beyond — pick the course that fits your curriculum.</p>
+            </div>
+
+            <div class="courses-grid">
+                <!-- CBSE Card -->
+                <div class="course-card">
+                    <div class="pill-group">
+                        <span class="pill-badge">LIMITED SEATS</span>
+                        <span class="pill-badge">ONLINE & IN-PERSON</span>
+                    </div>
+                    <h3 class="course-board">CBSE</h3>
+                    <p class="course-class">Class 12</p>
+                    <p class="course-subjects">PHYSICS & CHEMISTRY</p>
+                    <p class="course-description">Complete NCERT syllabus, <strong>concept-first teaching</strong>, and <strong>regular practice tests</strong>. Walk into your board exam confident and prepared.</p>
+                    <div class="batch-timings">
+                        <div class="batch-left">
+                            <p class="batch-title">Weekday Batch</p>
+                            <p class="batch-days">Mon to Sat</p>
+                            <p class="batch-time">5:30 AM – 6:30 AM</p>
+                        </div>
+                        <div class="batch-divider">|</div>
+                        <div class="batch-right">
+                            <p class="batch-title">Weekend Batch</p>
+                            <p class="batch-schedule">Sat 6:00 PM – 8:30 PM<br>Sun 6:00 AM – 8:30 AM</p>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/919787692116" class="course-cta">Attend Free Demo →</a>
+                </div>
+
+                <!-- TN State Board Card -->
+                <div class="course-card">
+                    <div class="pill-group">
+                        <span class="pill-badge">LIMITED SEATS</span>
+                        <span class="pill-badge">ONLINE & IN-PERSON</span>
+                    </div>
+                    <h3 class="course-board tnboard">TN STATE BOARD</h3>
+                    <p class="course-class">Class 12</p>
+                    <p class="course-subjects">PHYSICS & CHEMISTRY</p>
+                    <p class="course-description">Complete TN State Board syllabus, <strong>concept-first teaching</strong>, and <strong>regular practice tests</strong>. Walk into your board exam confident and prepared.</p>
+                    <div class="batch-timings batch-single">
+                        <div class="batch-center">
+                            <p class="batch-title">Weekday Batch</p>
+                            <p class="batch-days">Mon to Sat</p>
+                            <p class="batch-time">6:30 AM – 7:30 AM</p>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/919787692116" class="course-cta">Attend Free Demo →</a>
+                </div>
+            </div>
+
+            <!-- CBSE Digest Card -->
+            <div class="cbse-digest-card" onclick="window.location.href='cbse-digest.html'" style="cursor: pointer;">
+                <div class="digest-left">
+                    <h3>CBSE Digest</h3>
+                    <div class="digest-flow">
+                        <span class="flow-item">watch the lecture</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-item">understand the concepts</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-item">read the notes</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-item">practice</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-item">score 100 marks</span>
+                    </div>
+                    <p class="digest-description">Free Class 10 Science lectures with notes — everything you need to ace your board exams.</p>
+                    <a href="cbse-digest.html" class="digest-cta">Subscribe on YouTube →</a>
+                </div>
+                <div class="digest-right">
+                    <div class="youtube-mockup">
+                        <div class="video-player">
+                            <img src="assets/images/chapter1-thumbnail.jpg" alt="Chapter 1">
+                            <div class="play-icon">▶</div>
+                        </div>
+                        <div class="video-suggestions">
+                            <p class="video-title">Chapter 1: Intro to Science</p>
+                            <div class="suggestion-item">Chapter 2: Forces</div>
+                            <div class="suggestion-item">Chapter 3: Energy</div>
+                            <div class="suggestion-item">Chapter 4: Waves</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODES -->
+    <section class="modes" id="modes-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">HOW TO ATTEND</p>
+                <h2 class="section-title">Same professor. Your choice of classroom.</h2>
+                <p class="section-subtitle">Attend in person if you're in Kanchipuram, or join live from anywhere in the world — same batch, same quality.</p>
+            </div>
+
+            <div class="modes-container">
+                <div class="mode-card classroom">
+                    <div class="mode-image">
+                        <img src="assets/images/mode-classroom.jpg" alt="Classroom" loading="lazy">
+                        <h3 class="mode-image-title">CLASSROOM</h3>
+                    </div>
+                    <div class="mode-card-content">
+                        <p class="mode-description">Learn face-to-face at our coaching centre — structured, focused, and deeply personal.</p>
+                        <ul class="mode-features">
+                            <li>Direct access to the professor</li>
+                            <li>Instant doubt clearing in class</li>
+                            <li>Weekly practice tests on-site</li>
+                            <li>Focused, distraction-free environment</li>
+                        </ul>
+                        <a href="https://maps.app.goo.gl/HRtqZ7h7q2wzd7sp9" class="mode-cta">Visit Location →</a>
+                    </div>
+                </div>
+
+                <div class="mode-card online">
+                    <div class="mode-image">
+                        <img src="assets/images/mode-online.jpg" alt="Online" loading="lazy">
+                        <h3 class="mode-image-title">ONLINE</h3>
+                    </div>
+                    <div class="mode-card-content">
+                        <p class="mode-description">Join live classes on Google Meet — same professor, same quality, no matter where you are.</p>
+                        <ul class="mode-features">
+                            <li>Live sessions via Google Meet</li>
+                            <li>Same batch, same syllabus</li>
+                            <li>Study from home — zero commute</li>
+                            <li>Open to students across the globe</li>
+                        </ul>
+                        <a href="https://wa.me/919787692116" class="mode-cta">Get Access Link →</a>
+                    </div>
+                </div>
+
+                <div class="mode-card hybrid">
+                    <div class="mode-image">
+                        <img src="assets/images/mode-hybrid.jpg" alt="Hybrid" loading="lazy">
+                        <h3 class="mode-image-title">HYBRID</h3>
+                    </div>
+                    <div class="mode-card-content">
+                        <p class="mode-description">Best of both worlds - Learn face-to-face at our Classroom or Join live classes on Google Meet.</p>
+                        <ul class="mode-features">
+                            <li>Direct access to the classroom</li>
+                            <li>Live sessions via Google Meet</li>
+                            <li>Never miss any classes</li>
+                            <li>Open to students in Kanchipuram</li>
+                        </ul>
+                        <a href="https://wa.me/919787692116" class="mode-cta">Get Started →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="faqs" id="faqs-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">FAQS</p>
+                <h2 class="section-title">Got questions? We've got answers.</h2>
+                <p class="section-subtitle">Everything you need to know before booking your free demo class.</p>
+            </div>
+
+            <div class="faq-filters">
+                <button class="faq-filter-btn active" data-filter="course">Course</button>
+                <button class="faq-filter-btn" data-filter="fees">Fees</button>
+                <button class="faq-filter-btn" data-filter="flexibility">Flexibility</button>
+            </div>
+
+            <div class="faq-grid">
+                <!-- COURSE Category -->
+                <div class="faq-item course" data-category="course">
+                    <div class="faq-question">
+                        <span>Who can join these classes?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">Students in Class 12 under CBSE or TN State Board can join. Classes are open to both beginners starting from scratch and students looking to revise and strengthen their concepts before exams.</div>
+                </div>
+
+                <div class="faq-item course" data-category="course">
+                    <div class="faq-question">
+                        <span>What is the course duration?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">The course runs all the way through to your board exams, regardless of when you join. Once the full syllabus is covered, we move into structured revision and a practice test series — with personalised feedback to help each student identify gaps and reach their target score. That said, we recommend joining as early as possible to get the most out of the program.</div>
+                </div>
+
+                <div class="faq-item course" data-category="course">
+                    <div class="faq-question">
+                        <span>What subjects are taught?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">Physics and Chemistry for Class 12 (both CBSE and TN State Board). For Class 10 CBSE Science, video lessons are available for free on our YouTube channel — covering concepts, formulas, diagrams, and NCERT questions with notes focusing on board exams.</div>
+                </div>
+
+                <div class="faq-item course" data-category="course">
+                    <div class="faq-question">
+                        <span>How is the teaching approach different?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">Prof. Dr. S. Balaji uses a concept-first teaching method — building strong fundamentals before moving to problem solving. Regular practice tests are conducted to track each student's progress, and the small batch size ensures personalized attention.</div>
+                </div>
+
+                <!-- FEES Category -->
+                <div class="faq-item fees hidden" data-category="fees">
+                    <div class="faq-question">
+                        <span>Is there a free demo class?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">Yes! We offer a free demo class with absolutely no commitment required. Just Call or WhatsApp us before coming to the class in-person or to get the Google Meet invite to attend online.</div>
+                </div>
+
+                <div class="faq-item fees hidden" data-category="fees">
+                    <div class="faq-question">
+                        <span>How much is the fees?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">We'd love to share the fee details with you personally! Drop us a WhatsApp message or give us a call — we'll answer all your questions and help you find the right batch too.</div>
+                </div>
+
+                <div class="faq-item fees hidden" data-category="fees">
+                    <div class="faq-question">
+                        <span>What is CBSE Digest? Is it completely free?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">CBSE Digest is a complete Class 10 Science lecture series on YouTube — and yes, it is 100% free. Every chapter is covered from the basics all the way through to what you need for your board exams. The series includes concept explanations, theory, exam-focused lessons, and notes — everything a Class 10 student needs in one place.</div>
+                </div>
+
+                <!-- FLEXIBILITY Category -->
+                <div class="faq-item flexibility hidden" data-category="flexibility">
+                    <div class="faq-question">
+                        <span>Can I attend classes online? Can I switch between online and in-person?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">Yes, classes are conducted live via Google Meet — you can attend from anywhere in the world. We use professional-grade audio and video to make online classes feel just like being in the classroom. Call us to receive your access link and batch details before the session begins. Switching is completely flexible. If you've enrolled for in-person classes but can't make it on a particular day, you can simply join online — so you never miss a session.</div>
+                </div>
+
+                <div class="faq-item flexibility hidden" data-category="flexibility">
+                    <div class="faq-question">
+                        <span>What are the batches available?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">We offer two batches for CBSE students — a weekday batch and a weekend batch — so you can choose what fits your schedule. For TN State Board students, we currently run a weekday batch. For exact timings, refer to the Courses section above.</div>
+                </div>
+
+                <div class="faq-item flexibility hidden" data-category="flexibility">
+                    <div class="faq-question">
+                        <span>Where are the classroom sessions held?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">Classroom sessions are held in Kanchipuram. If you are nearby, you are welcome to attend in person. The exact address is available on Google Maps — find the link in the Contact section of this website.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG -->
+    <section class="blog" id="blog-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">BLOG & UPDATES</p>
+                <h2 class="section-title">Board Exam Insider</h2>
+                <p class="section-subtitle">Free articles on exam strategy — written for students and parents who want the full picture.</p>
+            </div>
+
+            <div class="blog-content">
+                <div class="blog-card">
+                    <h3>What schools don't tell students about board exams — written plainly.</h3>
+                    <p>How toppers really prepare. What the paper-setter actually rewards. The patterns most students miss — backed by 25+ years in the classroom.</p>
+                    <a href="https://profbalaji.substack.com/" class="blog-cta-link">Read free articles →</a>
+                    <div class="blog-stats">
+                        <div class="stat">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Years teaching</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Research publications</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">Free</span>
+                            <span class="stat-label">Always, no sign-up</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-carousel-wrapper">
+                    <button class="carousel-arrow carousel-arrow-prev" id="carouselPrev">❮</button>
+                    <div class="blog-carousel">
+                        <div class="carousel-container" id="carouselContainer">
+                            <div class="carousel-item">
+                                <div class="article-thumbnail">
+                                    <img src="assets/images/article1.jpg" alt="Article 1" loading="lazy">
+                                </div>
+                                <p class="article-title">How Toppers Study Board Exams</p>
+                                <a href="https://open.substack.com/pub/profbalaji/p/board-exam-strategy?r=88mkmt&utm_campaign=post&utm_medium=web" class="article-link">Read →</a>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="article-thumbnail">
+                                    <img src="assets/images/article2.jpg" alt="Article 2" loading="lazy">
+                                </div>
+                                <p class="article-title">10 Days Before Board Exams</p>
+                                <a href="https://open.substack.com/pub/profbalaji/p/physics-cbse-strategy?r=88mkmt&utm_campaign=post&utm_medium=web" class="article-link">Read →</a>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="article-thumbnail">
+                                    <img src="assets/images/article3.jpg" alt="Article 3" loading="lazy">
+                                </div>
+                                <p class="article-title">Understanding Board Exam Patterns</p>
+                                <a href="https://open.substack.com/pub/profbalaji/p/how-answer-sheets-are-corrected-cbse-board-exams?r=88mkmt&utm_campaign=post&utm_medium=web" class="article-link">Read →</a>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="article-thumbnail">
+                                    <img src="assets/images/article4.jpg" alt="Article 4" loading="lazy">
+                                </div>
+                                <p class="article-title">Time Management Tips</p>
+                                <a href="https://open.substack.com/pub/profbalaji/p/class-10-science-get-started?r=88mkmt&utm_campaign=post&utm_medium=web" class="article-link">Read →</a>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="article-thumbnail">
+                                    <img src="assets/images/article5.jpg" alt="Article 5" loading="lazy">
+                                </div>
+                                <p class="article-title">Revision Strategies</p>
+                                <a href="https://open.substack.com/pub/profbalaji/p/nobody-told-you-this-about-class-12?r=88mkmt&utm_campaign=post&utm_medium=web" class="article-link">Read →</a>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="article-thumbnail">
+                                    <img src="assets/images/article6.jpg" alt="Article 6" loading="lazy">
+                                </div>
+                                <p class="article-title">Stress Management for Exams</p>
+                                <a href="https://open.substack.com/pub/profbalaji/p/physics-95-cbse-class-12?r=88mkmt&utm_campaign=post&utm_medium=web" class="article-link">Read →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-next" id="carouselNext">❯</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">CONTACT ME</p>
+                <h2 class="section-title">Let's get you started.</h2>
+                <p class="section-subtitle">Call or WhatsApp us to book your free demo class — in person in Kanchipuram or online from anywhere in the world.</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>CLASSROOM ADDRESS</h3>
+                    <p class="academy-name">Prof. Dr. S. Balaji Science Academy</p>
+                    <p class="academy-address">No. 26, Avvai Street, Athiyaman Nagar, Kanchipuram – 631 501</p>
+                    <p class="academy-phone">+91 97876 92116</p>
+                    <div class="contact-buttons">
+                        <a href="https://maps.app.goo.gl/HRtqZ7h7q2wzd7sp9" class="contact-btn maps-btn">Google Maps</a>
+                        <a href="tel:+919787692116" class="contact-btn call-btn">Call</a>
+                        <a href="https://wa.me/919787692116" class="contact-btn whatsapp-btn">WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <h3 class="inquiry-heading">Inquiry</h3>
+                    <form class="contact-form" id="contactForm" onsubmit="return false;">
+                        <div class="form-group">
+                            <label>Select your Board</label>
+                            <div class="form-buttons">
+                                <button type="button" class="form-btn" data-select="board" data-value="cbse">CBSE</button>
+                                <button type="button" class="form-btn" data-select="board" data-value="tnboard">TN State Board</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Choose your Preference</label>
+                            <div class="form-buttons form-buttons-row">
+                                <button type="button" class="form-btn" data-select="mode" data-value="classroom">Classroom</button>
+                                <button type="button" class="form-btn" data-select="mode" data-value="online">Online</button>
+                                <button type="button" class="form-btn" data-select="mode" data-value="hybrid">Hybrid</button>
+                            </div>
+                        </div>
+
+                        <button type="button" class="form-submit" id="submitBtn" disabled>Send Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-icons">
+            <a href="tel:+919787692116" class="footer-icon phone" title="Call">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.29 21 3 14.71 3 6c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+            </a>
+            <a href="mailto:prof.balaji13@gmail.com" class="footer-icon mail" title="Email">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+            </a>
+            <a href="https://g.co/kgs/EkVWVxL" class="footer-icon business" title="Google Business">
+                <img src="assets/icons/google-business.svg" alt="Google Business">
+            </a>
+            <a href="https://www.linkedin.com/in/profdrsbalaji" class="footer-icon linkedin" title="LinkedIn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.469v6.766z"/>
+                </svg>
+            </a>
+            <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" class="footer-icon scholar" title="Google Scholar">
+                <img src="assets/icons/google-scholar.svg" alt="Google Scholar">
+            </a>
+            <a href="https://profbalaji.substack.com/" class="footer-icon substack" title="Substack">
+                <img src="assets/icons/substack.svg" alt="Substack">
+            </a>
+            <a href="https://www.youtube.com/@CBSEdigest" class="footer-icon youtube" title="YouTube">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/>
+                </svg>
+            </a>
+        </div>
+        <p class="footer-copyright">© 2026 Prof. Dr. S. Balaji. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
