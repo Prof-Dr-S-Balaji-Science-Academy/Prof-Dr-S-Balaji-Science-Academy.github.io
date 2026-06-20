@@ -23,7 +23,7 @@ The site includes:
 
 ## Live Website
 
-Visit the live website at: `https://besandeep21.github.io/`
+Visit the live website at: `https://profbalaji.in`
 
 ## Repository Structure
 
