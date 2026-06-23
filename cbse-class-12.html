@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBSE Class 12 Physics & Chemistry | Prof. Dr. S. Balaji</title>
+    <meta name="description" content="Complete CBSE Class 12 Physics & Chemistry coaching. Board exam-focused preparation with concept-first teaching.">
+    <meta name="keywords" content="CBSE Class 12, Physics, Chemistry, Board Exams">
+    <meta property="og:title" content="CBSE Class 12 Coaching | Prof. Dr. S. Balaji">
+    <meta property="og:description" content="Complete CBSE Class 12 Physics & Chemistry coaching. Board exam-focused preparation.">
+    <meta property="og:url" content="https://profbalaji.in/cbse-class-12.html">
+    <link rel="canonical" href="https://profbalaji.in/cbse-class-12.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .course-hero {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(135deg, #0d2ad4 0%, rgba(13, 42, 212, 0.05) 100%);
+        }
+
+        .course-hero .section-container {
+            max-width: 1200px;
+        }
+
+        .course-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .course-hero-left {
+            z-index: 2;
+        }
+
+        .course-pill {
+            display: inline-block;
+            background: rgba(13, 42, 212, 0.15);
+            color: #0d2ad4;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(13, 42, 212, 0.2);
+        }
+
+        .course-hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .blue-highlight {
+            color: #0d2ad4;
+        }
+
+        .course-divider {
+            width: 60px;
+            height: 4px;
+            background: #0d2ad4;
+            margin: 1.5rem 0 2rem 0;
+            border-radius: 2px;
+        }
+
+        .course-hero-description {
+            font-size: 1.05rem;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .course-highlights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-badge {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #0d2ad4;
+        }
+
+        .highlight-badge-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0d2ad4;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .highlight-badge-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .course-hero-right {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .course-info-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .course-info-icon {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 1rem;
+            color: #0d2ad4;
+        }
+
+        .course-info-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #0d2ad4;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-info-content {
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .course-section {
+            padding: 4rem 1.5rem;
+        }
+
+        .course-section:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .course-section .section-container {
+            max-width: 1200px;
+        }
+
+        .batches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .batch-card {
+            background: white;
+            border: 2px solid #0d2ad4;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .batch-icon-svg {
+            width: 50px;
+            height: 50px;
+            color: #0d2ad4;
+            margin: 0 auto 1rem;
+        }
+
+        .batch-card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .batch-card-days {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .batch-card-time {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0d2ad4;
+            margin-bottom: 1.5rem;
+        }
+
+        .batch-card-extra {
+            font-size: 0.85rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .mode-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .mode-item:hover {
+            box-shadow: 0 8px 24px rgba(13, 42, 212, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .mode-icon-svg {
+            width: 55px;
+            height: 55px;
+            color: #0d2ad4;
+            margin: 0 auto 1rem;
+        }
+
+        .mode-item-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.8rem;
+        }
+
+        .mode-item-desc {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .program-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-item-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #0d2ad4;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .highlight-item-icon {
+            width: 40px;
+            height: 40px;
+            color: #0d2ad4;
+            flex-shrink: 0;
+        }
+
+        .highlight-item-content {
+            text-align: left;
+        }
+
+        .highlight-item-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .highlight-item-desc {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .special-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #0d2ad4 0%, #4952d4 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .special-card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .special-card-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .course-cta-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .course-cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .course-cta-button {
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 2px solid #0d2ad4;
+        }
+
+        .course-cta-button.primary {
+            background: #0d2ad4;
+            color: white;
+        }
+
+        .course-cta-button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(13, 42, 212, 0.3);
+        }
+
+        .course-cta-button.secondary {
+            background: transparent;
+            color: #0d2ad4;
+        }
+
+        .course-cta-button.secondary:hover {
+            background: #0d2ad4;
+            color: white;
+        }
+
+        @media (max-width: 1024px) {
+            .course-hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .course-hero-right {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .course-hero-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .course-hero {
+                padding: 2rem 1.5rem;
+            }
+
+            .course-hero-title {
+                font-size: 1.5rem;
+            }
+
+            .course-highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-hero-right {
+                grid-template-columns: 1fr;
+            }
+
+            .batches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .program-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .special-card {
+                grid-column: auto;
+            }
+
+            .course-cta-buttons {
+                flex-direction: column;
+            }
+
+            .course-cta-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+            
+            <nav class="nav-desktop">
+                <a href="index.html#about-section" class="nav-link">About</a>
+                <a href="index.html#courses-section" class="nav-link">Courses</a>
+                <a href="index.html#faqs-section" class="nav-link">FAQs</a>
+                <a href="index.html#blog-section" class="nav-link">Blog</a>
+                <a href="index.html#contact-section" class="nav-link">Contact</a>
+                <a href="tel:+919787692116" class="nav-cta">Call</a>
+            </nav>
+
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav class="nav-mobile" id="navMobile">
+            <button class="close-menu" id="closeMenu">✕</button>
+            <a href="index.html#about-section" class="nav-link-mobile">About</a>
+            <a href="index.html#courses-section" class="nav-link-mobile">Courses</a>
+            <a href="index.html#faqs-section" class="nav-link-mobile">FAQs</a>
+            <a href="index.html#contact-section" class="nav-link-mobile">Contact</a>
+            <a href="tel:+919787692116" class="nav-link-mobile cta-mobile">Call</a>
+        </nav>
+    </header>
+
+    <!-- COURSE HERO -->
+    <section class="course-hero">
+        <div class="section-container">
+            <div class="course-hero-grid">
+                <div class="course-hero-left">
+                    <div class="course-pill">CBSE · CLASS 12 · PHYSICS & CHEMISTRY</div>
+                    
+                    <h1 class="course-hero-title">
+                        Complete Preparation.<br>
+                        <span class="blue-highlight">Confident Performance.</span>
+                    </h1>
+
+                    <div class="course-divider"></div>
+
+                    <p class="course-hero-description">
+                        A comprehensive program for CBSE Class 12 students covering the entire syllabus with concept-first teaching, regular practice, doubt clearing and full-length exams till the board exams.
+                    </p>
+
+                    <div class="course-highlights-grid">
+                        <div class="highlight-badge">
+                            <div class="highlight-badge-label">BATCH STRENGTH</div>
+                            <div class="highlight-badge-text">Small Batches Only</div>
+                        </div>
+                        <div class="highlight-badge">
+                            <div class="highlight-badge-label">DURATION</div>
+                            <div class="highlight-badge-text">Till Board Exams</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-hero-right">
+                    <div class="course-info-card">
+                        <svg class="course-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <div class="course-info-label">WEEKDAY BATCH</div>
+                        <div class="course-info-content">
+                            Mon – Fri<br>
+                            5:30 AM – 6:30 AM
+                        </div>
+                    </div>
+
+                    <div class="course-info-card">
+                        <svg class="course-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <div class="course-info-label">WEEKEND BATCH</div>
+                        <div class="course-info-content">
+                            Sat 6:00 PM – 8:30 PM<br>
+                            Sun 6:00 AM – 8:30 AM
+                        </div>
+                    </div>
+
+                    <div class="course-info-card">
+                        <svg class="course-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <div class="course-info-label">LIVE DOUBT</div>
+                        <div class="course-info-content">
+                            Clearing in Class
+                        </div>
+                    </div>
+
+                    <div class="course-info-card">
+                        <svg class="course-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L15.09 8.26H22L17.54 12.88L19.63 19.74L12 15.12L4.37 19.74L6.46 12.88L2 8.26H8.91L12 2Z"/>
+                        </svg>
+                        <div class="course-info-label">EXPERT FACULTY</div>
+                        <div class="course-info-content">
+                            25+ Yrs Teaching
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BATCH OPTIONS -->
+    <section class="course-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">— BATCH OPTIONS —</p>
+                <h2 class="section-title">Choose what works for you</h2>
+            </div>
+
+            <div class="batches-grid">
+                <div class="batch-card">
+                    <svg class="batch-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+                    </svg>
+                    <h3 class="batch-card-title">Weekday Batch</h3>
+                    <p class="batch-card-days">Mon – Fri</p>
+                    <p class="batch-card-time">5:30 AM – 6:30 AM</p>
+                    <p class="batch-card-extra">1 hour daily</p>
+                </div>
+
+                <div class="batch-card">
+                    <svg class="batch-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+                    </svg>
+                    <h3 class="batch-card-title">Weekend Batch</h3>
+                    <p class="batch-card-days">Sat & Sun</p>
+                    <p class="batch-card-time">2.5 hours each day</p>
+                    <p class="batch-card-extra">Full day sessions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW TO ATTEND -->
+    <section class="course-section" style="background: #f9f9f9;">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">— HOW TO ATTEND —</p>
+                <h2 class="section-title">Three ways to join</h2>
+            </div>
+
+            <div class="modes-grid">
+                <div class="mode-item">
+                    <svg class="mode-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <h3 class="mode-item-name">Classroom</h3>
+                    <p class="mode-item-desc">Learn in-person at our center in Kanchipuram with direct access to the professor.</p>
+                </div>
+
+                <div class="mode-item">
+                    <svg class="mode-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 7l-7 5 7 5V7z"/>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                    </svg>
+                    <h3 class="mode-item-name">Online</h3>
+                    <p class="mode-item-desc">Live sessions via Google Meet. Join from anywhere in the world.</p>
+                </div>
+
+                <div class="mode-item">
+                    <svg class="mode-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                        <path d="M12 12h8"/>
+                    </svg>
+                    <h3 class="mode-item-name">Hybrid</h3>
+                    <p class="mode-item-desc">Flexible mix — attend in-person or online based on your schedule.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAM HIGHLIGHTS -->
+    <section class="course-section">
+        <div class="section-container">
+            <div class="section-header">
+                <p class="section-label">— WHAT YOU GET —</p>
+                <h2 class="section-title">A structured path to board exam success</h2>
+            </div>
+
+            <div class="program-highlights">
+                <div class="highlight-item-card">
+                    <svg class="highlight-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                    <div class="highlight-item-content">
+                        <div class="highlight-item-title">Complete Syllabus Coverage</div>
+                        <div class="highlight-item-desc">Every chapter, every topic, every important concept systematically taught.</div>
+                    </div>
+                </div>
+
+                <div class="highlight-item-card">
+                    <svg class="highlight-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <div class="highlight-item-content">
+                        <div class="highlight-item-title">Live Doubt Clearing</div>
+                        <div class="highlight-item-desc">Ask questions anytime during class. No doubt left unanswered.</div>
+                    </div>
+                </div>
+
+                <div class="highlight-item-card">
+                    <svg class="highlight-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                    </svg>
+                    <div class="highlight-item-content">
+                        <div class="highlight-item-title">Regular Practice Tests</div>
+                        <div class="highlight-item-desc">Weekly tests to track progress and identify weak areas early.</div>
+                    </div>
+                </div>
+
+                <div class="highlight-item-card">
+                    <svg class="highlight-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <div class="highlight-item-content">
+                        <div class="highlight-item-title">Concept-First Teaching</div>
+                        <div class="highlight-item-desc">Build strong fundamentals before jumping to complex problems.</div>
+                    </div>
+                </div>
+
+                <div class="highlight-item-card">
+                    <svg class="highlight-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                        <polyline points="10 17 14 13 10 9"/>
+                    </svg>
+                    <div class="highlight-item-content">
+                        <div class="highlight-item-title">Full-Length Exams</div>
+                        <div class="highlight-item-desc">Mock exams matching the actual board exam format and difficulty.</div>
+                    </div>
+                </div>
+
+                <div class="special-card">
+                    <div class="special-card-title">📅 Program runs till Board Exams</div>
+                    <div class="special-card-subtitle">Enroll at any point and continue till your board exams</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="course-section">
+        <div class="section-container">
+            <div class="course-cta-section">
+                <h2 class="section-title" style="margin-bottom: 1rem;">Ready to begin your board exam preparation?</h2>
+                <p style="font-size: 1.05rem; color: #666; margin-bottom: 2rem;">Book your free demo class today. No commitment required.</p>
+                
+                <div class="course-cta-buttons">
+                    <a href="tel:+919787692116" class="course-cta-button primary">Book Free Demo</a>
+                    <a href="https://wa.me/919787692116?text=Hi%2C%20I%27m%20interested%20in%20CBSE%20Class%2012%20coaching" class="course-cta-button secondary">WhatsApp Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-icons">
+            <a href="tel:+919787692116" class="footer-icon phone" title="Call">
+                <i class="bi bi-telephone-fill"></i>
+            </a>
+            <a href="mailto:prof.balaji13@gmail.com" class="footer-icon mail" title="Email">
+                <i class="bi bi-envelope-at-fill"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/profdrsbalaji" class="footer-icon linkedin" title="LinkedIn">
+                <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="https://www.youtube.com/@CBSEdigest" class="footer-icon youtube" title="YouTube">
+                <i class="bi bi-youtube"></i>
+            </a>
+        </div>
+        <p class="footer-copyright">© 2026 Prof. Dr. S. Balaji. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
