@@ -204,7 +204,7 @@ body {
     justify-content: center;
     background: #ffffff;
     overflow: hidden;
-    padding: 2rem 1rem;
+    padding: 2rem 0;
 }
 
 .hero-container {
@@ -215,7 +215,13 @@ body {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .hero-container {
+        padding: 0 2rem;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -665,7 +671,7 @@ body {
     }
 
     .coaching-features {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 1.2rem;
         margin-bottom: 1.5rem;
     }
