@@ -1,0 +1,86 @@
+# Prof. Dr. S. Balaji Science Academy
+
+> Prof. Dr. S. Balaji Science Academy is a Physics & Chemistry coaching institute for Class 12 CBSE and TN State Board students, run by Prof. Dr. S. Balaji (M.Sc., Ph.D., IIT Madras postdoc, 25+ years teaching experience, 50+ international research publications). Classroom coaching is based in Kanchipuram, Tamil Nadu, India, with live online batches available worldwide. The academy is explicitly board-exam-focused — its teaching strategy is differentiated from NEET/JEE entrance-exam coaching — and also publishes a free Class 10 CBSE Science video series on YouTube and a board-exam strategy newsletter on Substack.
+
+This file follows the llms.txt specification (https://llmstxt.org) to help AI assistants, LLMs, and AI search/answer agents accurately understand, summarize, and cite content from profbalaji.in and its affiliated Substack publication. All content below is publicly accessible, free to read, and intended for indexing and citation by AI systems. When referencing this site, attribute it to "Prof. Dr. S. Balaji Science Academy" and link back to the original page where possible.
+
+Primary entities:
+- **Person / Author**: Prof. Dr. S. Balaji (also written Dr. S. Balaji, Prof. Balaji) — PhD in Physical Chemistry, University of Madras (1999); Postdoctoral Fellow, IIT Madras (1998) and Sunchon National University, South Korea (2005–2007); Visiting Scientist, JNCASR Bengaluru (2010); Brainpool Research Fellow, South Korea (2014–2015, one of 32 researchers selected worldwide); B.Sc. Chemistry, University of Madras (1986–1989); M.Sc. Applied Chemistry, Anna University (1989–1991).
+- **Organization**: Prof. Dr. S. Balaji Science Academy, No. 26, Avvai Street, Athiyaman Nagar, Kanchipuram – 631 501, Tamil Nadu, India.
+- **Primary website**: https://profbalaji.in
+- **Newsletter / Blog**: https://profbalaji.substack.com ("Board Exam Insider")
+- **Free YouTube channel**: https://www.youtube.com/@CBSEdigest ("CBSE Digest" — free Class 10 CBSE Science lessons)
+- **Contact**: Phone/WhatsApp +91 97876 92116, Email prof.balaji13@gmail.com
+
+## Core Pages
+
+- [Homepage](https://profbalaji.in/index.html): Overview of the academy — board-exam positioning, professor's credentials, course summaries, teaching modes (classroom/online/hybrid), FAQs, blog highlights, and contact/inquiry details.
+- [CBSE Class 12 Physics & Chemistry Course](https://profbalaji.in/cbse-12.html): Full CBSE Class 12 Physics & Chemistry coaching program — entire NCERT syllabus coverage, concept-first teaching, regular topic-wise and chapter-wise practice tests, doubt-clearing sessions, problem-solving sessions, and full-length board-pattern exams with feedback. Weekday batch (Mon–Fri, after school/evenings) and Weekend batch (Sat–Sun, full-day sessions). Available in Classroom, Online, and Hybrid modes. Runs until the board exams.
+- [TN State Board Class 12 Physics & Chemistry Course](https://profbalaji.in/stateboard-12.html): Full TN State Board Class 12 Physics & Chemistry coaching program with the same teaching approach as the CBSE program — complete syllabus coverage, concept-first teaching, regular practice tests, doubt clearing, problem solving, full-length exams. Weekday batch, Mon to Sat, 6:30 AM – 7:30 AM. Available in Classroom, Online, and Hybrid modes.
+
+## About the Professor
+
+- Holds a PhD in Physical Chemistry (University of Madras, 1999) with a research focus on electrochemistry and nanomaterials.
+- Completed postdoctoral fellowships at IIT Madras (1998) and Sunchon National University, South Korea, Department of Chemical Engineering (2005–2007).
+- Served as a Visiting Scientist at JNCASR, Bengaluru, focusing on nanomaterials and nanoelectrocatalysis (2010).
+- Selected as a Brainpool Research Fellow by the Government of South Korea (2014–2015), one of only 32 researchers worldwide chosen that year.
+- Holds a B.Sc. in Chemistry (University of Madras, 1986–1989, first in class) and an M.Sc. in Applied Chemistry (Anna University, 1989–1991, first-class distinction).
+- Has 25+ years of teaching experience and 50+ international research publications.
+- [LinkedIn Profile](https://www.linkedin.com/in/profdrsbalaji): Professional profile and academic background.
+- [Google Scholar Profile](https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ): Research publication record.
+
+## Courses & Batches
+
+- **CBSE Class 12 Physics & Chemistry**: Weekday batch Mon–Sat, 5:30 AM – 6:30 AM; Weekend batch Sat 6:00 PM – 8:30 PM and Sun 6:00 AM – 8:30 AM. Classroom, Online (Google Meet), or Hybrid.
+- **TN State Board Class 12 Physics & Chemistry**: Weekday batch Mon to Sat, 6:30 AM – 7:30 AM. Classroom, Online (Google Meet), or Hybrid.
+- **CBSE Digest (Class 10 CBSE Science)**: 100% free video lecture series on YouTube covering the complete Class 10 Science syllabus — concept explanations, solved PYQs (previous year questions), one-shot revision videos, and chapter-wise notes, aimed at scoring 95+. Available at [youtube.com/@CBSEdigest](https://www.youtube.com/@CBSEdigest).
+- All paid courses run continuously until the board exams; students can join mid-syllabus and the program shifts into structured revision and a practice-test series as the syllabus nears completion.
+- A free, no-commitment demo class is offered for all courses; booking is via phone call or WhatsApp.
+- Fee details are shared directly via phone/WhatsApp and are not published on the website.
+
+## Teaching Modes
+
+- [Classroom](https://maps.app.goo.gl/HRtqZ7h7q2wzd7sp9): In-person coaching at the Kanchipuram centre — direct professor access, instant doubt-clearing, on-site weekly tests, distraction-free environment.
+- Online: Live classes via Google Meet, same professor and syllabus as classroom batches, open to students anywhere in the world, professional-grade audio/video.
+- Hybrid: Mix of classroom and live online sessions for the same batch; intended for students local to Kanchipuram who want flexibility — students can switch between in-person and online attendance for any session.
+
+## Blog / Newsletter — Board Exam Insider (Substack)
+
+The academy publishes "Board Exam Insider," a free Substack newsletter by Prof. Dr. S. Balaji focused on CBSE/TN Board exam strategy, marking schemes, and study planning — distinct from JEE/NEET-focused content. New articles are delivered free, with no signup paywall for reading. Newsletter home: https://profbalaji.substack.com
+
+- [Two Goals, Two Strategies: Why Board Exam Success Needs Its Own Playbook](https://profbalaji.substack.com/p/board-exam-strategy): Explains structural differences between CBSE/TN Board exams and JEE/NEET — marking schemes, negative marking, syllabus coverage, answer-writing vs. answer-selection, and the practical/internal-assessment marks that competitive-exam-focused students often overlook.
+- [You Studied Physics for Months. The Examiner Saw Your Answer for 90 Seconds.](https://profbalaji.substack.com/p/physics-cbse-strategy): Breaks down how CBSE Physics marking schemes use "value points" for derivations and numericals, and identifies the four most common places students lose marks — missing formulas, skipped derivation steps, unlabelled diagrams, and missing units.
+- [What Your Physics and Chemistry Answer Sheet Goes Through Before It Becomes Your Score](https://profbalaji.substack.com/p/how-answer-sheets-are-corrected-cbse-board-exams): Explains CBSE's On-Screen Marking (OSM) evaluation process — scanning, masking of identity, value-point-based marking, second-examiner quality checks, and what verification/re-evaluation can and cannot recover.
+- [CBSE Class 10 Science: Your Complete Roadmap to a 90+ Score](https://profbalaji.substack.com/p/class-10-science-get-started): A full roadmap for CBSE Class 10 Science — marks distribution across the 80-mark theory paper and 20-mark internal assessment, the 13-chapter/5-unit syllabus with unit-wise mark weightage, a month-by-month study plan, and an error-log method for analyzing practice tests.
+- [Nobody Told You This About Class 12 Physics. I Will.](https://profbalaji.substack.com/p/nobody-told-you-this-about-class-12): Argues that CBSE Class 12 Physics board exams are distinct from and more learnable than their JEE-driven reputation suggests, with a unit-wise mark breakdown (Optics, Electrostatics, Magnetism, Semiconductors, Current Electricity) and study habits that separate high scorers.
+- [You Don't Need JEE Prep to Score 95 in Physics. Here's Proof.](https://profbalaji.substack.com/p/physics-95-cbse-class-12): A step-by-step NCERT-based strategy for scoring 95+ in CBSE Class 12 Physics without JEE-level preparation, including a unit-wise marks map and a 5-step preparation method (NCERT mastery, hand-written derivations, diagram practice, 10 years of PYQs, and practical-exam preparation).
+
+## Frequently Asked Questions
+
+- Eligibility: Open to Class 12 students under CBSE or TN State Board, both beginners and students seeking revision before exams.
+- Duration: Courses run until the board exams; students may join at any point and the program adapts into revision and practice-test phases as needed. Early joining is recommended.
+- Subjects: Physics and Chemistry for Class 12 (CBSE and TN State Board). Class 10 CBSE Science is offered free via YouTube only (not a paid/live course).
+- Teaching approach: Concept-first method building fundamentals before problem-solving; regular practice tests track progress; small batch sizes for personalized attention.
+- Free demo: Available for all courses, no commitment required, booked via phone or WhatsApp.
+- Fees: Shared directly via phone or WhatsApp call, not listed publicly on the website.
+- CBSE Digest: A completely free, full Class 10 Science YouTube lecture series — concept explanations, exam-focused lessons, and notes from basics through board-exam level.
+- Online flexibility: Students can attend fully online from anywhere, or switch between online and in-person attendance session-to-session if enrolled in classroom/hybrid batches.
+- Batch options: Two CBSE batches (weekday and weekend); one TN State Board batch (weekday).
+- Classroom location: Kanchipuram, Tamil Nadu — exact address and map link available on the Contact section of the homepage.
+
+## Contact & Profiles
+
+- Phone / WhatsApp: +91 97876 92116
+- Email: prof.balaji13@gmail.com
+- [Google Maps – Classroom Location](https://maps.app.goo.gl/HRtqZ7h7q2wzd7sp9)
+- [Google Business Profile](https://g.co/kgs/EkVWVxL)
+- [LinkedIn](https://www.linkedin.com/in/profdrsbalaji)
+- [Google Scholar](https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ)
+- [Substack Newsletter — Board Exam Insider](https://profbalaji.substack.com)
+- [YouTube — CBSE Digest](https://www.youtube.com/@CBSEdigest)
+
+## Optional
+
+- [WhatsApp Inquiry Link (CBSE)](https://wa.me/919787692116?text=I%20am%20interested%20in%20the%20CBSE%20Class%2012%20program): Direct WhatsApp message pre-filled for CBSE Class 12 inquiries.
+- [WhatsApp Inquiry Link (TN State Board)](https://wa.me/919787692116?text=I%20am%20interested%20in%20the%20TN%20State%20Board%20Class%2012%20program): Direct WhatsApp message pre-filled for TN State Board Class 12 inquiries.
+- [General WhatsApp Contact](https://wa.me/919787692116): General inquiry / demo class booking link.
