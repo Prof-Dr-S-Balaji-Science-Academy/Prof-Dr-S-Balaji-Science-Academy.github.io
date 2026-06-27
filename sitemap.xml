@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home Page -->
+  <url>
+    <loc>https://profbalaji.in/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- CBSE Digest – Class 10 Science Free Lectures & Notes -->
+  <url>
+    <loc>https://profbalaji.in/cbse-digest.html</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- CBSE Class 12 Physics & Chemistry Coaching -->
+  <url>
+    <loc>https://profbalaji.in/cbse-12.html</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- TN State Board Class 12 Physics & Chemistry Coaching -->
+  <url>
+    <loc>https://profbalaji.in/stateboard-12.html</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Science Study Planner – CBSE Class 10 -->
+  <url>
+    <loc>https://profbalaji.in/science-studyplan.html</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
