@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Maps - Board Bench</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/mindmap.css">
+</head>
+<body>
+    <!-- HEADER (from main website) -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">B</span>
+                <span class="logo-text">Board Bench</span>
+            </div>
+            <nav class="nav-desktop">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Mind Maps</a>
+                <a href="#" class="nav-link">Resources</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE NAV (from main website) -->
+    <nav class="nav-mobile" id="navMobile">
+        <div class="nav-mobile-header">
+            <span class="nav-mobile-title">Menu</span>
+            <button class="close-menu" id="closeMenu">✕</button>
+        </div>
+        <a href="#" class="nav-link-mobile">Home</a>
+        <a href="#" class="nav-link-mobile">Mind Maps</a>
+        <a href="#" class="nav-link-mobile">Resources</a>
+        <a href="#" class="nav-link-mobile">Contact</a>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="mindmap-main">
+        <!-- HERO SECTION -->
+        <section class="mindmap-hero">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <span class="hero-badge">🧠 Mind Maps for Smarter Revision</span>
+                    <h1 class="hero-title">
+                        Big Concepts.<br>
+                        <span class="highlight">Clear Connections.</span><br>
+                        Better Retention.
+                    </h1>
+                    <p class="hero-description">
+                        Our chapter mind maps break down complex topics into visual connections so you can understand faster, revise smarter, and remember longer.
+                    </p>
+                    <button class="cta-button" id="viewMindmapBtn">
+                        <span class="icon">👁️</span>
+                        View Mind Map
+                    </button>
+                </div>
+                <div class="hero-right">
+                    <svg class="hero-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Placeholder bars representing mindmap structure -->
+                        <g class="placeholder-structure">
+                            <!-- Central node -->
+                            <rect x="180" y="130" width="40" height="40" rx="4" fill="#0052CC" opacity="0.8"/>
+                            
+                            <!-- L1 branches -->
+                            <rect x="80" y="50" width="50" height="30" rx="3" fill="#0052CC" opacity="0.6"/>
+                            <rect x="280" y="60" width="50" height="28" rx="3" fill="#0052CC" opacity="0.6"/>
+                            <rect x="70" y="200" width="55" height="32" rx="3" fill="#0052CC" opacity="0.6"/>
+                            <rect x="290" y="210" width="48" height="30" rx="3" fill="#0052CC" opacity="0.6"/>
+                            
+                            <!-- L2 branches left -->
+                            <rect x="20" y="30" width="35" height="20" rx="2" fill="#0052CC" opacity="0.4"/>
+                            <rect x="25" y="95" width="38" height="18" rx="2" fill="#0052CC" opacity="0.4"/>
+                            
+                            <!-- L2 branches right -->
+                            <rect x="345" y="35" width="40" height="22" rx="2" fill="#0052CC" opacity="0.4"/>
+                            <rect x="340" y="105" width="36" height="20" rx="2" fill="#0052CC" opacity="0.4"/>
+                            
+                            <!-- L2 branches bottom left -->
+                            <rect x="15" y="240" width="42" height="20" rx="2" fill="#0052CC" opacity="0.4"/>
+                            <rect x="28" y="280" width="38" height="15" rx="2" fill="#0052CC" opacity="0.4"/>
+                            
+                            <!-- L2 branches bottom right -->
+                            <rect x="345" y="250" width="40" height="20" rx="2" fill="#0052CC" opacity="0.4"/>
+                            <rect x="340" y="285" width="36" height="15" rx="2" fill="#0052CC" opacity="0.4"/>
+                            
+                            <!-- Connecting lines -->
+                            <line x1="200" y1="150" x2="105" y2="80" stroke="#0052CC" stroke-width="2" opacity="0.3" stroke-dasharray="2,2"/>
+                            <line x1="200" y1="150" x2="305" y2="74" stroke="#0052CC" stroke-width="2" opacity="0.3" stroke-dasharray="2,2"/>
+                            <line x1="200" y1="150" x2="97" y2="216" stroke="#0052CC" stroke-width="2" opacity="0.3" stroke-dasharray="2,2"/>
+                            <line x1="200" y1="150" x2="314" y2="225" stroke="#0052CC" stroke-width="2" opacity="0.3" stroke-dasharray="2,2"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUBJECT SELECTION MODAL -->
+        <div class="modal" id="subjectModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Select Your Subject</h2>
+                    <button class="modal-close" onclick="closeSubjectModal()">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="subject-grid">
+                        <!-- Active subjects -->
+                        <button class="subject-card active" data-subject="cbse-10-science" onclick="selectSubject('cbse-10-science', 'CBSE Class 10 Science')">
+                            <span class="subject-icon">🧪</span>
+                            <span class="subject-name">CBSE Class 10<br>Science</span>
+                            <span class="subject-chapters">13 Chapters</span>
+                        </button>
+                        
+                        <!-- Placeholder subjects -->
+                        <button class="subject-card placeholder" disabled>
+                            <span class="subject-icon">⚛️</span>
+                            <span class="subject-name">CBSE Class 12<br>Physics</span>
+                            <span class="subject-chapters">Coming Soon</span>
+                        </button>
+                        
+                        <button class="subject-card placeholder" disabled>
+                            <span class="subject-icon">🧬</span>
+                            <span class="subject-name">CBSE Class 12<br>Chemistry</span>
+                            <span class="subject-chapters">Coming Soon</span>
+                        </button>
+                        
+                        <button class="subject-card placeholder" disabled>
+                            <span class="subject-icon">⚛️</span>
+                            <span class="subject-name">State Board 12<br>Physics</span>
+                            <span class="subject-chapters">Coming Soon</span>
+                        </button>
+                        
+                        <button class="subject-card placeholder" disabled>
+                            <span class="subject-icon">🧬</span>
+                            <span class="subject-name">State Board 12<br>Chemistry</span>
+                            <span class="subject-chapters">Coming Soon</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAPTER SELECTION MODAL -->
+        <div class="modal" id="chapterModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Select Chapter</h2>
+                    <button class="modal-close" onclick="closeChapterModal()">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="chapter-list" id="chapterList">
+                        <!-- Chapters will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MINDMAP DISPLAY SECTION -->
+        <section class="mindmap-section" id="mindmapSection" style="display: none;">
+            <div class="mindmap-header">
+                <div class="mindmap-breadcrumb">
+                    <button class="back-button" onclick="goBackToSubjects()">← Back to Subjects</button>
+                    <span class="breadcrumb-text">
+                        <span id="selectedSubjectName"></span> > <span id="selectedChapterName"></span>
+                    </span>
+                </div>
+                <div class="mindmap-controls">
+                    <button class="control-btn expand-btn" id="expandAllBtn" onclick="toggleExpandAll()">
+                        <span class="btn-icon">⬆️</span>
+                        <span class="btn-text">Expand All</span>
+                    </button>
+                    <div class="download-group">
+                        <button class="control-btn download-btn" onclick="downloadChapterPDF()">
+                            <span class="btn-icon">📥</span>
+                            <span class="btn-text">Download Chapter</span>
+                        </button>
+                        <button class="control-btn download-btn" onclick="downloadAllChaptersPDF()">
+                            <span class="btn-icon">📦</span>
+                            <span class="btn-text">Download All</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mindmap-container">
+                <svg class="mindmap-svg" id="mindmapSvg"></svg>
+                <div class="mindmap-nodes" id="mindmapNodes"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (from main website) -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Board Bench</h4>
+                <p>Making exam preparation smarter and faster for every student.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Mind Maps</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: info@boardbench.com</p>
+                <p>Phone: +91 XXXXX XXXXX</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Board Bench. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="script.js"></script>
+    <script src="data/cbse-10-science.js"></script>
+    <script src="js/mindmap.js"></script>
+</body>
+</html>
