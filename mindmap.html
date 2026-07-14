@@ -1,230 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mind Maps - Board Bench</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="css/mindmap.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mind Maps – Prof. Dr. S. Balaji Science Academy</title>
+<meta name="description" content="Interactive mind maps for CBSE Class 10 Science, Class 12 Physics & Chemistry, and State Board Class 12. Click, expand and explore every concept visually.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="canonical" href="https://profbalaji.in/mindmap.html">
+<link rel="stylesheet" href="mindmap.css">
 </head>
 <body>
-    <!-- HEADER (from main website) -->
-    <header class="header">
-        <div class="header-container">
-            <div class="logo">
-                <span class="logo-icon">B</span>
-                <span class="logo-text">Board Bench</span>
-            </div>
-            <nav class="nav-desktop">
-                <a href="#" class="nav-link">Home</a>
-                <a href="#" class="nav-link">Mind Maps</a>
-                <a href="#" class="nav-link">Resources</a>
-                <a href="#" class="nav-link">Contact</a>
-            </nav>
-            <button class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
 
-    <!-- MOBILE NAV (from main website) -->
-    <nav class="nav-mobile" id="navMobile">
-        <div class="nav-mobile-header">
-            <span class="nav-mobile-title">Menu</span>
-            <button class="close-menu" id="closeMenu">✕</button>
-        </div>
-        <a href="#" class="nav-link-mobile">Home</a>
-        <a href="#" class="nav-link-mobile">Mind Maps</a>
-        <a href="#" class="nav-link-mobile">Resources</a>
-        <a href="#" class="nav-link-mobile">Contact</a>
+<!-- ══════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════ -->
+<header class="header" id="header">
+  <div class="header-container">
+    <a href="index.html" class="logo">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+    <nav class="nav-desktop">
+      <a href="index.html"               class="nav-link">Home</a>
+      <a href="cbse-digest.html"         class="nav-link">CBSE Digest</a>
+      <a href="science-studyplan.html"   class="nav-link">Study Planner</a>
+      <a href="mindmap.html"             class="nav-link active">Mind Maps</a>
+      <a href="https://www.youtube.com/@CBSEdigest" class="nav-cta" style="background:#FF0000;">Subscribe</a>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-mobile" id="navMobile">
+    <button class="close-menu" id="closeMenu" aria-label="Close menu">✕</button>
+    <a href="index.html"             class="nav-link-mobile">Home</a>
+    <a href="cbse-digest.html"       class="nav-link-mobile">CBSE Digest</a>
+    <a href="science-studyplan.html" class="nav-link-mobile">Study Planner</a>
+    <a href="mindmap.html"           class="nav-link-mobile">Mind Maps</a>
+    <a href="https://www.youtube.com/@CBSEdigest" class="nav-link-mobile cta-mobile" style="background:#FF0000;">Subscribe</a>
+  </nav>
+</header>
 
-    <!-- MAIN CONTENT -->
-    <main class="mindmap-main">
-        <!-- HERO SECTION -->
-        <section class="mindmap-hero">
-            <div class="hero-content">
-                <div class="hero-left">
-                    <span class="hero-badge">🧠 Mind Maps for Smarter Revision</span>
-                    <h1 class="hero-title">
-                        Big Concepts.<br>
-                        <span class="highlight">Clear Connections.</span><br>
-                        Better Retention.
-                    </h1>
-                    <p class="hero-description">
-                        Our chapter mind maps break down complex topics into visual connections so you can understand faster, revise smarter, and remember longer.
-                    </p>
-                    <button class="cta-button" id="viewMindmapBtn">
-                        <span class="icon">👁️</span>
-                        View Mind Map
-                    </button>
-                </div>
-                <div class="hero-right">
-                    <svg class="hero-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Placeholder bars representing mindmap structure -->
-                        <g class="placeholder-structure">
-                            <!-- Central node -->
-                            <rect x="180" y="130" width="40" height="40" rx="4" fill="#0052CC" opacity="0.8"/>
-                            
-                            <!-- L1 branches -->
-                            <rect x="80" y="50" width="50" height="30" rx="3" fill="#0052CC" opacity="0.6"/>
-                            <rect x="280" y="60" width="50" height="28" rx="3" fill="#0052CC" opacity="0.6"/>
-                            <rect x="70" y="200" width="55" height="32" rx="3" fill="#0052CC" opacity="0.6"/>
-                            <rect x="290" y="210" width="48" height="30" rx="3" fill="#0052CC" opacity="0.6"/>
-                            
-                            <!-- L2 branches left -->
-                            <rect x="20" y="30" width="35" height="20" rx="2" fill="#0052CC" opacity="0.4"/>
-                            <rect x="25" y="95" width="38" height="18" rx="2" fill="#0052CC" opacity="0.4"/>
-                            
-                            <!-- L2 branches right -->
-                            <rect x="345" y="35" width="40" height="22" rx="2" fill="#0052CC" opacity="0.4"/>
-                            <rect x="340" y="105" width="36" height="20" rx="2" fill="#0052CC" opacity="0.4"/>
-                            
-                            <!-- L2 branches bottom left -->
-                            <rect x="15" y="240" width="42" height="20" rx="2" fill="#0052CC" opacity="0.4"/>
-                            <rect x="28" y="280" width="38" height="15" rx="2" fill="#0052CC" opacity="0.4"/>
-                            
-                            <!-- L2 branches bottom right -->
-                            <rect x="345" y="250" width="40" height="20" rx="2" fill="#0052CC" opacity="0.4"/>
-                            <rect x="340" y="285" width="36" height="15" rx="2" fill="#0052CC" opacity="0.4"/>
-                            
-                            <!-- Connecting lines -->
-                            <line x1="200" y1="150" x2="105" y2="80" stroke="#0052CC" stroke-width="2" opacity="0.3" stroke-dasharray="2,2"/>
-                            <line x1="200" y1="150" x2="305" y2="74" stroke="#0052CC" stroke-width="2" opacity="0.3" stroke-dasharray="2,2"/>
-                            <line x1="200" y1="150" x2="97" y2="216" stroke="#0052CC" stroke-width="2" opacity="0.3" stroke-dasharray="2,2"/>
-                            <line x1="200" y1="150" x2="314" y2="225" stroke="#0052CC" stroke-width="2" opacity="0.3" stroke-dasharray="2,2"/>
-                        </g>
-                    </svg>
-                </div>
-            </div>
-        </section>
+<!-- ══════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section class="mm-hero" id="hero">
+  <div class="mm-hero-inner">
 
-        <!-- SUBJECT SELECTION MODAL -->
-        <div class="modal" id="subjectModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Select Your Subject</h2>
-                    <button class="modal-close" onclick="closeSubjectModal()">✕</button>
-                </div>
-                <div class="modal-body">
-                    <div class="subject-grid">
-                        <!-- Active subjects -->
-                        <button class="subject-card active" data-subject="cbse-10-science" onclick="selectSubject('cbse-10-science', 'CBSE Class 10 Science')">
-                            <span class="subject-icon">🧪</span>
-                            <span class="subject-name">CBSE Class 10<br>Science</span>
-                            <span class="subject-chapters">13 Chapters</span>
-                        </button>
-                        
-                        <!-- Placeholder subjects -->
-                        <button class="subject-card placeholder" disabled>
-                            <span class="subject-icon">⚛️</span>
-                            <span class="subject-name">CBSE Class 12<br>Physics</span>
-                            <span class="subject-chapters">Coming Soon</span>
-                        </button>
-                        
-                        <button class="subject-card placeholder" disabled>
-                            <span class="subject-icon">🧬</span>
-                            <span class="subject-name">CBSE Class 12<br>Chemistry</span>
-                            <span class="subject-chapters">Coming Soon</span>
-                        </button>
-                        
-                        <button class="subject-card placeholder" disabled>
-                            <span class="subject-icon">⚛️</span>
-                            <span class="subject-name">State Board 12<br>Physics</span>
-                            <span class="subject-chapters">Coming Soon</span>
-                        </button>
-                        
-                        <button class="subject-card placeholder" disabled>
-                            <span class="subject-icon">🧬</span>
-                            <span class="subject-name">State Board 12<br>Chemistry</span>
-                            <span class="subject-chapters">Coming Soon</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Left: copy -->
+    <div class="mm-hero-left">
+      <div class="mm-hero-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Interactive · Visual · Board-Focused
+      </div>
 
-        <!-- CHAPTER SELECTION MODAL -->
-        <div class="modal" id="chapterModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Select Chapter</h2>
-                    <button class="modal-close" onclick="closeChapterModal()">✕</button>
-                </div>
-                <div class="modal-body">
-                    <div class="chapter-list" id="chapterList">
-                        <!-- Chapters will be dynamically loaded here -->
-                    </div>
-                </div>
-            </div>
-        </div>
+      <h1>Learn Faster with<br><span>Visual Mind Maps</span></h1>
 
-        <!-- MINDMAP DISPLAY SECTION -->
-        <section class="mindmap-section" id="mindmapSection" style="display: none;">
-            <div class="mindmap-header">
-                <div class="mindmap-breadcrumb">
-                    <button class="back-button" onclick="goBackToSubjects()">← Back to Subjects</button>
-                    <span class="breadcrumb-text">
-                        <span id="selectedSubjectName"></span> > <span id="selectedChapterName"></span>
-                    </span>
-                </div>
-                <div class="mindmap-controls">
-                    <button class="control-btn expand-btn" id="expandAllBtn" onclick="toggleExpandAll()">
-                        <span class="btn-icon">⬆️</span>
-                        <span class="btn-text">Expand All</span>
-                    </button>
-                    <div class="download-group">
-                        <button class="control-btn download-btn" onclick="downloadChapterPDF()">
-                            <span class="btn-icon">📥</span>
-                            <span class="btn-text">Download Chapter</span>
-                        </button>
-                        <button class="control-btn download-btn" onclick="downloadAllChaptersPDF()">
-                            <span class="btn-icon">📦</span>
-                            <span class="btn-text">Download All</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+      <p class="mm-hero-desc">
+        Every chapter, every concept — laid out in a clear, expandable map. Click any node to explore deeper. Perfect for quick revision before your boards.
+      </p>
 
-            <div class="mindmap-container">
-                <svg class="mindmap-svg" id="mindmapSvg"></svg>
-                <div class="mindmap-nodes" id="mindmapNodes"></div>
-            </div>
-        </section>
-    </main>
+      <div class="mm-hero-tags">
+        <span class="mm-hero-tag" style="background:#eef2ff;color:#0d2ad4;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 3h6m-3 0v6l-4 8h10L14 9V3"/></svg>
+          Chemistry
+        </span>
+        <span class="mm-hero-tag" style="background:#fef3c7;color:#d97706;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Physics
+        </span>
+        <span class="mm-hero-tag" style="background:#f0fdf4;color:#16a34a;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          Biology
+        </span>
+        <span class="mm-hero-tag" style="background:#ecfeff;color:#0891b2;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 22c0-6 4-10 10-10s10 4 10 10"/><path d="M12 12C12 6 7 2 2 2c0 5 4 9 10 10z"/></svg>
+          Environment
+        </span>
+      </div>
 
-    <!-- FOOTER (from main website) -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Board Bench</h4>
-                <p>Making exam preparation smarter and faster for every student.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Mind Maps</a></li>
-                    <li><a href="#">Resources</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <p>Email: info@boardbench.com</p>
-                <p>Phone: +91 XXXXX XXXXX</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Board Bench. All rights reserved.</p>
-        </div>
-    </footer>
+      <button class="mm-cta-btn" id="viewMindMapBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="M11 8v6M8 11h6"/>
+        </svg>
+        View Mind Map
+      </button>
+    </div>
 
-    <!-- SCRIPTS -->
-    <script src="script.js"></script>
-    <script src="data/cbse-10-science.js"></script>
-    <script src="js/mindmap.js"></script>
+    <!-- Right: SVG illustration of a mind map -->
+    <div class="mm-hero-right">
+      <svg class="mm-hero-illustration" viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="nodeGlow" x="-15%" y="-30%" width="130%" height="160%">
+            <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0d2ad4" flood-opacity="0.14"/>
+          </filter>
+          <filter id="leafGlow" x="-20%" y="-40%" width="140%" height="180%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0d2ad4" flood-opacity="0.10"/>
+          </filter>
+        </defs>
+
+        <!-- ── Curved connection lines ── -->
+        <!-- Root → L1 nodes -->
+        <path d="M200,210 C240,210 240,100 290,100" fill="none" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round"/>
+        <path d="M200,210 C240,210 240,160 290,160" fill="none" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round"/>
+        <path d="M200,210 C240,210 240,210 290,210" fill="none" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round"/>
+        <path d="M200,210 C240,210 240,260 290,260" fill="none" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round"/>
+        <path d="M200,210 C240,210 240,320 290,320" fill="none" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- L1 → L2: Chemistry children -->
+        <path d="M380,90 C410,90 410,62 438,62"  fill="none" stroke="#bbf7d0" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M380,90 C410,90 410,90 438,90"  fill="none" stroke="#bbf7d0" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M380,90 C410,90 410,118 438,118" fill="none" stroke="#bbf7d0" stroke-width="1.4" stroke-linecap="round"/>
+
+        <!-- L1 → L2: Physics children -->
+        <path d="M380,200 C412,200 412,182 438,182" fill="none" stroke="#fde68a" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M380,200 C412,200 412,200 438,200" fill="none" stroke="#fde68a" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M380,200 C412,200 412,218 438,218" fill="none" stroke="#fde68a" stroke-width="1.4" stroke-linecap="round"/>
+
+        <!-- L1 → L2: Biology children -->
+        <path d="M380,260 C412,260 412,248 438,248" fill="none" stroke="#a5f3fc" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M380,260 C412,260 412,265 438,265" fill="none" stroke="#a5f3fc" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M380,260 C412,260 412,282 438,282" fill="none" stroke="#a5f3fc" stroke-width="1.4" stroke-linecap="round"/>
+
+        <!-- ── Root node ── -->
+        <rect x="80" y="185" width="120" height="50" rx="25" ry="25"
+              fill="#0d2ad4" stroke="#0a1fa8" stroke-width="2" filter="url(#nodeGlow)"/>
+        <text x="140" y="215" text-anchor="middle" dominant-baseline="middle"
+              fill="white" font-size="11.5" font-weight="800"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+          Class 10 Science
+        </text>
+
+        <!-- ── L1 nodes ── -->
+        <!-- Chemistry -->
+        <rect x="290" y="76" width="90" height="28" rx="14"
+              fill="#1e3a8a" stroke="#1e40af" stroke-width="1.5" filter="url(#nodeGlow)"/>
+        <text x="335" y="90" text-anchor="middle" dominant-baseline="middle"
+              fill="white" font-size="10" font-weight="700"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Chemistry</text>
+
+        <!-- Physics -->
+        <rect x="290" y="186" width="90" height="28" rx="14"
+              fill="#b45309" stroke="#d97706" stroke-width="1.5" filter="url(#nodeGlow)"/>
+        <text x="335" y="200" text-anchor="middle" dominant-baseline="middle"
+              fill="white" font-size="10" font-weight="700"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Physics</text>
+
+        <!-- Biology -->
+        <rect x="290" y="146" width="90" height="28" rx="14"
+              fill="#166534" stroke="#16a34a" stroke-width="1.5" filter="url(#nodeGlow)"/>
+        <text x="335" y="160" text-anchor="middle" dominant-baseline="middle"
+              fill="white" font-size="10" font-weight="700"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Biology</text>
+
+        <!-- Environment -->
+        <rect x="290" y="246" width="90" height="28" rx="14"
+              fill="#0e7490" stroke="#0891b2" stroke-width="1.5" filter="url(#nodeGlow)"/>
+        <text x="335" y="260" text-anchor="middle" dominant-baseline="middle"
+              fill="white" font-size="10" font-weight="700"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Environment</text>
+
+        <!-- Heredity -->
+        <rect x="290" y="306" width="90" height="28" rx="14"
+              fill="#7c3aed" stroke="#8b5cf6" stroke-width="1.5" filter="url(#nodeGlow)"/>
+        <text x="335" y="320" text-anchor="middle" dominant-baseline="middle"
+              fill="white" font-size="10" font-weight="700"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Heredity</text>
+
+        <!-- ── L2 leaf nodes (Chemistry children) ── -->
+        <rect x="438" y="50" width="104" height="24" rx="12"
+              fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2" filter="url(#leafGlow)"/>
+        <text x="490" y="62" text-anchor="middle" dominant-baseline="middle"
+              fill="#166534" font-size="9" font-weight="600"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Reactions</text>
+
+        <rect x="438" y="78" width="104" height="24" rx="12"
+              fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2" filter="url(#leafGlow)"/>
+        <text x="490" y="90" text-anchor="middle" dominant-baseline="middle"
+              fill="#166534" font-size="9" font-weight="600"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Acids & Bases</text>
+
+        <rect x="438" y="106" width="104" height="24" rx="12"
+              fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2" filter="url(#leafGlow)"/>
+        <text x="490" y="118" text-anchor="middle" dominant-baseline="middle"
+              fill="#166534" font-size="9" font-weight="600"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Metals</text>
+
+        <!-- ── L2 leaf nodes (Physics children) ── -->
+        <rect x="438" y="170" width="104" height="24" rx="12"
+              fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" filter="url(#leafGlow)"/>
+        <text x="490" y="182" text-anchor="middle" dominant-baseline="middle"
+              fill="#92400e" font-size="9" font-weight="600"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Light</text>
+
+        <rect x="438" y="188" width="104" height="24" rx="12"
+              fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" filter="url(#leafGlow)"/>
+        <text x="490" y="200" text-anchor="middle" dominant-baseline="middle"
+              fill="#92400e" font-size="9" font-weight="600"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Electricity</text>
+
+        <rect x="438" y="206" width="104" height="24" rx="12"
+              fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" filter="url(#leafGlow)"/>
+        <text x="490" y="218" text-anchor="middle" dominant-baseline="middle"
+              fill="#92400e" font-size="9" font-weight="600"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Magnetism</text>
+
+        <!-- ── L2 leaf nodes (Biology) ── -->
+        <rect x="438" y="236" width="104" height="24" rx="12"
+              fill="#ecfeff" stroke="#a5f3fc" stroke-width="1.2" filter="url(#leafGlow)"/>
+        <text x="490" y="248" text-anchor="middle" dominant-baseline="middle"
+              fill="#0e7490" font-size="9" font-weight="600"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Life Processes</text>
+
+        <rect x="438" y="253" width="104" height="24" rx="12"
+              fill="#ecfeff" stroke="#a5f3fc" stroke-width="1.2" filter="url(#leafGlow)"/>
+        <text x="490" y="265" text-anchor="middle" dominant-baseline="middle"
+              fill="#0e7490" font-size="9" font-weight="600"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Coordination</text>
+
+        <rect x="438" y="270" width="104" height="24" rx="12"
+              fill="#ecfeff" stroke="#a5f3fc" stroke-width="1.2" filter="url(#leafGlow)"/>
+        <text x="490" y="282" text-anchor="middle" dominant-baseline="middle"
+              fill="#0e7490" font-size="9" font-weight="600"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Reproduction</text>
+
+        <!-- Decorative floating dots -->
+        <circle cx="55"  cy="90"  r="5" fill="#eef2ff" opacity="0.8"/>
+        <circle cx="40"  cy="300" r="3" fill="#fde68a" opacity="0.7"/>
+        <circle cx="470" cy="340" r="4" fill="#bbf7d0" opacity="0.7"/>
+        <circle cx="250" cy="380" r="6" fill="#c7d2fe" opacity="0.5"/>
+        <circle cx="75"  cy="360" r="3.5" fill="#a5f3fc" opacity="0.6"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SUBJECT PICKER
+════════════════════════════════════════════════════════ -->
+<section class="mm-picker-section" id="subjectPicker">
+  <div class="mm-section-inner">
+    <div class="mm-section-heading">
+      <h2>Choose a Subject</h2>
+      <p>Select a subject below to open its interactive mind map</p>
+    </div>
+    <div class="mm-subject-grid" id="subjectPickerCards">
+      <!-- Rendered by mindmap.js -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     MIND MAP CANVAS SECTION
+════════════════════════════════════════════════════════ -->
+<section class="mm-map-section" id="mindMapSection" style="display:none;">
+  <div class="mm-map-header">
+    <div class="mm-map-header-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M3 12h2M19 12h2M12 3v2M12 19v2M5.64 5.64l1.41 1.41M16.95 16.95l1.41 1.41M5.64 18.36l1.41-1.41M16.95 7.05l1.41-1.41"/>
+      </svg>
+      Interactive Mind Map
+    </div>
+    <span class="mm-map-header-meta">Click any node with › to expand · Drag to pan · Scroll to zoom</span>
+  </div>
+
+  <div id="mindMapCanvas">
+    <!-- Populated by mindmap.js -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-icons">
+    <a href="tel:+919787692116" class="footer-icon phone" title="Call">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+    </a>
+    <a href="mailto:prof.balaji13@gmail.com" class="footer-icon mail" title="Email">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+    <a href="https://g.co/kgs/EkVWVxL" class="footer-icon business" title="Google Business">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/profdrsbalaji" class="footer-icon linkedin" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" class="footer-icon scholar" title="Google Scholar">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+    </a>
+    <a href="https://profbalaji.substack.com/" class="footer-icon substack" title="Substack">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@CBSEdigest" class="footer-icon youtube" title="YouTube">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+  </div>
+  <p class="footer-copyright">© 2025 Prof. Dr. S. Balaji. All Rights Reserved.</p>
+</footer>
+
+<script src="mindmap.js"></script>
 </body>
 </html>
