@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Interactive Mind Map - Explore comprehensive chapter structures for CBSE and State Board syllabus." />
+  <title>Mind Map | Prof. Dr. S. Balaji Science Academy</title>
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    .mm-hero-grid{display:grid;grid-template-columns:1fr;gap:var(--space-8);align-items:center}
+    @media(min-width:896px){.mm-hero-grid{grid-template-columns:1.1fr 0.9fr;gap:var(--space-12)}}
+    .mm-hero-sub{font-size:var(--text-base);color:var(--muted);max-width:52ch;margin-bottom:var(--space-5)}
+    .mm-info-card{background:var(--dark);color:var(--bg);border-radius:var(--radius-lg);padding:var(--space-8);display:flex;flex-direction:column;gap:var(--space-3)}
+    .mm-info-card h2{font-family:var(--font-display);font-size:clamp(20px,3vw,28px);font-weight:400;color:var(--bg);margin-bottom:var(--space-1)}
+    .mm-info-box{display:flex;flex-direction:column;gap:6px;padding:var(--space-3);background:rgba(255,255,255,0.08);border-radius:var(--radius-sm)}
+    .mm-info-box svg{width:22px;height:22px;color:#578bfa;flex-shrink:0}
+    .mm-info-box strong{font-size:14px;font-weight:700;color:#fff}
+    .mm-info-box span{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.4}
+    @media(max-width:895px){.mm-info-card{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}.mm-info-card h2{grid-column:1/-1}}
+    /* Mobile: single-column pill list */
+    .mm-book-grid{display:flex;flex-direction:column;gap:var(--space-2);margin-bottom:var(--space-8)}
+    @media(min-width:768px){.mm-book-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-3)}}
+
+    /* BASE card — mobile pill row */
+    .mm-book-card{position:relative;display:flex;flex-direction:row;align-items:center;gap:14px;padding:12px 48px 12px 14px;min-height:0;border:2px solid var(--border);border-radius:var(--radius-pill);background:var(--bg);cursor:pointer;transition:all 150ms cubic-bezier(0.2,0,0,1);user-select:none}
+    .mm-book-card:hover{box-shadow:0 4px 16px rgba(0,82,255,0.1);border-color:rgba(0,82,255,0.3)}
+    .mm-book-card.selected{border-color:var(--accent);background:color-mix(in oklab,var(--accent),transparent 94%)}
+    .mm-book-card input[type="radio"]{position:absolute;top:50%;right:14px;transform:translateY(-50%);width:18px;height:18px;accent-color:var(--accent);cursor:pointer}
+
+    /* icon circle */
+    .mm-book-icon{width:38px;height:38px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 150ms}
+    .mm-book-card.selected .mm-book-icon{background:color-mix(in oklab,var(--accent),transparent 85%)}
+    .mm-book-icon svg{width:20px;height:20px;flex-shrink:0;transition:all 150ms}
+    .mm-book-card.selected .mm-book-icon svg{color:var(--accent) !important;stroke:var(--accent) !important}
+
+    /* label lines */
+    .mm-book-label-top{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.02em;line-height:1.3}
+    .mm-book-label-sub{display:block;font-size:14px;font-weight:700;color:var(--fg);line-height:1.3}
+    .mm-book-card.selected .mm-book-label-top{color:color-mix(in oklab,var(--accent),transparent 35%)}
+    .mm-book-card.selected .mm-book-label-sub{color:var(--accent)}
+
+    /* Desktop: vertical card */
+    @media(min-width:768px){
+      .mm-book-card{flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:var(--space-5) var(--space-3);min-height:148px;border-radius:var(--radius-md)}
+      .mm-book-card:hover{transform:translateY(-3px)}
+      .mm-book-card input[type="radio"]{top:10px;right:10px;transform:none}
+      .mm-book-icon{width:48px;height:48px}
+      .mm-book-icon svg{width:26px;height:26px}
+      .mm-book-label-top{font-size:10px;text-align:center}
+      .mm-book-label-sub{font-size:12px;text-align:center}
+    }
+    .mm-workspace{display:grid;grid-template-columns:210px 1fr;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;height:640px;max-height:74vh}
+    @media(max-width:767px){.mm-workspace{grid-template-columns:1fr;height:auto}}
+    .mm-sidebar{background:var(--bg);border-right:1px solid var(--border);padding:var(--space-3);display:flex;flex-direction:column;overflow:hidden}
+    .mm-sidebar-scroll{flex:1;overflow-y:auto;min-height:0}
+    .mm-sidebar-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:var(--space-2);margin-bottom:var(--space-2);display:block}
+    .mm-chapter-item{padding:8px 10px;border-radius:var(--radius-sm);border-left:3px solid transparent;cursor:pointer;transition:all 120ms;margin-bottom:2px}
+    .mm-chapter-item:hover{background:var(--surface)}
+    .mm-chapter-item.active{background:color-mix(in oklab,var(--accent),transparent 92%);border-left-color:var(--accent)}
+    .mm-ch-num{display:block;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em}
+    .mm-ch-title{display:block;font-size:12px;font-weight:500;color:var(--fg);line-height:1.3}
+    .mm-chapter-item.active .mm-ch-title{color:var(--accent)}
+    .mm-sidebar-empty{padding:var(--space-6) var(--space-3);text-align:center;color:var(--muted);font-size:13px;line-height:1.5}
+    .mm-sidebar-empty svg{width:28px;height:28px;stroke:var(--border);margin:0 auto var(--space-3);display:block}
+    /* Export button: always visible at bottom — flex-shrink:0 prevents it scrolling away */
+    .mm-sidebar-foot{flex-shrink:0;padding:var(--space-3) 0 0;border-top:1px solid var(--border);background:var(--bg)}
+    .mm-export-btn{display:flex;align-items:center;gap:6px;width:100%;padding:9px 10px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--fg);cursor:pointer;transition:all 120ms;justify-content:center}
+    .mm-export-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .mm-export-btn svg{width:14px;height:14px;flex-shrink:0}
+    .mm-export-btn:disabled{opacity:0.4;cursor:not-allowed;pointer-events:none}
+    .mm-canvas-wrap{position:relative;overflow:hidden;background:#f8f9fb}
+    #mm-svg{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+    #mm-svg:active{cursor:grabbing}
+    .mm-zoom-controls{position:absolute;bottom:14px;right:14px;display:flex;flex-direction:column;gap:6px;z-index:10}
+    .mm-zoom-btn{width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--border);color:var(--fg);font-size:15px;font-weight:700;cursor:pointer;display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:all 120ms}
+    .mm-zoom-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .mm-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(248,249,251,0.8);font-size:13px;color:var(--muted);z-index:20;display:none}
+    @media(max-width:767px){
+      .mm-workspace{height:auto}
+      .mm-sidebar{border-right:none;border-bottom:1px solid var(--border);height:220px;max-height:220px}
+      .mm-canvas-wrap{min-height:420px}
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-container">
+        <a href="../../index.html" class="brand-logo-link"><img src="../../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo"/></a>
+        <a class="brand" href="../../index.html">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+      </div>
+      <style>
+        .brand-container{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-right:auto}
+        .brand-logo{height:40px;width:40px;border-radius:50%;object-fit:cover;flex-shrink:0}
+        @media(min-width:480px){.brand-logo{height:44px;width:44px}}
+        @media(min-width:896px){.brand-logo{height:48px;width:48px}}
+        .site-header .brand{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.25;color:var(--fg);text-decoration:none;max-width:160px;word-break:break-word}
+        @media(min-width:896px){.site-header .brand{font-size:14px;white-space:nowrap;max-width:none}}
+        .brand-logo-link{display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:50%;transition:opacity 150ms}
+        .brand-logo-link:hover{opacity:.8}
+      </style>
+      <div class="header-right">
+        <nav class="nav-desktop" aria-label="Primary">
+          <a href="../../index.html#about">About</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+            <div class="nav-dropdown-menu">
+              <a href="../../pages/courses/cbse10.html">CBSE Class 10</a>
+              <a href="../../pages/courses/cbse12.html">CBSE Class 12</a>
+              <a href="../../pages/courses/stateboard12.html">State Board Class 12</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+            <div class="nav-dropdown-menu">
+              <a href="/pages/studyplanner/">Study Planner</a>
+              <a href="/pages/periodictable/">Periodic Table</a>
+              <a href="/pages/mindmap/">Mind Map</a>
+            </div>
+          </div>
+          <a href="../../index.html#attend">How to attend</a>
+          <a href="../../index.html#faq">FAQs</a>
+          <a href="../../index.html#blog">Blog</a>
+          <a href="../../index.html#contact">Contact</a>
+        </nav>
+        <div class="nav-actions"><a class="btn btn-primary" href="/pages/test.html">Sign Up</a></div>
+      </div>
+      <a class="btn btn-primary btn-sm nav-actions-mobile" href="/pages/test.html">Sign Up</a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile"><span></span></button>
+    </div>
+  </header>
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+    <a href="../../index.html#about">About</a>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="../../pages/courses/cbse10.html">CBSE Class 10</a>
+        <a href="../../pages/courses/cbse12.html">CBSE Class 12</a>
+        <a href="../../pages/courses/stateboard12.html">State Board Class 12</a>
+      </div>
+    </div>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="/pages/studyplanner/">Study Planner</a>
+        <a href="/pages/periodictable/">Periodic Table</a>
+        <a href="/pages/mindmap/">Mind Map</a>
+      </div>
+    </div>
+    <a href="../../index.html#attend">How to attend</a>
+    <a href="../../index.html#faq">FAQs</a>
+    <a href="../../index.html#blog">Blog</a>
+    <a href="../../index.html#contact">Contact</a>
+  </nav>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="section" style="background:var(--bg);">
+      <div class="container mm-hero-grid">
+        <div>
+          <div class="hero-badge" style="margin-bottom:var(--space-5);"><span class="dot" aria-hidden="true"></span> Mind Mapping</div>
+          <h1 style="margin-bottom:var(--space-3);max-width:12ch;">Visual Learning</h1>
+          <p class="lead lead-italic" style="margin-bottom:var(--space-5);">with deep understanding</p>
+          <p class="mm-hero-sub">Mind maps transform the way you learn. Break down complex chapters into interconnected concepts, visualise relationships between topics, and build lasting understanding through structured exploration.</p>
+          <p class="mm-hero-sub">Select a subject below and navigate through its complete chapter structure. Hover, click, and explore — every branch reveals a new dimension of your syllabus.</p>
+        </div>
+        <aside class="mm-info-card">
+          <h2>Why Mind Maps?</h2>
+          <div class="mm-info-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <strong>Non-Linear Learning</strong><span>Break free from page-by-page reading. Explore topics in the order that makes sense to you.</span>
+          </div>
+          <div class="mm-info-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/></svg>
+            <strong>Pattern Recognition</strong><span>See how concepts connect. Understanding relationships strengthens memory and recall.</span>
+          </div>
+          <div class="mm-info-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+            <strong>Faster Revision</strong><span>Visual structure means quicker scanning. Review in minutes what would take hours in textbooks.</span>
+          </div>
+          <div class="mm-info-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <strong>Concept Clarity</strong><span>Every branch is a deep dive. From overview to detail — navigate at your own pace.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- BOOK + MINDMAP -->
+    <section class="section section-surface">
+      <div class="container">
+        <p class="eyebrow" style="margin-bottom:var(--space-3);">Explore Your Syllabus</p>
+        <h2 style="margin-bottom:var(--space-6);">Select your book to begin</h2>
+        <div class="mm-book-grid" id="bookGrid"></div>
+        <div class="mm-workspace">
+          <div class="mm-sidebar" id="sidebar">
+            <div class="mm-sidebar-scroll">
+              <div class="mm-sidebar-empty" id="sidebarEmpty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                Select a book to see its chapters
+              </div>
+              <div id="chapterList" style="display:none;">
+                <span class="mm-sidebar-label" id="bookLabel"></span>
+              </div>
+            </div>
+            <div class="mm-sidebar-foot" id="sidebarFoot" style="display:none;">
+              <button class="mm-export-btn" id="exportBtn" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export PDF
+              </button>
+            </div>
+          </div>
+          <div class="mm-canvas-wrap">
+            <div class="mm-loading" id="loadingOverlay">Loading chapters…</div>
+            <svg id="mm-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+            <div class="mm-zoom-controls">
+              <button class="mm-zoom-btn" id="btnZoomIn">+</button>
+              <button class="mm-zoom-btn" id="btnZoomOut">−</button>
+              <button class="mm-zoom-btn" id="btnReset" style="font-size:11px;">⊙</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="socials">
+          <a href="tel:+919787692116" aria-label="Call"><img src="../../assets/icons/call.svg" alt="Call"/></a>
+          <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business"><img src="../../assets/icons/google-business.svg" alt="Google Business"/></a>
+          <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="../../assets/icons/linkedin.svg" alt="LinkedIn"/></a>
+          <a href="mailto:prof@example.com" aria-label="Email"><img src="../../assets/icons/mail.svg" alt="Email"/></a>
+          <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar"><img src="../../assets/icons/google-scholar.svg" alt="Google Scholar"/></a>
+          <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack"><img src="../../assets/icons/substack.png" alt="Substack"/></a>
+          <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="../../assets/icons/youtube.svg" alt="YouTube"/></a>
+        </div>
+      </div>
+      <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:8px;">
+        <span style="font-size:12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy. All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+/* ─── NAV ─────────────────────────────────────────────────────────── */
+(function(){
+  var t=document.getElementById('menu-toggle'),n=document.getElementById('nav-mobile');
+  if(t&&n){t.addEventListener('click',function(){var o=t.getAttribute('aria-expanded')==='true';t.setAttribute('aria-expanded',String(!o));n.classList.toggle('open',!o);document.body.classList.toggle('nav-open',!o)});}
+  var mdt=document.querySelector('.nav-mobile-dropdown-trigger');
+  if(mdt){mdt.addEventListener('click',function(){mdt.setAttribute('aria-expanded',String(mdt.getAttribute('aria-expanded')!=='true'));});}
+  var ddt=document.querySelector('.nav-dropdown-trigger');
+  if(ddt){ddt.addEventListener('click',function(){ddt.setAttribute('aria-expanded',String(ddt.getAttribute('aria-expanded')!=='true'));});document.addEventListener('click',function(e){var dd=document.querySelector('.nav-dropdown');if(dd&&!dd.contains(e.target))ddt.setAttribute('aria-expanded','false');});}
+  var y=document.getElementById('y');if(y)y.textContent=new Date().getFullYear();
+})();
+
+/* ─── MINDMAP ENGINE ──────────────────────────────────────────────── */
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+
+  /* ── JSON paths — one file per book ─────────────────────────────
+     Place your files at:
+       assets/mindmap/cbse10.json
+       assets/mindmap/cbse12-phy.json
+       assets/mindmap/cbse12-chem.json
+       assets/mindmap/sb12-phy.json
+       assets/mindmap/sb12-chem.json
+
+     Each JSON must be shaped:
+     {
+       "chapters": [
+         {
+           "id": "c1",
+           "number": 1,
+           "title": "Chapter Title",
+           "data": {
+             "id": "root", "text": "Chapter Title", "kids": [
+               { "id": "s1", "text": "Topic", "kids": [
+                 { "id": "t1", "text": "Sub-topic", "kids": [] }
+               ]}
+             ]
+           }
+         }
+       ]
+     }
+  ──────────────────────────────────────────────────────────────── */
+
+  /* labelTop = line 1 (board + class), labelSub = line 2 (subject) */
+  var BOOKS=[
+    {id:'cbse10',      labelTop:'CBSE · Class 10',        labelSub:'Science',   icon:'science',   jsonPath:'../../assets/mindmap/cbse10.json'},
+    {id:'cbse12-phy',  labelTop:'CBSE · Class 12',        labelSub:'Physics',   icon:'physics',   jsonPath:'../../assets/mindmap/cbse12-phy.json'},
+    {id:'cbse12-chem', labelTop:'CBSE · Class 12',        labelSub:'Chemistry', icon:'chemistry', jsonPath:'../../assets/mindmap/cbse12-chem.json'},
+    {id:'sb12-phy',    labelTop:'State Board · Class 12', labelSub:'Physics',   icon:'physics',   jsonPath:'../../assets/mindmap/sb12-phy.json'},
+    {id:'sb12-chem',   labelTop:'State Board · Class 12', labelSub:'Chemistry', icon:'chemistry', jsonPath:'../../assets/mindmap/sb12-chem.json'}
+  ];
+
+  /* Better relevant icons:
+     science   → microscope (lens + stand)
+     physics   → atom (orbits + nucleus)
+     chemistry → flask / beaker with liquid */
+  var ICONS={
+    science: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:inherit">'+
+      '<circle cx="12" cy="9" r="4"/>'+
+      '<path d="M12 13v8"/>'+
+      '<path d="M8 21h8"/>'+
+      '<path d="M7 5.5A6.95 6.95 0 0 0 5 9a7 7 0 0 0 14 0 6.95 6.95 0 0 0-2-3.5"/>'+
+      '</svg>',
+    physics: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:inherit">'+
+      '<ellipse cx="12" cy="12" rx="10" ry="4"/>'+
+      '<ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>'+
+      '<ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>'+
+      '<circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>'+
+      '</svg>',
+    chemistry: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:inherit">'+
+      '<path d="M9 3h6"/>'+
+      '<path d="M10 3v5l-4 8a2 2 0 0 0 1.8 3h8.4A2 2 0 0 0 18 16l-4-8V3"/>'+
+      '<path d="M8.5 15.5c1 .7 2 1 3.5 1s2.5-.3 3.5-1" stroke-opacity="0.5"/>'+
+      '<circle cx="10.5" cy="13.5" r="0.8" fill="currentColor" stroke="none"/>'+
+      '<circle cx="14" cy="14.5" r="0.6" fill="currentColor" stroke="none"/>'+
+      '</svg>'
+  };
+
+  /* ── pill visual config per level — clearly distinct colours ─── */
+  var PILL=[
+    {fill:'#0052ff',stroke:'#003ecc',text:'#ffffff'},   /* L0 root       – Coinbase Blue          */
+    {fill:'#0f172a',stroke:'#0f172a',text:'#ffffff'},   /* L1 primary    – Near-black              */
+    {fill:'#1e3a5f',stroke:'#1e3a5f',text:'#bfdbfe'},   /* L2 secondary  – Deep navy               */
+    {fill:'#065f46',stroke:'#065f46',text:'#a7f3d0'},   /* L3 tertiary   – Deep teal/green         */
+    {fill:'#4c1d95',stroke:'#4c1d95',text:'#ddd6fe'},   /* L4            – Deep violet             */
+    {fill:'#7c2d12',stroke:'#7c2d12',text:'#fed7aa'}    /* L5            – Deep amber              */
+  ];
+  var LINE_COL='rgba(150,165,200,0.5)';
+
+  /* ── layout constants ─── */
+  var PH   =[18,15,14,13,12,11];
+  var FS   =[12,11,10.5,10,9.5,9];
+  var HGAP =[260,220,200,185,170];   /* wider gaps = tree spreads horizontally */
+  var VPAD =26;                       /* more vertical breathing prevents L4/L5 overlap */
+  var CHARS=[22,24,26,28,30,32];
+  var MAXPW=[215,220,240,255,265,275];
+  var COL_OFFSET = 180;               /* wider alternating offset = more horizontal use */
+
+  /* ── state ─── */
+  var S={book:null,chapter:null,tree:null,chapters:[],scale:1,tx:0,ty:0};
+
+  /* ── DOM ─── */
+  var bookGrid    =document.getElementById('bookGrid');
+  var sidebarEmpty=document.getElementById('sidebarEmpty');
+  var chapterList =document.getElementById('chapterList');
+  var bookLabel   =document.getElementById('bookLabel');
+  var sidebarFoot =document.getElementById('sidebarFoot');
+  var exportBtn   =document.getElementById('exportBtn');
+  var loadingOvl  =document.getElementById('loadingOverlay');
+  var svg         =document.getElementById('mm-svg');
+
+  /* ══════════════════════════════════════════════════════
+     BOOK CARDS
+  ══════════════════════════════════════════════════════ */
+  BOOKS.forEach(function(b){
+    var lbl=document.createElement('label');
+    lbl.className='mm-book-card'; lbl.dataset.id=b.id;
+    lbl.innerHTML=
+      '<input type="radio" name="mmbook" value="'+b.id+'"/>'+
+      '<div class="mm-book-icon">'+ICONS[b.icon]+'</div>'+
+      '<div class="mm-book-label">'+
+        '<span class="mm-book-label-top">'+b.labelTop+'</span>'+
+        '<span class="mm-book-label-sub">'+b.labelSub+'</span>'+
+      '</div>';
+    lbl.querySelector('input').addEventListener('change',function(){selectBook(b.id);});
+    bookGrid.appendChild(lbl);
+  });
+
+  /* ══════════════════════════════════════════════════════
+     SELECT BOOK — fetch JSON, fall back to empty
+  ══════════════════════════════════════════════════════ */
+  function selectBook(id){
+    S.book=id; S.chapter=null; S.tree=null; S.chapters=[];
+    document.querySelectorAll('.mm-book-card').forEach(function(c){c.classList.toggle('selected',c.dataset.id===id);});
+    var b=BOOKS.find(function(x){return x.id===id;});
+    sidebarEmpty.style.display='none';
+    chapterList.style.display='block';
+    sidebarFoot.style.display='block';
+    bookLabel.textContent=b?(b.labelTop+' — '+b.labelSub):'';    chapterList.querySelectorAll('.mm-chapter-item').forEach(function(el){el.remove();});
+    exportBtn.disabled=true;
+    loadingOvl.style.display='flex';
+    drawMockup();
+
+    fetch(b.jsonPath)
+      .then(function(r){if(!r.ok)throw new Error('not found');return r.json();})
+      .then(function(json){
+        loadingOvl.style.display='none';
+        S.chapters=json.chapters||[];
+        renderSidebar();
+      })
+      .catch(function(){
+        loadingOvl.style.display='none';
+        /* JSON not yet uploaded — sidebar shows friendly message */
+        S.chapters=[];
+        renderSidebar();
+      });
+  }
+
+  function renderSidebar(){
+    chapterList.querySelectorAll('.mm-chapter-item').forEach(function(el){el.remove();});
+    if(!S.chapters.length){
+      var msg=document.createElement('div');
+      msg.style.cssText='padding:12px 10px;font-size:12px;color:var(--muted);line-height:1.5;';
+      msg.textContent='No chapters found. Place your JSON file in assets/mindmap/.';
+      chapterList.appendChild(msg);
+      return;
+    }
+    S.chapters.forEach(function(ch){
+      var d=document.createElement('div');
+      d.className='mm-chapter-item'; d.dataset.id=ch.id;
+      d.innerHTML='<span class="mm-ch-num">Chapter '+ch.number+'</span><span class="mm-ch-title">'+ch.title+'</span>';
+      d.addEventListener('click',function(){selectChapter(ch.id);});
+      chapterList.appendChild(d);
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════
+     SELECT CHAPTER
+  ══════════════════════════════════════════════════════ */
+  function selectChapter(id){
+    S.chapter=id; S.scale=1; S.tx=0; S.ty=0;
+    document.querySelectorAll('.mm-chapter-item').forEach(function(el){el.classList.toggle('active',el.dataset.id===id);});
+    var ch=S.chapters.find(function(c){return c.id===id;});
+    if(!ch) return;
+    S.tree=JSON.parse(JSON.stringify(ch.data));
+    /* Root must be open so L1 nodes are immediately visible.
+       Only collapse L1+ children so the tree starts clean. */
+    S.tree.open=true;
+    if(S.tree.kids) S.tree.kids.forEach(function(k){ openAll(k,false); });
+    exportBtn.disabled=false;
+    renderTree(S.tree,svg,true);
+  }
+
+  /* open/close all nodes recursively */
+  function openAll(node,open){
+    node.open=open;
+    if(node.kids)node.kids.forEach(function(k){openAll(k,open);});
+  }
+
+  /* ══════════════════════════════════════════════════════
+     GEOMETRY HELPERS
+  ══════════════════════════════════════════════════════ */
+  function wrapText(text,maxCh){
+    var words=text.split(' '),lines=[],cur='';
+    words.forEach(function(w){
+      var test=cur?cur+' '+w:w;
+      if(test.length>maxCh&&cur){lines.push(cur);cur=w;}else{cur=test;}
+    });
+    if(cur)lines.push(cur);
+    return lines;
+  }
+
+  /* Width of the pill for given text+level */
+  function pillW(text,level){
+    var maxCh=CHARS[Math.min(level,CHARS.length-1)];
+    var maxPw=MAXPW[Math.min(level,MAXPW.length-1)];
+    var charW=[7.2,6.6,6.2,5.9,5.6][Math.min(level,4)];
+    var lines=wrapText(text,maxCh);
+    var maxLen=0; lines.forEach(function(l){if(l.length>maxLen)maxLen=l.length;});
+    return Math.min(maxPw, Math.max(70, maxLen*charW+28));
+  }
+
+  /* ACTUAL pill half-height accounting for number of lines of text */
+  function pillH(text,level){
+    var maxCh=CHARS[Math.min(level,CHARS.length-1)];
+    var fs=FS[Math.min(level,FS.length-1)];
+    var lh=fs+3.5;                              /* line-height */
+    var lines=wrapText(text,maxCh);
+    var textH=lines.length*lh;
+    var minPH=PH[Math.min(level,PH.length-1)];  /* minimum half-height (1 line) */
+    var PAD=10;                                  /* top + bottom inner padding */
+    return Math.max(minPH, textH/2 + PAD);
+  }
+
+  /* subtreeH: total vertical space consumed by this node + ALL its open descendants.
+     The key fix: when a node has children, its own height is irrelevant for spacing —
+     the total height is driven entirely by the sum of children subtree heights.
+     We only use selfH as a floor when there are no children.            */
+  function subtreeH(node,level){
+    var ph=pillH(node.text,level);
+    var selfH=ph*2+VPAD;
+    var visKids=(node.open&&node.kids&&node.kids.length)?node.kids:[];
+    if(!visKids.length) return selfH;
+    var childTotal=0;
+    visKids.forEach(function(k){childTotal+=subtreeH(k,level+1);});
+    /* The parent must be at least as tall as all its children stacked */
+    return Math.max(selfH, childTotal);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     LAYOUT — alternating columns for tertiary nodes
+     Each L1 node's children (L2) start at the same X.
+     But each L2 node's children (L3) alternate between
+     two X positions based on whether their L1 ancestor
+     is even-indexed or odd-indexed:
+       even L1 → L3 children at column A (closer)
+       odd  L1 → L3 children at column B (further right)
+     This gives a zigzag/staircase effect at L3 while
+     keeping all L1 and L2 nodes in clean columns.
+     All deeper levels (L4+) inherit their L1 parity.
+  ══════════════════════════════════════════════════════ */
+  var COL_OFFSET = 140; /* extra X for odd-L1 tertiary column */
+
+  function buildLayout(root){
+    var nodes = [];
+
+    /* place: x is the ACTUAL x for this node.
+       childBaseX is what x+hg would normally be — we pass it
+       explicitly so alternating offsets work cleanly.
+       parity = 0 (even L1) or 1 (odd L1) */
+    function place(node, level, x, y, parity){
+      var ph  = pillH(node.text, level);
+      var pw  = pillW(node.text, level);
+      var hg  = HGAP[Math.min(level, HGAP.length-1)];
+      var visKids = (node.open && node.kids && node.kids.length) ? node.kids : [];
+
+      nodes.push({
+        id:node.id, text:node.text, level:level,
+        cx:x, cy:y, pw:pw, ph:ph,
+        open:node.open, hasKids:!!(node.kids&&node.kids.length)
+      });
+
+      if(!visKids.length) return;
+
+      /* X for children: normal hg, plus COL_OFFSET if odd parity AND this is L1→L2 transition */
+      var childX = x + hg + (level === 1 && parity === 1 ? COL_OFFSET : 0);
+
+      var totalH = 0;
+      visKids.forEach(function(k){ totalH += subtreeH(k, level+1); });
+      var curY = y - totalH/2;
+
+      visKids.forEach(function(k){
+        var kh = subtreeH(k, level+1);
+        place(k, level+1, childX, curY + kh/2, parity);
+        curY += kh;
+      });
+    }
+
+    /* Handle root (L0) specially — gives each L1 child its parity */
+    var ph0  = pillH(root.text, 0);
+    var pw0  = pillW(root.text, 0);
+    var hg0  = HGAP[0];
+    var visL1 = (root.open && root.kids && root.kids.length) ? root.kids : [];
+
+    nodes.push({
+      id:root.id, text:root.text, level:0,
+      cx:0, cy:0, pw:pw0, ph:ph0,
+      open:root.open, hasKids:!!visL1.length
+    });
+
+    if(visL1.length){
+      var totalH = 0;
+      visL1.forEach(function(k){ totalH += subtreeH(k, 1); });
+      var curY = -totalH/2;
+
+      visL1.forEach(function(k, i){
+        var kh = subtreeH(k, 1);
+        /* parity: 0 for even-index L1, 1 for odd-index L1 */
+        place(k, 1, hg0, curY + kh/2, i % 2);
+        curY += kh;
+      });
+    }
+
+    return nodes;
+  }
+
+  /* ══════════════════════════════════════════════════════
+     DRAW PILL — ph is the actual half-height (dynamic, multiline-aware)
+  ══════════════════════════════════════════════════════ */
+  function svgEl(tag){return document.createElementNS(NS,tag);}
+
+  function drawPill(parent,cx,cy,text,level,hasKids,isOpen,interactive,phOverride){
+    var col=PILL[Math.min(level,PILL.length-1)];
+    var ph=phOverride!==undefined ? phOverride : pillH(text,level);
+    var fs=FS[Math.min(level,FS.length-1)];
+    var pw=pillW(text,level);
+    var maxCh=CHARS[Math.min(level,CHARS.length-1)];
+    var lines=wrapText(text,maxCh);
+    var lh=fs+3.5;                 /* must match pillH */
+    var minPH_base=PH[Math.min(level,PH.length-1)];
+    /* rx: pill ends — cap at single-line half-height so multi-line pills stay stadium-shaped */
+    var rx=Math.min(minPH_base, ph);
+
+    var g=svgEl('g');
+    g.setAttribute('class','mm-node');
+    if(interactive&&hasKids) g.style.cursor='pointer';
+
+    var rect=svgEl('rect');
+    rect.setAttribute('x',cx-pw/2); rect.setAttribute('y',cy-ph);
+    rect.setAttribute('width',pw);  rect.setAttribute('height',ph*2);
+    rect.setAttribute('rx',rx);     rect.setAttribute('ry',rx);
+    rect.setAttribute('fill',col.fill);
+    rect.setAttribute('stroke',col.stroke);
+    rect.setAttribute('stroke-width',level===0?0:1);
+    g.appendChild(rect);
+
+    /* text block: centred inside pill */
+    var totalTH=lines.length*lh;
+    var startY=cy - totalTH/2 + lh*0.45;
+    lines.forEach(function(line,i){
+      var t=svgEl('text');
+      t.setAttribute('x',cx); t.setAttribute('y',startY+i*lh);
+      t.setAttribute('text-anchor','middle');
+      t.setAttribute('dominant-baseline','middle');
+      t.setAttribute('font-size',fs);
+      t.setAttribute('font-weight',level===0?700:level===1?600:500);
+      t.setAttribute('fill',col.text);
+      t.setAttribute('font-family',"'Inter','CoinbaseSans',system-ui,sans-serif");
+      t.textContent=line;
+      g.appendChild(t);
+    });
+
+    /* expand indicator anchored to right edge, vertically centred on pill */
+    if(hasKids&&interactive){
+      var arr=svgEl('text');
+      arr.setAttribute('x',cx+pw/2-10); arr.setAttribute('y',cy);
+      arr.setAttribute('dominant-baseline','middle');
+      arr.setAttribute('font-size',9);
+      arr.setAttribute('fill',col.text);
+      arr.setAttribute('opacity','0.7');
+      arr.textContent=isOpen?'▾':'▸';
+      g.appendChild(arr);
+    }
+    parent.appendChild(g);
+    return g;
+  }
+
+  /* ══════════════════════════════════════════════════════
+     DRAW CONNECTOR (cubic bezier, right-edge → left-edge)
+  ══════════════════════════════════════════════════════ */
+  function drawConnector(parent,x1,y1,x2,y2){
+    var p=svgEl('path');
+    var cpx=(x1+x2)/2;
+    p.setAttribute('d','M '+x1+' '+y1+' C '+cpx+' '+y1+' '+cpx+' '+y2+' '+x2+' '+y2);
+    p.setAttribute('fill','none'); p.setAttribute('stroke',LINE_COL); p.setAttribute('stroke-width','1.2');
+    parent.insertBefore(p,parent.firstChild);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     RENDER TREE — can target any SVG element (screen or PDF)
+  ══════════════════════════════════════════════════════ */
+  function renderTree(tree, targetSvg, interactive, forceFontScale){
+    targetSvg.innerHTML='';
+    var nodes=buildLayout(tree);
+    var pad=40;
+    var xs=nodes.map(function(n){return n.cx-n.pw/2;});
+    var xe=nodes.map(function(n){return n.cx+n.pw/2;});
+    var ys=nodes.map(function(n){return n.cy-n.ph;});
+    var ye=nodes.map(function(n){return n.cy+n.ph;});
+    var vx=Math.min.apply(null,xs)-pad, vy=Math.min.apply(null,ys)-pad;
+    var vw=Math.max.apply(null,xe)-vx+pad*2, vh=Math.max.apply(null,ye)-vy+pad*2;
+    targetSvg.setAttribute('viewBox',vx+' '+vy+' '+vw+' '+vh);
+
+    /* build id→node map */
+    var map={};
+    nodes.forEach(function(n){map[n.id]=n;});
+
+    /* connectors first (behind pills) */
+    buildTreeConnectors(tree,map,targetSvg);
+
+    /* pills */
+    nodes.forEach(function(n){
+      /* Root never shows expand indicator and is never clickable */
+      var isRoot = (n.id === 'root');
+      var g=drawPill(targetSvg,n.cx,n.cy,n.text,n.level,isRoot?false:n.hasKids,n.open,interactive,n.ph);
+      if(interactive && n.hasKids && !isRoot){
+        g.addEventListener('click',function(){
+          toggleNode(S.tree,n.id);
+          renderTree(S.tree,svg,true);
+        });
+      }
+    });
+
+    if(interactive) applyTransform();
+  }
+
+  function buildTreeConnectors(node,map,targetSvg){
+    if(!node.open||!node.kids) return;
+    node.kids.forEach(function(k){
+      var p=map[node.id], c=map[k.id];
+      if(p&&c) drawConnector(targetSvg, p.cx+p.pw/2, p.cy, c.cx-c.pw/2, c.cy);
+      buildTreeConnectors(k,map,targetSvg);
+    });
+  }
+
+  function findNode(tree,id){
+    if(tree.id===id)return tree;
+    if(tree.kids){for(var i=0;i<tree.kids.length;i++){var f=findNode(tree.kids[i],id);if(f)return f;}}
+    return null;
+  }
+  function toggleNode(tree,id){
+    var n=findNode(tree,id);
+    /* Root node (level 0 = the chapter title) must always stay open.
+       Only L1 and deeper nodes expand/collapse on click. */
+    if(n && n.kids && n.kids.length && n.id !== 'root'){
+      n.open=!n.open;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     DEFAULT MOCKUP — fixed non-overlapping layout
+     Uses exact pixel positions, no dynamic layout
+  ══════════════════════════════════════════════════════ */
+  function drawMockup(){
+    svg.innerHTML='';
+    S.scale=1; S.tx=0; S.ty=0;
+    /* Fixed viewBox: root at x=80, branches to right */
+    svg.setAttribute('viewBox','-20 -260 720 560');
+
+    function gPill(cx,cy,w,h,label,level){
+      var isRoot=level===0;
+      var col=PILL[Math.min(level,PILL.length-1)];
+      var ph=h; var pw=w;
+      var rect=svgEl('rect');
+      rect.setAttribute('x',cx-pw/2); rect.setAttribute('y',cy-ph);
+      rect.setAttribute('width',pw); rect.setAttribute('height',ph*2);
+      rect.setAttribute('rx',ph); rect.setAttribute('ry',ph);
+      rect.setAttribute('fill', col.fill);
+      rect.setAttribute('stroke', col.stroke);
+      rect.setAttribute('stroke-width','1');
+      rect.setAttribute('opacity', isRoot ? '1' : '0.22');
+      svg.appendChild(rect);
+      if(label){
+        var t=svgEl('text');
+        t.setAttribute('x',cx); t.setAttribute('y',cy);
+        t.setAttribute('text-anchor','middle'); t.setAttribute('dominant-baseline','middle');
+        t.setAttribute('font-size',isRoot?11:9);
+        t.setAttribute('font-weight',isRoot?700:500);
+        t.setAttribute('fill', isRoot ? '#fff' : col.fill);
+        t.setAttribute('opacity', isRoot ? '1' : '0.55');
+        t.setAttribute('font-family',"'Inter',system-ui,sans-serif");
+        t.textContent=label; svg.appendChild(t);
+      }
+    }
+    function gLine(x1,y1,x2,y2){
+      var p=svgEl('path');
+      var cpx=(x1+x2)/2;
+      p.setAttribute('d','M '+x1+' '+y1+' C '+cpx+' '+y1+' '+cpx+' '+y2+' '+x2+' '+y2);
+      p.setAttribute('fill','none'); p.setAttribute('stroke','rgba(0,82,255,0.18)'); p.setAttribute('stroke-width','1');
+      svg.insertBefore(p,svg.firstChild);
+    }
+
+    /* Root — centred vertically */
+    gPill(80,0,160,18,'Select a book to explore',0);
+
+    /* L1: 5 primary nodes, evenly spaced, no overlap */
+    var l1y=[-200,-100,0,100,200];
+    var l1x=280, l1w=110, l1h=14;
+    l1y.forEach(function(y){
+      gLine(80+80,0,l1x-l1w/2,y);
+      gPill(l1x,y,l1w,l1h,'Primary Topic',1);
+    });
+
+    /* L2: only attach to 3 middle L1 nodes to avoid clutter */
+    var l2x=460, l2w=90, l2h=12;
+    var l2groups=[
+      {py:-100, ys:[-130,-100,-70]},
+      {py:0,    ys:[-30,0,30]},
+      {py:100,  ys:[70,100,130]}
+    ];
+    l2groups.forEach(function(grp){
+      grp.ys.forEach(function(y){
+        gLine(l1x+l1w/2,grp.py,l2x-l2w/2,y);
+        gPill(l2x,y,l2w,l2h,'Secondary',2);
+      });
+    });
+
+    /* L3: only attach to first L2 group's middle node */
+    var l3x=615, l3w=76, l3h=10;
+    [-30,0,30].forEach(function(y){
+      gLine(l2x+l2w/2,0,l3x-l3w/2,y);
+      gPill(l3x,y,l3w,l3h,'Detail',3);
+    });
+
+    applyTransform();
+  }
+
+  /* ══════════════════════════════════════════════════════
+     PDF EXPORT
+     — deep-clones the tree with all nodes open
+     — builds layout at PDF scale
+     — renders into an off-screen SVG
+     — serialises and opens print window
+  ══════════════════════════════════════════════════════ */
+  exportBtn.addEventListener('click',function(){
+    if(!S.tree||!S.chapter) return;
+
+    var ch=S.chapters.find(function(c){return c.id===S.chapter;});
+    var title=ch?ch.title:'Mind Map';
+
+    /* Fetch logo as base64 so it embeds cleanly in the SVG */
+    var logoPath='../../assets/images/logo.jpg';
+    function doExport(logoDataUrl){
+      var fullTree=JSON.parse(JSON.stringify(S.tree));
+      openAll(fullTree,true);
+
+      var nodes=buildLayout(fullTree);
+      var pad=40;
+      var xs=nodes.map(function(n){return n.cx-n.pw/2;});
+      var xe=nodes.map(function(n){return n.cx+n.pw/2;});
+      var ys=nodes.map(function(n){return n.cy-n.ph;});
+      var ye=nodes.map(function(n){return n.cy+n.ph;});
+      var vx=Math.min.apply(null,xs)-pad, vy=Math.min.apply(null,ys)-pad;
+      var vw=Math.max.apply(null,xe)-vx+pad*2, vh=Math.max.apply(null,ye)-vy+pad*2;
+
+      var PAGE_W=1587, PAGE_H=1123, HEADER_H=56;
+      var scaleX=PAGE_W/vw, scaleY=(PAGE_H-HEADER_H)/vh;
+      var scale=Math.min(scaleX,scaleY);
+      var fontScale=Math.max(0.7,Math.min(1.4,scale));
+
+      var svgStr=buildPdfSvg(fullTree,nodes,vx,vy,vw,vh,PAGE_W,PAGE_H,HEADER_H,scale,fontScale,title,logoDataUrl);
+
+      var win=window.open('','_blank','width=1400,height=1000');
+      win.document.write(
+        '<!doctype html><html><head><meta charset="utf-8">'+
+        '<title>'+title+' — Mind Map</title>'+
+        '<style>'+
+          '*{margin:0;padding:0;box-sizing:border-box}'+
+          'body{background:#fff;display:flex;flex-direction:column;align-items:flex-start}'+
+          'svg{display:block;width:100%;height:auto}'+
+          '.print-bar{position:fixed;top:16px;right:16px;display:flex;gap:10px;z-index:99}'+
+          '.print-bar button{padding:8px 16px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;border:none}'+
+          '.btn-print{background:#0052ff;color:#fff}'+
+          '.btn-close{background:#eef0f3;color:#0a0b0d}'+
+          '@media print{'+
+            '@page{size:A3 landscape;margin:0}'+
+            'body{width:420mm;height:297mm;overflow:hidden}'+
+            'svg{width:420mm !important;height:297mm !important}'+
+            '.print-bar{display:none !important}'+
+          '}'+
+        '</style>'+
+        '</head><body>'+
+        '<div class="print-bar">'+
+          '<button class="btn-print" onclick="window.print()">🖨 Print / Save PDF</button>'+
+          '<button class="btn-close" onclick="window.close()">Close</button>'+
+        '</div>'+
+        svgStr+
+        '</body></html>'
+      );
+      win.document.close();
+    }
+
+    /* Try to load the logo; fall back to null (uses text B) if it fails */
+    var img=new Image();
+    var canvas=document.createElement('canvas');
+    img.onload=function(){
+      var size=44;
+      canvas.width=size; canvas.height=size;
+      var ctx=canvas.getContext('2d');
+      /* Draw as circle clip */
+      ctx.beginPath();
+      ctx.arc(size/2,size/2,size/2,0,Math.PI*2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(img,0,0,size,size);
+      doExport(canvas.toDataURL('image/jpeg',0.92));
+    };
+    img.onerror=function(){ doExport(null); };
+    img.crossOrigin='anonymous';
+    img.src=logoPath;
+  });
+
+  function buildPdfSvg(tree,nodes,vx,vy,vw,vh,pw,ph,headerH,scale,fontScale,title,logoDataUrl){
+    var map={};
+    nodes.forEach(function(n){map[n.id]=n;});
+
+    var lines=[];
+    lines.push('<svg xmlns="'+NS+'" xmlns:xlink="http://www.w3.org/1999/xlink" width="'+pw+'" height="'+ph+'" viewBox="0 0 '+pw+' '+ph+'" style="background:#f8f9fb">');
+    lines.push('<rect width="'+pw+'" height="'+ph+'" fill="#f8f9fb"/>');
+
+    /* Header bar */
+    lines.push('<rect x="0" y="0" width="'+pw+'" height="'+headerH+'" fill="#0052ff"/>');
+
+    /* Logo: embed as base64 image clipped to circle, or fallback B */
+    var logoSize=38, logoPad=9, logoCX=logoPad+logoSize/2;
+    if(logoDataUrl){
+      /* clipPath for circular logo */
+      lines.push('<defs><clipPath id="logoClip"><circle cx="'+logoCX+'" cy="'+(headerH/2)+'" r="'+(logoSize/2)+'"/></clipPath></defs>');
+      lines.push('<image href="'+logoDataUrl+'" x="'+logoPad+'" y="'+(headerH/2-logoSize/2)+'" width="'+logoSize+'" height="'+logoSize+'" clip-path="url(#logoClip)" preserveAspectRatio="xMidYMid slice"/>');
+    } else {
+      lines.push('<circle cx="'+logoCX+'" cy="'+(headerH/2)+'" r="'+(logoSize/2)+'" fill="rgba(255,255,255,0.2)"/>');
+      lines.push('<text x="'+logoCX+'" y="'+(headerH/2)+'" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="900" fill="#fff" font-family="Inter,system-ui,sans-serif">B</text>');
+    }
+
+    /* Academy name */
+    var textX = logoPad + logoSize + 10;
+    lines.push('<text x="'+textX+'" y="'+(headerH/2-6)+'" dominant-baseline="middle" font-size="9" font-weight="700" fill="rgba(255,255,255,0.95)" font-family="Inter,system-ui,sans-serif" letter-spacing="0.8">PROF. DR. S. BALAJI SCIENCE ACADEMY</text>');
+    lines.push('<text x="'+textX+'" y="'+(headerH/2+7)+'" dominant-baseline="middle" font-size="8" fill="rgba(255,255,255,0.6)" font-family="Inter,system-ui,sans-serif">profbalaji.in</text>');
+
+    /* Chapter title centred */
+    lines.push('<text x="'+(pw/2)+'" y="'+(headerH/2+1)+'" text-anchor="middle" dominant-baseline="middle" font-size="15" font-weight="700" fill="#fff" font-family="Inter,system-ui,sans-serif">'+escXml(title)+' — Mind Map</text>');
+
+    /* Map content */
+    var tx=(-vx)*scale + (pw - vw*scale)/2;
+    var ty=(-vy)*scale + headerH;
+    lines.push('<g transform="translate('+tx+','+ty+') scale('+scale+')" >');
+    lines.push(buildConnectorLines(tree,map));
+    nodes.forEach(function(n){ lines.push(buildPillStr(n,fontScale)); });
+    lines.push('</g></svg>');
+    return lines.join('\n');
+  }
+
+  function buildConnectorLines(node,map){
+    var out='';
+    if(!node.open||!node.kids) return out;
+    node.kids.forEach(function(k){
+      var p=map[node.id], c=map[k.id];
+      if(p&&c){
+        var x1=p.cx+p.pw/2, y1=p.cy, x2=c.cx-c.pw/2, y2=c.cy;
+        var cpx=(x1+x2)/2;
+        out+='<path d="M '+x1+' '+y1+' C '+cpx+' '+y1+' '+cpx+' '+y2+' '+x2+' '+y2+'" fill="none" stroke="'+LINE_COL+'" stroke-width="1.2"/>';
+      }
+      out+=buildConnectorLines(k,map);
+    });
+    return out;
+  }
+
+  function buildPillStr(n,fontScale){
+    var col=PILL[Math.min(n.level,PILL.length-1)];
+    var ph=n.ph, pw=n.pw, cx=n.cx, cy=n.cy;
+    var fs=FS[Math.min(n.level,FS.length-1)]*fontScale;
+    var maxCh=CHARS[Math.min(n.level,CHARS.length-1)];
+    var lines=wrapText(n.text,maxCh);
+    var lh=fs+3.5;
+    var minPH_base=PH[Math.min(n.level,PH.length-1)];
+    var rx=Math.min(minPH_base,ph);
+    var out='<g>';
+    out+='<rect x="'+(cx-pw/2)+'" y="'+(cy-ph)+'" width="'+pw+'" height="'+(ph*2)+'" rx="'+rx+'" ry="'+rx+'" fill="'+col.fill+'" stroke="'+col.stroke+'" stroke-width="'+(n.level===0?0:1)+'"/>';
+    var totalTH=lines.length*lh;
+    var startY=cy-totalTH/2+lh*0.45;
+    lines.forEach(function(line,i){
+      out+='<text x="'+cx+'" y="'+(startY+i*lh)+'" text-anchor="middle" dominant-baseline="middle" font-size="'+fs+'" font-weight="'+(n.level===0?700:n.level===1?600:500)+'" fill="'+col.text+'" font-family="Inter,system-ui,sans-serif">'+escXml(line)+'</text>';
+    });
+    out+='</g>';
+    return out;
+  }
+
+  function escXml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  /* ══════════════════════════════════════════════════════
+     TRANSFORM / ZOOM / PAN
+  ══════════════════════════════════════════════════════ */
+  function applyTransform(){
+    svg.style.transform='scale('+S.scale+') translate('+S.tx+'px,'+S.ty+'px)';
+  }
+  document.getElementById('btnZoomIn').addEventListener('click',function(){S.scale=Math.min(3,S.scale+0.15);applyTransform();});
+  document.getElementById('btnZoomOut').addEventListener('click',function(){S.scale=Math.max(0.3,S.scale-0.15);applyTransform();});
+  document.getElementById('btnReset').addEventListener('click',function(){S.scale=1;S.tx=0;S.ty=0;applyTransform();});
+  svg.addEventListener('wheel',function(e){e.preventDefault();S.scale=Math.max(0.3,Math.min(3,S.scale+(e.deltaY<0?0.1:-0.1)));applyTransform();},{passive:false});
+  var drag={on:false,sx:0,sy:0,stx:0,sty:0};
+  svg.addEventListener('mousedown',function(e){drag={on:true,sx:e.clientX,sy:e.clientY,stx:S.tx,sty:S.ty};});
+  document.addEventListener('mousemove',function(e){if(!drag.on)return;S.tx=drag.stx+(e.clientX-drag.sx)/S.scale;S.ty=drag.sty+(e.clientY-drag.sy)/S.scale;applyTransform();});
+  document.addEventListener('mouseup',function(){drag.on=false;});
+  var touch={on:false,sx:0,sy:0,stx:0,sty:0,dist:0};
+  svg.addEventListener('touchstart',function(e){if(e.touches.length===1){touch={on:true,sx:e.touches[0].clientX,sy:e.touches[0].clientY,stx:S.tx,sty:S.ty,dist:0};}else if(e.touches.length===2){touch.on=false;var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;touch.dist=Math.sqrt(dx*dx+dy*dy);}},{passive:true});
+  svg.addEventListener('touchmove',function(e){e.preventDefault();if(e.touches.length===1&&touch.on){S.tx=touch.stx+(e.touches[0].clientX-touch.sx)/S.scale;S.ty=touch.sty+(e.touches[0].clientY-touch.sy)/S.scale;applyTransform();}else if(e.touches.length===2){var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY,d=Math.sqrt(dx*dx+dy*dy);S.scale=Math.max(0.3,Math.min(3,S.scale*d/touch.dist));touch.dist=d;applyTransform();}},{passive:false});
+  svg.addEventListener('touchend',function(){touch.on=false;});
+
+  /* INIT */
+  drawMockup();
+
+})();
+</script>
+</body>
+</html>

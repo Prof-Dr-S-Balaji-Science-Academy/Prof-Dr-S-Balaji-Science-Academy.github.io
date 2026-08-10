@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Create a custom study planner for CBSE Class 10 Science, CBSE Class 12, and State Board Class 12. Download your personalised preparation schedule as PDF." />
+  <title>Study Planner | Prof. Dr. S. Balaji Science Academy</title>
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    /* ── Hero grid ── */
+    .sp-hero-grid{display:grid;grid-template-columns:1fr;gap:var(--space-8);align-items:center}
+    @media(min-width:896px){.sp-hero-grid{grid-template-columns:1.1fr 0.9fr;gap:var(--space-12)}}
+    .sp-hero-sub{font-size:var(--text-base);color:var(--muted);max-width:52ch;line-height:1.7;margin-bottom:var(--space-5)}
+
+    /* ── Dark card ── */
+    .sp-info-card{background:var(--dark);color:var(--bg);border-radius:var(--radius-lg);padding:var(--space-8);display:flex;flex-direction:column;gap:var(--space-4)}
+    .sp-info-card h2{font-family:var(--font-display);font-size:clamp(20px,3vw,28px);font-weight:400;color:var(--bg);margin-bottom:var(--space-2)}
+    .sp-card-note{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.5;border-top:1px solid rgba(255,255,255,0.1);padding-top:var(--space-3)}
+    .sp-info-box{display:flex;flex-direction:column;gap:6px;padding:var(--space-3);background:rgba(255,255,255,0.08);border-radius:var(--radius-sm)}
+    .sp-info-box svg{width:22px;height:22px;color:#578bfa;flex-shrink:0}
+    .sp-info-box strong{font-size:14px;font-weight:700;color:#fff}
+    .sp-info-box span{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.4}
+
+    /* ── Countdown ── */
+    .sp-target-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(87,139,250,0.18);border:1px solid rgba(87,139,250,0.3);color:#578bfa;font-size:12px;font-weight:700;letter-spacing:0.04em;padding:5px 12px;border-radius:var(--radius-pill)}
+    .sp-countdown{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3)}
+    .sp-count-box{background:rgba(255,255,255,0.08);border-radius:var(--radius-sm);padding:var(--space-3) var(--space-2);text-align:center}
+    .sp-count-num{display:block;font-size:clamp(28px,4vw,40px);font-weight:700;color:#fff;line-height:1;font-family:var(--font-display)}
+    .sp-count-label{display:block;font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-transform:uppercase;margin-top:4px}
+
+    /* ── Board selector ── */
+    .sp-board-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);margin-bottom:var(--space-8)}
+    @media(max-width:640px){.sp-board-grid{grid-template-columns:1fr}}
+    .sp-board-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:var(--space-5) var(--space-4);border:2px solid var(--border);border-radius:var(--radius-md);background:var(--bg);cursor:pointer;transition:all 150ms cubic-bezier(0.2,0,0,1);font-family:var(--font-body);text-align:center}
+    .sp-board-btn:hover{border-color:rgba(0,82,255,0.35);box-shadow:0 4px 16px rgba(0,82,255,0.08);transform:translateY(-2px)}
+    .sp-board-btn.active{border-color:var(--accent);background:color-mix(in oklab,var(--accent),transparent 94%)}
+    .sp-board-top{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase}
+    .sp-board-main{font-size:15px;font-weight:700;color:var(--fg)}
+    .sp-board-btn.active .sp-board-top{color:color-mix(in oklab,var(--accent),transparent 30%)}
+    .sp-board-btn.active .sp-board-main{color:var(--accent)}
+
+    /* ── Planner ── */
+    .sp-planner{display:none}
+    .sp-planner.visible{display:block}
+    .sp-subject-section{
+      margin-bottom: 64px;
+      padding-bottom: 48px;
+      border-bottom: 3px solid var(--border);
+    }
+    .sp-subject-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .sp-subject-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-5);padding-bottom:var(--space-4);border-bottom:2px solid var(--border)}
+    .sp-subject-title{font-family:var(--font-display);font-size:clamp(20px,2.5vw,26px);font-weight:400;color:var(--fg)}
+    .sp-totals{display:flex;gap:var(--space-3);flex-wrap:wrap}
+    .sp-total-chip{font-size:12px;font-weight:600;padding:4px 12px;border-radius:var(--radius-pill);background:var(--surface);color:var(--muted)}
+    .sp-total-chip.prep{background:color-mix(in oklab,var(--accent),transparent 90%);color:var(--accent)}
+    .sp-total-chip.rev{background:color-mix(in oklab,#0667d0,transparent 88%);color:#0667d0}
+
+    /* ── Table ── */
+    .sp-table-wrap{overflow-x:auto}
+    .sp-table{width:100%;border-collapse:collapse;font-size:13px}
+    .sp-table thead th{background:var(--dark);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:10px 12px;text-align:left;white-space:nowrap}
+    .sp-table thead th:first-child{border-radius:8px 0 0 0}
+    .sp-table thead th:last-child{border-radius:0 8px 0 0}
+    .sp-table thead th.col-group-prep{background:#1a2a4a;border-left:3px solid rgba(87,139,250,0.5)}
+    .sp-table thead th.col-group-rev{background:#1a2a3a;border-left:3px solid rgba(6,103,208,0.5)}
+    .sp-table tbody tr{border-bottom:1px solid var(--border);transition:background 100ms}
+    .sp-table tbody tr:hover{background:var(--surface)}
+    .sp-table tbody tr.unit-header td{background:color-mix(in oklab,var(--fg),transparent 94%);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:6px 12px}
+    .sp-table td{padding:11px 12px;vertical-align:middle}
+    .sp-table td:first-child{font-weight:700;color:var(--muted);font-size:12px}
+    .sp-table td.col-group-prep{border-left:3px solid rgba(87,139,250,0.2);background:color-mix(in oklab,var(--accent),transparent 97%)}
+    .sp-table td.col-group-rev{border-left:3px solid rgba(6,103,208,0.2);background:color-mix(in oklab,#0667d0,transparent 97%)}
+    /* Grouped prep/rev cell */
+    .sp-group-cell{display:flex;align-items:center;gap:10px}
+    .sp-group-hrs{font-size:14px;font-weight:800;min-width:32px;flex-shrink:0}
+    .sp-group-hrs.prep-hrs{color:var(--accent)}
+    .sp-group-hrs.rev-hrs{color:#0667d0}
+    .sp-group-divider{width:1px;height:32px;background:var(--border);flex-shrink:0}
+
+    /* difficulty */
+    .diff{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:var(--radius-pill);white-space:nowrap}
+    .diff-easy{background:#dcfce7;color:#166534}
+    .diff-medium{background:#fef9c3;color:#854d0e}
+    .diff-high{background:#ffedd5;color:#9a3412}
+    .diff-very-high{background:#fee2e2;color:#991b1b}
+
+    /* ── Date range trigger button ── */
+    .sp-date-trigger{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;font-size:12px;color:var(--fg);white-space:nowrap;font-family:var(--font-body);transition:border-color 150ms,box-shadow 150ms;text-align:left;min-width:170px}
+    .sp-date-trigger:hover,.sp-date-trigger:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent),transparent 85%);outline:none}
+    .sp-date-trigger svg{width:14px;height:14px;color:var(--accent);flex-shrink:0}
+    .sp-dt-text{display:flex;flex-direction:column;gap:1px;line-height:1.25}
+    .sp-dt-text .dt-main{font-weight:700;font-size:12px;color:var(--fg)}
+    .sp-dt-text .dt-sub{font-size:10px;color:var(--muted)}
+
+    /* ── Calendar overlay ── */
+    #sp-cal-overlay{position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.25);display:none;align-items:center;justify-content:center}
+    #sp-cal-overlay.open{display:flex}
+    #sp-cal-box{background:#fff;border-radius:16px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.22);width:340px;max-width:calc(100vw - 32px);position:relative}
+    .sp-cal-header-strip{background:var(--dark);border-radius:10px;padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+    .sp-cal-header-label{font-size:11px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:2px}
+    .sp-cal-header-dates{font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+    .sp-cal-header-sep{color:rgba(255,255,255,.4)}
+    #sp-cal-title{font-size:11px;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.04em}
+    .sp-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .sp-cal-nav-btn{background:none;border:1.5px solid var(--border);border-radius:8px;width:32px;height:32px;cursor:pointer;display:grid;place-items:center;color:var(--fg);transition:all 100ms;flex-shrink:0}
+    .sp-cal-nav-btn:hover{background:var(--surface);border-color:var(--accent)}
+    .sp-cal-month-label{font-size:15px;font-weight:700;color:var(--fg)}
+    .sp-cal-daynames{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:4px}
+    .sp-cal-dayname{font-size:10px;font-weight:700;color:var(--muted);text-align:center;padding:4px 0;letter-spacing:.04em}
+    .sp-cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+    .sp-cal-cell{height:36px;display:flex;align-items:center;justify-content:center;font-size:13px;border-radius:8px;cursor:pointer;position:relative;transition:background 80ms,color 80ms;user-select:none}
+    .sp-cal-cell.empty{cursor:default}
+    .sp-cal-cell.today:not(.sel-start):not(.sel-end){color:var(--accent);font-weight:700}
+    .sp-cal-cell:not(.empty):not(.sel-start):not(.sel-end):hover{background:#f0f4ff}
+    .sp-cal-cell.in-range{background:#dce9ff;border-radius:0}
+    .sp-cal-cell.range-cap-left{border-radius:8px 0 0 8px}
+    .sp-cal-cell.range-cap-right{border-radius:0 8px 8px 0}
+    .sp-cal-cell.sel-start,.sp-cal-cell.sel-end{background:var(--accent)!important;color:#fff!important;font-weight:700;border-radius:8px;z-index:1}
+    .sp-cal-cell.sel-start.has-end{border-radius:8px 0 0 8px}
+    .sp-cal-cell.sel-end.has-start{border-radius:0 8px 8px 0}
+    .sp-cal-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+    .sp-cal-actions{display:flex;gap:8px;margin-top:14px;justify-content:flex-end}
+    .sp-cal-cancel{padding:7px 16px;border:1.5px solid var(--border);border-radius:8px;background:none;font-size:13px;color:var(--muted);cursor:pointer;font-family:var(--font-body)}
+    .sp-cal-cancel:hover{border-color:var(--fg);color:var(--fg)}
+    .sp-cal-confirm{padding:7px 20px;border:none;border-radius:8px;background:var(--accent);font-size:13px;font-weight:700;color:#fff;cursor:pointer;font-family:var(--font-body)}
+    .sp-cal-confirm:hover{opacity:.9}
+    .sp-cal-confirm:disabled{opacity:.4;cursor:not-allowed}
+
+    /* ── PDF print ── */
+    @media print{
+      body>*:not(#sp-pdf-area){display:none!important}
+      #sp-pdf-area{display:block!important;position:static!important;margin:0;padding:0}
+    }
+    #sp-pdf-area{display:none}
+
+    /* download bar */
+    .sp-download-bar{display:flex;align-items:center;justify-content:flex-end;gap:var(--space-3);padding:var(--space-4) 0;border-top:1px solid var(--border);margin-top:var(--space-4)}
+    .sp-dl-note{font-size:12px;color:var(--muted)}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER — exact match to index/mindmap -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-container">
+        <a href="../../index.html" class="brand-logo-link"><img src="../../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo"/></a>
+        <a class="brand" href="../../index.html">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+      </div>
+      <style>
+        .brand-container{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-right:auto}
+        .brand-logo{height:40px;width:40px;border-radius:50%;object-fit:cover;flex-shrink:0}
+        @media(min-width:480px){.brand-logo{height:44px;width:44px}}
+        @media(min-width:896px){.brand-logo{height:48px;width:48px}}
+        .site-header .brand{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.25;color:var(--fg);text-decoration:none;max-width:160px;word-break:break-word}
+        @media(min-width:896px){.site-header .brand{font-size:14px;white-space:nowrap;max-width:none}}
+        .brand-logo-link{display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:50%;transition:opacity 150ms}
+        .brand-logo-link:hover{opacity:.8}
+      </style>
+      <div class="header-right">
+        <nav class="nav-desktop" aria-label="Primary">
+          <a href="../../index.html#about">About</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+            <div class="nav-dropdown-menu">
+              <a href="../../pages/courses/cbse10.html">CBSE Class 10</a>
+              <a href="../../pages/courses/cbse12.html">CBSE Class 12</a>
+              <a href="../../pages/courses/stateboard12.html">State Board Class 12</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+            <div class="nav-dropdown-menu">
+              <a href="/pages/studyplanner/">Study Planner</a>
+              <a href="/pages/periodictable/">Periodic Table</a>
+              <a href="/pages/mindmap/">Mind Map</a>
+            </div>
+          </div>
+          <a href="../../index.html#attend">How to attend</a>
+          <a href="../../index.html#faq">FAQs</a>
+          <a href="../../index.html#blog">Blog</a>
+          <a href="../../index.html#contact">Contact</a>
+        </nav>
+        <div class="nav-actions"><a class="btn btn-primary" href="/pages/test.html">Sign Up</a></div>
+      </div>
+      <a class="btn btn-primary btn-sm nav-actions-mobile" href="/pages/test.html">Sign Up</a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile"><span></span></button>
+    </div>
+  </header>
+
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+    <a href="../../index.html#about">About</a>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="../../pages/courses/cbse10.html">CBSE Class 10</a>
+        <a href="../../pages/courses/cbse12.html">CBSE Class 12</a>
+        <a href="../../pages/courses/stateboard12.html">State Board Class 12</a>
+      </div>
+    </div>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="/pages/studyplanner/">Study Planner</a>
+        <a href="/pages/periodictable/">Periodic Table</a>
+        <a href="/pages/mindmap/">Mind Map</a>
+      </div>
+    </div>
+    <a href="../../index.html#attend">How to attend</a>
+    <a href="../../index.html#faq">FAQs</a>
+    <a href="../../index.html#blog">Blog</a>
+    <a href="../../index.html#contact">Contact</a>
+  </nav>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="section" style="background:var(--bg);">
+      <div class="container sp-hero-grid">
+
+        <!-- LEFT -->
+        <div>
+          <div class="hero-badge" style="margin-bottom:var(--space-5);"><span class="dot" aria-hidden="true"></span> STUDY PLANNER</div>
+          <h1 style="margin-bottom:var(--space-3);max-width:14ch;">The only Preparation Plan</h1>
+          <p class="lead lead-italic" style="margin-bottom:var(--space-5);">you need for Board Exams.</p>
+          <p class="sp-hero-sub">Most students study hard but study without direction. A structured plan is the difference between covering your syllabus with confidence and running out of time before exams. Allocate the right hours to each chapter, space out your revision, and walk into January with everything done.</p>
+          <p class="sp-hero-sub">Build your personalised schedule below — chapter by chapter, subject by subject — and download it to keep with you every day.</p>
+          <div style="display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-6);">
+            <a class="btn btn-primary" href="../../index.html#courses">Courses</a>
+            <a class="btn btn-secondary" href="https://test.profbalaji.in/pages/test.html">Mock Tests</a>
+          </div>
+        </div>
+
+        <!-- RIGHT — dark card -->
+        <aside class="sp-info-card">
+          <div class="sp-target-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            TARGET: 31 JANUARY
+          </div>
+          <h2>Days to Deadline</h2>
+          <div class="sp-countdown">
+            <div class="sp-count-box"><span class="sp-count-num" id="cd-months">--</span><span class="sp-count-label">Months</span></div>
+            <div class="sp-count-box"><span class="sp-count-num" id="cd-weeks">--</span><span class="sp-count-label">or Weeks</span></div>
+            <div class="sp-count-box"><span class="sp-count-num" id="cd-days">--</span><span class="sp-count-label">or Days</span></div>
+          </div>
+          <p class="sp-card-note">For your best marks, all preparation and revision must be complete by <strong style="color:#fff;">31st January</strong>. The final weeks before the exam are for rest, light review, and confidence — not new learning.</p>
+          <div class="sp-info-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <strong>Chapter-by-chapter plan</strong><span>Each chapter gets dedicated preparation time based on its difficulty.</span>
+          </div>
+          <div class="sp-info-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+            <strong>Spaced revision built-in</strong><span>Revision is scheduled weeks after prep — the right way to retain.</span>
+          </div>
+          <div class="sp-info-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <strong>Download as PDF</strong><span>Print your plan and stick it on the wall. Every chapter, every date, at a glance.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PLANNER SECTION -->
+    <section class="section section-surface">
+      <div class="container">
+        <p class="eyebrow" style="margin-bottom:var(--space-3);">Build Your Plan</p>
+        <h2 style="margin-bottom:var(--space-6);">Select your class &amp; board</h2>
+
+        <div class="sp-board-grid">
+          <button class="sp-board-btn" onclick="selectBoard('cbse_10',this)">
+            <span class="sp-board-top">CBSE</span><span class="sp-board-main">Class 10</span>
+          </button>
+          <button class="sp-board-btn" onclick="selectBoard('cbse_12',this)">
+            <span class="sp-board-top">CBSE</span><span class="sp-board-main">Class 12</span>
+          </button>
+          <button class="sp-board-btn" onclick="selectBoard('stateboard_12',this)">
+            <span class="sp-board-top">State Board</span><span class="sp-board-main">Class 12</span>
+          </button>
+        </div>
+
+        <div class="sp-planner" id="sp-planner">
+          <div id="sp-subjects-wrap"></div>
+          <div class="sp-download-bar">
+            <span class="sp-dl-note">Click any date range to adjust before downloading.</span>
+            <button class="btn btn-primary" onclick="downloadPDF()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:6px;vertical-align:-2px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="socials">
+          <a href="tel:+919787692116" aria-label="Call"><img src="../../assets/icons/call.svg" alt="Call"/></a>
+          <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business"><img src="../../assets/icons/google-business.svg" alt="Google Business"/></a>
+          <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="../../assets/icons/linkedin.svg" alt="LinkedIn"/></a>
+          <a href="mailto:prof@example.com" aria-label="Email"><img src="../../assets/icons/mail.svg" alt="Email"/></a>
+          <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar"><img src="../../assets/icons/google-scholar.svg" alt="Google Scholar"/></a>
+          <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack"><img src="../../assets/icons/substack.png" alt="Substack"/></a>
+          <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="../../assets/icons/youtube.svg" alt="YouTube"/></a>
+        </div>
+      </div>
+      <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:8px;">
+        <span style="font-size:12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy. All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="sp-pdf-area"></div>
+
+  <!-- Calendar modal overlay -->
+  <div id="sp-cal-overlay" role="dialog" aria-modal="true" aria-label="Select date range">
+    <div id="sp-cal-box">
+      <!-- Dark header strip showing selected range -->
+      <div class="sp-cal-header-strip">
+        <div>
+          <div class="sp-cal-header-label">Select dates</div>
+          <div class="sp-cal-header-dates">
+            <span id="cal-hdr-from">—</span>
+            <span class="sp-cal-header-sep">—</span>
+            <span id="cal-hdr-to">—</span>
+          </div>
+        </div>
+        <div id="sp-cal-title"></div>
+      </div>
+      <!-- Month navigation -->
+      <div class="sp-cal-nav">
+        <button class="sp-cal-nav-btn" id="cal-prev" aria-label="Previous month">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span class="sp-cal-month-label" id="cal-month-label"></span>
+        <button class="sp-cal-nav-btn" id="cal-next" aria-label="Next month">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <!-- Day names -->
+      <div class="sp-cal-daynames">
+        <div class="sp-cal-dayname">Su</div><div class="sp-cal-dayname">Mo</div>
+        <div class="sp-cal-dayname">Tu</div><div class="sp-cal-dayname">We</div>
+        <div class="sp-cal-dayname">Th</div><div class="sp-cal-dayname">Fr</div>
+        <div class="sp-cal-dayname">Sa</div>
+      </div>
+      <!-- Day cells -->
+      <div class="sp-cal-days" id="cal-days"></div>
+      <!-- Hint -->
+      <div class="sp-cal-hint" id="cal-hint">Click a start date</div>
+      <!-- Actions -->
+      <div class="sp-cal-actions">
+        <button class="sp-cal-cancel" id="cal-cancel">Cancel</button>
+        <button class="sp-cal-confirm" id="cal-confirm" disabled>Confirm</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ─────────────────────────────── helpers ─────────── */
+document.getElementById('y').textContent = new Date().getFullYear();
+
+function fmt(d){ return d.toISOString().slice(0,10); }
+function parseDate(s){ const [y,m,d]=s.split('-'); return new Date(+y,+m-1,+d); }
+function addDays(s,n){ const d=parseDate(s); d.setDate(d.getDate()+n); return fmt(d); }
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtDisplay(s){
+  if(!s) return '';
+  const [y,m,d]=s.split('-');
+  return `${parseInt(d)} ${MONTHS[parseInt(m)-1]} ${y}`;
+}
+
+/* ─────────────────────────────── countdown ──────── */
+(function(){
+  const now=new Date(), m=now.getMonth(), d=now.getDate();
+  const dormant=(m===0&&d>31)||(m>=1&&m<=2);
+  const set=(v)=>{ ['cd-months','cd-weeks','cd-days'].forEach(id=>document.getElementById(id).textContent=v); };
+  if(dormant){ set('0'); return; }
+  const ty=m===0?now.getFullYear():now.getFullYear()+1;
+  const target=new Date(ty,0,31,23,59,59);
+  const diff=target-now;
+  if(diff<=0){ set('0'); return; }
+  const totalDays=Math.floor(diff/86400000);
+  // Each unit is independent — same duration expressed three ways
+  const totalMonths=(target.getFullYear()-now.getFullYear())*12+(target.getMonth()-now.getMonth());
+  const totalWeeks=Math.floor(totalDays/7);
+  document.getElementById('cd-months').textContent=totalMonths;
+  document.getElementById('cd-weeks').textContent=totalWeeks;
+  document.getElementById('cd-days').textContent=totalDays;
+})();
+
+/* ─────────────────────────────── data ───────────── */
+let DATA=null, currentKey=null;
+fetch('../../assets/studyplanner/studyplanner.json')
+  .then(r=>r.json()).then(d=>{DATA=d;}).catch(()=>{});
+
+function selectBoard(key,btn){
+  document.querySelectorAll('.sp-board-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentKey=key;
+  const go=()=>renderPlanner(key);
+  DATA?go():setTimeout(go,700);
+}
+
+/* ─────────────────────────────── schedule ───────── */
+function buildSchedule(chapters){
+  const now=new Date();
+  const m=now.getMonth(), d=now.getDate();
+  const target31=new Date((m===0&&d<=31)?now.getFullYear():now.getFullYear()+1,0,31);
+  const avail=Math.floor((target31-now)/86400000);
+  const tight=avail<chapters.length*14;
+  const daysPerCh=tight?Math.max(3,Math.floor(avail/(chapters.length*1.5))):7;
+  let cursor=fmt(now);
+  return chapters.map((ch,i)=>{
+    const prepStart=cursor;
+    const prepDays=Math.max(2,Math.round(daysPerCh*0.7));
+    const prepEnd=addDays(prepStart,prepDays-1);
+    const revDelay=tight?Math.max(prepDays+4,10):14+Math.floor(i*0.4);
+    const revStart=addDays(prepStart,revDelay);
+    const revEnd=addDays(revStart,Math.max(0,Math.round(ch.revision)-1));
+    cursor=addDays(prepEnd,1);
+    return{prepStart,prepEnd,revStart,revEnd};
+  });
+}
+
+/* ─────────────────────────────── render ─────────── */
+function renderPlanner(key){
+  const board=DATA[key]; if(!board) return;
+  const wrap=document.getElementById('sp-subjects-wrap');
+  wrap.className=''; wrap.innerHTML='';
+
+  board.subjects.forEach(subject=>{
+    const sched=buildSchedule(subject.chapters);
+    const sec=document.createElement('div');
+    sec.className='sp-subject-section';
+    let prevUnit=null, rows='';
+
+    subject.chapters.forEach((ch,i)=>{
+      const s=sched[i];
+      if(ch.unit&&ch.unit!==prevUnit){
+        rows+=`<tr class="unit-header"><td colspan="5">${ch.unit}</td></tr>`;
+        prevUnit=ch.unit;
+      }
+      const dc={'Easy':'diff-easy','Medium':'diff-medium','High':'diff-high','Very High':'diff-very-high'}[ch.difficulty]||'diff-medium';
+      const sid=`${key}_${subject.id}_${i}`;
+      rows+=`
+        <tr>
+          <td>${ch.ch}</td>
+          <td style="max-width:200px;line-height:1.4;">${ch.title}</td>
+          <td><span class="diff ${dc}">${ch.difficulty}</span></td>
+          <td class="col-group-prep">
+            <div class="sp-group-cell">
+              <span class="sp-group-hrs prep-hrs">${ch.prep}h</span>
+              <div class="sp-group-divider"></div>
+              ${makeTrigger(sid,'prep',s.prepStart,s.prepEnd)}
+            </div>
+          </td>
+          <td class="col-group-rev">
+            <div class="sp-group-cell">
+              <span class="sp-group-hrs rev-hrs">${ch.revision}h</span>
+              <div class="sp-group-divider"></div>
+              ${makeTrigger(sid,'rev',s.revStart,s.revEnd)}
+            </div>
+          </td>
+        </tr>`;
+    });
+
+    sec.innerHTML=`
+      <div class="sp-subject-head">
+        <span class="sp-subject-title">${subject.name}</span>
+        <div class="sp-totals">
+          <span class="sp-total-chip prep">Prep: ${subject.totalPrep} hrs</span>
+          <span class="sp-total-chip rev">Revision: ${subject.totalRevision} hrs</span>
+        </div>
+      </div>
+      <div class="sp-table-wrap">
+        <table class="sp-table">
+          <thead><tr>
+            <th>Ch.</th><th>Title</th><th>Difficulty</th>
+            <th class="col-group-prep">Preparation &nbsp;(hrs · dates)</th>
+            <th class="col-group-rev">Revision &nbsp;(hrs · dates)</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+    wrap.appendChild(sec);
+  });
+
+  const planner=document.getElementById('sp-planner');
+  planner.classList.add('visible');
+  planner.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function makeTrigger(sid, type, from, to) {
+  var id = sid + '_' + type;
+  return '<button class="sp-date-trigger" data-calid="' + id + '" type="button">'
+    + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+    + '<div class="sp-dt-text">'
+    + '<span class="dt-main" id="disp-from-' + id + '">' + fmtDisplay(from) + '</span>'
+    + '<span class="dt-sub" id="disp-to-' + id + '">to ' + fmtDisplay(to) + '</span>'
+    + '</div>'
+    + '<input type="hidden" id="val-from-' + id + '" value="' + from + '"/>'
+    + '<input type="hidden" id="val-to-' + id + '" value="' + to + '"/>'
+    + '</button>';
+}
+
+/* ══════════════════════════════════════════════════════
+   CALENDAR — completely self-contained, no timing issues
+   ══════════════════════════════════════════════════════ */
+var CAL = { activeId:null, year:0, month:0, phase:0, start:null, end:null, hover:null };
+
+/* Open the calendar for a given trigger id */
+function calOpen(id, from, to) {
+  CAL.activeId = id;
+  CAL.start    = from;
+  CAL.end      = to;
+  CAL.hover    = null;
+  CAL.phase    = 0;   // 0 = waiting for start click
+  var d = parseDate(from);
+  CAL.year  = d.getFullYear();
+  CAL.month = d.getMonth();
+  document.getElementById('sp-cal-overlay').classList.add('open');
+  document.getElementById('sp-cal-title').textContent = (id.indexOf('_prep') !== -1) ? 'PREPARATION' : 'REVISION';
+  document.getElementById('cal-hint').textContent = 'Click a start date';
+  document.getElementById('cal-confirm').disabled = true;
+  calDraw();
+  calSyncHeader();
+}
+
+function calClose() {
+  document.getElementById('sp-cal-overlay').classList.remove('open');
+  CAL.activeId = null; CAL.phase = 0;
+  CAL.start = null; CAL.end = null; CAL.hover = null;
+}
+
+function calConfirm() {
+  if (!CAL.start || !CAL.end || !CAL.activeId) return;
+  var from = CAL.start < CAL.end ? CAL.start : CAL.end;
+  var to   = CAL.start < CAL.end ? CAL.end   : CAL.start;
+  document.getElementById('val-from-'  + CAL.activeId).value       = from;
+  document.getElementById('val-to-'    + CAL.activeId).value       = to;
+  document.getElementById('disp-from-' + CAL.activeId).textContent = fmtDisplay(from);
+  document.getElementById('disp-to-'   + CAL.activeId).textContent = 'to ' + fmtDisplay(to);
+  calClose();
+}
+
+function calGo(dir) {
+  CAL.month += dir;
+  if (CAL.month > 11) { CAL.month = 0; CAL.year++; }
+  if (CAL.month <  0) { CAL.month = 11; CAL.year--; }
+  calDraw();
+}
+
+function calSyncHeader() {
+  var dispFrom = CAL.start ? fmtDisplay(CAL.start) : '—';
+  var dispTo   = (CAL.hover || CAL.end) ? fmtDisplay(CAL.hover || CAL.end) : '—';
+  document.getElementById('cal-hdr-from').textContent = dispFrom;
+  document.getElementById('cal-hdr-to').textContent   = dispTo;
+}
+
+/* Draw the grid — pure DOM, no innerHTML wipe of the grid's parent */
+function calDraw() {
+  document.getElementById('cal-month-label').textContent = MONTHS[CAL.month] + ' ' + CAL.year;
+
+  var today       = fmt(new Date());
+  var firstDay    = new Date(CAL.year, CAL.month, 1).getDay();
+  var totalDays   = new Date(CAL.year, CAL.month + 1, 0).getDate();
+
+  /* Compute range to highlight */
+  var lo = null, hi = null;
+  if (CAL.phase === 1 && CAL.start) {
+    var ref = CAL.hover || CAL.start;
+    lo = CAL.start < ref ? CAL.start : ref;
+    hi = CAL.start < ref ? ref : CAL.start;
+  } else if (CAL.start && CAL.end) {
+    lo = CAL.start < CAL.end ? CAL.start : CAL.end;
+    hi = CAL.start < CAL.end ? CAL.end   : CAL.start;
+  } else if (CAL.start) {
+    lo = hi = CAL.start;
+  }
+
+  var grid = document.getElementById('cal-days');
+
+  /* Build expected cell count */
+  var total = firstDay + totalDays;
+  var cells = grid.children;
+
+  /* Resize cell pool */
+  while (cells.length < total) {
+    var c = document.createElement('div');
+    grid.appendChild(c);
+  }
+  while (cells.length > total) {
+    grid.removeChild(grid.lastChild);
+  }
+
+  for (var i = 0; i < total; i++) {
+    var cell = cells[i];
+    cell.className = 'sp-cal-cell';
+    cell.removeAttribute('data-ds');
+    cell.textContent = '';
+
+    if (i < firstDay) {
+      cell.classList.add('empty');
+      continue;
+    }
+
+    var day = i - firstDay + 1;
+    var ds  = CAL.year + '-' + pad2(CAL.month + 1) + '-' + pad2(day);
+    cell.dataset.ds  = ds;
+    cell.textContent = day;
+
+    if (ds === today) cell.classList.add('today');
+
+    if (lo && hi) {
+      if (ds === lo && ds === hi) { cell.classList.add('sel-start', 'sel-end'); }
+      else if (ds === lo)         { cell.classList.add('sel-start'); if (lo !== hi) cell.classList.add('has-end'); }
+      else if (ds === hi)         { cell.classList.add('sel-end');   if (lo !== hi) cell.classList.add('has-start'); }
+      else if (ds > lo && ds < hi) {
+        cell.classList.add('in-range');
+        var dow = new Date(CAL.year, CAL.month, day).getDay();
+        if (dow === 0) cell.classList.add('range-cap-left');
+        if (dow === 6) cell.classList.add('range-cap-right');
+      }
+    }
+  }
+}
+
+function pad2(n) { return String(n).padStart(2,'0'); }
+
+/* ── All calendar events wired once, here, inline ── */
+/* Trigger buttons — delegated on document */
+document.addEventListener('click', function(e) {
+  /* Calendar trigger buttons */
+  var btn = e.target.closest('.sp-date-trigger');
+  if (btn && btn.dataset.calid) {
+    var id   = btn.dataset.calid;
+    var from = document.getElementById('val-from-' + id).value;
+    var to   = document.getElementById('val-to-'   + id).value;
+    calOpen(id, from, to);
+    return;
+  }
+
+  /* Backdrop click — close */
+  if (e.target.id === 'sp-cal-overlay') { calClose(); return; }
+
+  /* Nav buttons */
+  if (e.target.id === 'cal-prev' || e.target.closest('#cal-prev')) { calGo(-1); return; }
+  if (e.target.id === 'cal-next' || e.target.closest('#cal-next')) { calGo(1);  return; }
+
+  /* Cancel / Confirm */
+  if (e.target.id === 'cal-cancel')  { calClose();   return; }
+  if (e.target.id === 'cal-confirm') { calConfirm(); return; }
+
+  /* Day cell clicks */
+  var cell = e.target.closest('.sp-cal-cell');
+  if (cell && cell.dataset.ds && !cell.classList.contains('empty')) {
+    var ds = cell.dataset.ds;
+    if (CAL.phase === 0) {
+      /* First click — pick start */
+      CAL.phase  = 1;
+      CAL.start  = ds;
+      CAL.end    = null;
+      CAL.hover  = ds;
+      document.getElementById('cal-hint').textContent = 'Now click an end date';
+      document.getElementById('cal-confirm').disabled = true;
+    } else {
+      /* Second click — pick end */
+      CAL.phase  = 0;
+      CAL.end    = ds;
+      CAL.hover  = null;
+      document.getElementById('cal-hint').textContent = 'Dates selected — click Confirm to apply';
+      document.getElementById('cal-confirm').disabled = false;
+    }
+    calDraw();
+    calSyncHeader();
+    return;
+  }
+});
+
+/* Hover — mousemove on the grid (avoids losing events during re-draw) */
+document.addEventListener('mouseover', function(e) {
+  if (CAL.phase !== 1) return;
+  var cell = e.target.closest('.sp-cal-cell');
+  if (!cell || !cell.dataset.ds || cell.classList.contains('empty')) return;
+  /* Only act if inside the calendar box */
+  if (!document.getElementById('sp-cal-box').contains(cell)) return;
+  if (CAL.hover === cell.dataset.ds) return; /* no change */
+  CAL.hover = cell.dataset.ds;
+  calDraw();
+  calSyncHeader();
+});
+
+/* ─────────────────────────────── PDF ────────────── */
+function downloadPDF(){
+  if(!currentKey||!DATA) return;
+  const board=DATA[currentKey];
+  const pdfArea=document.getElementById('sp-pdf-area');
+  let pages='';
+
+  board.subjects.forEach(subject=>{
+    let rows='', prevUnit=null;
+    subject.chapters.forEach((ch,i)=>{
+      const sid=`${currentKey}_${subject.id}_${i}`;
+      const from=document.getElementById(`val-from-${sid}_prep`)?.value||'';
+      const to=document.getElementById(`val-to-${sid}_prep`)?.value||'';
+      const rfrom=document.getElementById(`val-from-${sid}_rev`)?.value||'';
+      const rto=document.getElementById(`val-to-${sid}_rev`)?.value||'';
+      if(ch.unit&&ch.unit!==prevUnit){
+        rows+=`<tr class="pdf-unit"><td colspan="5">${ch.unit}</td></tr>`;
+        prevUnit=ch.unit;
+      }
+      const dc={'Easy':['#dcfce7','#166534'],'Medium':['#fef9c3','#854d0e'],'High':['#ffedd5','#9a3412'],'Very High':['#fee2e2','#991b1b']}[ch.difficulty]||['#eee','#333'];
+      rows+=`<tr>
+        <td class="pdf-ch">${ch.ch}</td>
+        <td class="pdf-title">${ch.title}</td>
+        <td><span style="display:inline-block;font-size:8px;font-weight:700;padding:2px 6px;border-radius:999px;background:${dc[0]};color:${dc[1]};">${ch.difficulty}</span></td>
+        <td class="pdf-hrs">${ch.prep}h</td>
+        <td class="pdf-date-cell">${fmtDisplay(from)}<br><span style="color:#9ca3af;font-size:8px;">to ${fmtDisplay(to)}</span></td>
+        <td class="pdf-hrs" style="color:#0052ff;">${ch.revision}h</td>
+        <td class="pdf-date-cell">${fmtDisplay(rfrom)}<br><span style="color:#9ca3af;font-size:8px;">to ${fmtDisplay(rto)}</span></td>
+      </tr>`;
+    });
+
+    pages+=`<div class="pdf-page">
+      <div class="pdf-hdr">
+        <div><div class="pdf-academy">PROF. DR. S. BALAJI SCIENCE ACADEMY</div><div class="pdf-site">profbalaji.in</div></div>
+        <div class="pdf-subject-tag">${board.label} — ${subject.name}</div>
+      </div>
+      <h1 class="pdf-h1">Study Planner — ${subject.name}</h1>
+      <table class="pdf-table">
+        <thead><tr><th>Ch.</th><th>Title</th><th>Difficulty</th><th>Prep Hrs</th><th>Preparation Dates</th><th>Rev Hrs</th><th>Revision Dates</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="pdf-foot">Generated by profbalaji.in · Target: 31 January · Complete all preparation and revision before the exam.</div>
+    </div>`;
+  });
+
+  pdfArea.innerHTML=`<style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    @page{size:A4 portrait;margin:14mm 0}
+    html,body{margin:0;padding:0;width:100%}
+    #sp-pdf-wrap{width:182mm;margin:0 auto;padding:0}
+    .pdf-page{width:182mm;font-family:'Inter',system-ui,sans-serif}
+    .pdf-page+.pdf-page{page-break-before:always}
+    .pdf-hdr{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #0a0b0d;padding-bottom:8px;margin-bottom:12px}
+    .pdf-academy{font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#0a0b0d}
+    .pdf-site{font-size:8px;color:#5b616e;margin-top:2px}
+    .pdf-subject-tag{font-size:9px;font-weight:600;color:#5b616e;letter-spacing:.04em}
+    .pdf-h1{font-size:17px;font-weight:400;margin:0 0 12px;color:#0a0b0d}
+    .pdf-table{width:100%;border-collapse:collapse;font-size:9px}
+    .pdf-table thead th{background:#0a0b0d;color:rgba(255,255,255,.75);font-size:7.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:6px 8px;text-align:left}
+    .pdf-table tbody tr{border-bottom:1px solid #e5e7eb}
+    .pdf-unit td{background:#f3f4f6;color:#6b7280;font-size:7.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px}
+    .pdf-table td{padding:6px 8px;vertical-align:middle}
+    .pdf-ch{font-weight:700;color:#5b616e;font-size:9px;white-space:nowrap}
+    .pdf-title{color:#0a0b0d;max-width:130px;line-height:1.3}
+    .pdf-date-cell{font-size:8.5px;color:#0a0b0d;line-height:1.6}
+    .pdf-hrs{font-size:9px;font-weight:700;color:#0a0b0d;white-space:nowrap;text-align:right;line-height:1.7}
+    .pdf-foot{margin-top:12px;font-size:7.5px;color:#9ca3af;border-top:1px solid #e5e7eb;padding-top:5px}
+  </style><div id="sp-pdf-wrap">${pages}</div>`;
+
+  pdfArea.style.display='block';
+  setTimeout(()=>{ window.print(); pdfArea.style.display='none'; },300);
+}
+</script>
+<script src="../../js/main.js" defer></script>
+</body>
+</html>

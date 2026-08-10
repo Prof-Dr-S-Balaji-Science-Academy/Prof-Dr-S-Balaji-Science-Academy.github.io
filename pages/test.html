@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Free mock tests for CBSE Class 10 Science, CBSE Class 12 Physics & Chemistry, and State Board Class 12. Chapter-level MCQs, full-length board exam tests — launching soon." />
+  <title>Free Mock Tests · Coming Soon | Prof. Dr. S. Balaji Science Academy</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon.ico" />
+  <style>
+    :root {
+      --bg:           #ffffff;
+      --surface:      #eef0f3;
+      --surface-warm: var(--surface);
+      --fg:           #0a0b0d;
+      --fg-2:         var(--fg);
+      --muted:        #5b616e;
+      --meta:         var(--muted);
+      --border:       rgba(91, 97, 110, 0.2);
+      --border-soft:  var(--border);
+      --accent:       #0052ff;
+      --accent-on:    #ffffff;
+      --accent-hover: #578bfa;
+      --accent-active: #0667d0;
+      --font-body:    "Inter", system-ui, sans-serif;
+      --radius-pill:  56px;
+      --radius-sm:    8px;
+    }
+    body { font-family: var(--font-body); background-color: var(--bg); color: var(--fg); line-height: 1.5; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; font-weight: 600; text-decoration: none; border-radius: var(--radius-pill); transition: background-color 150ms; cursor: pointer; border: none; font-size: 1rem; font-family: var(--font-body); }
+    .btn-primary { background-color: var(--accent); color: var(--accent-on); }
+    .btn-primary:hover { background-color: var(--accent-hover); }
+    .btn-secondary { background-color: var(--surface); color: var(--fg); }
+    .btn-secondary:hover { background-color: var(--accent-hover); color: var(--accent-on); }
+    .card { border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+
+    /* ── Coming Soon hero additions ── */
+    .cs-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: color-mix(in oklab, var(--accent) 10%, transparent);
+      border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 24px;
+    }
+    .cs-badge .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .5; transform: scale(1.3); }
+    }
+
+    .feature-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 28px 0 32px;
+    }
+    .feature-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--fg);
+    }
+    .feature-chip svg { color: var(--accent); flex-shrink: 0; }
+
+    /* hero sub text */
+    .hero-sub { color: var(--muted); font-size: 15px; margin-bottom: 12px; line-height: 1.65; }
+    .hero-free-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #dcfce7;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    /* ── Dark panel — matches homepage hero-panel exactly ── */
+    .hero-panel h2 { font-size: 1.5rem; }
+    .panel-line { font-size: 14px; margin: 8px 0 20px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal; max-width: 100%; }
+
+    .course-rows { display: flex; flex-direction: column; gap: 0; }
+    .course-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .course-row:last-child { border-bottom: none; }
+    .course-row .grade-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 4px 9px;
+      flex-shrink: 0;
+      min-width: 28px;
+      text-align: center;
+    }
+    .course-row-inner { display: flex; flex-direction: column; }
+    .course-row-inner strong { font-size: 13px; font-weight: 600; }
+    .course-row-inner span { font-size: 12px; opacity: 0.55; margin-top: 1px; }
+
+    /* feature grid — same as homepage */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .feature-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .feature-item svg { margin-bottom: 6px; opacity: 0.85; }
+    .feature-item strong { font-size: 14px; font-weight: 600; }
+    .feature-item span { font-size: 12px; opacity: 0.55; }
+  </style>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* Fix panel-line wrapping — overrides the nowrap set at 480px+ in styles.css */
+    .hero-panel .panel-line { white-space: normal !important; overflow-wrap: break-word !important; word-break: break-word !important; }
+    /* Lock hero-grid to equal columns and allow cells to shrink */
+    .hero-grid { grid-template-columns: 1fr 1fr !important; align-items: start !important; }
+    .hero-grid > * { min-width: 0 !important; }
+  </style>
+</head>
+<body id="home">
+
+  <!-- ═══════════ HEADER (identical to index.html) ═══════════ -->
+  <header class="site-header" data-od-id="site-header">
+    <div class="container header-inner">
+      <div class="brand-container">
+        <a href="../index.html" data-od-id="brand-logo-link" class="brand-logo-link">
+          <img src="../assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+        </a>
+        <a class="brand" href="../index.html" data-od-id="brand">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+      </div>
+      <style>
+        .brand-container {
+          display: flex; align-items: center; gap: 12px;
+          flex-shrink: 0; margin-right: auto;
+        }
+        .brand-logo {
+          height: 40px; width: 40px;
+          border-radius: 50%; object-fit: cover; flex-shrink: 0;
+        }
+        @media (min-width: 480px) { .brand-logo { height: 44px; width: 44px; } }
+        @media (min-width: 896px) { .brand-logo { height: 48px; width: 48px; } }
+        .site-header .brand {
+          font-size: 11px; font-weight: 700;
+          letter-spacing: 0.06em; text-transform: uppercase;
+          line-height: 1.25; color: var(--fg); text-decoration: none;
+          max-width: 160px; word-break: break-word;
+        }
+        @media (min-width: 896px) {
+          .site-header .brand { font-size: 14px; white-space: nowrap; max-width: none; }
+        }
+        .brand-logo-link {
+          display: flex; align-items: center; justify-content: center;
+          text-decoration: none; border-radius: 50%;
+          transition: opacity 150ms ease-standard;
+        }
+        .brand-logo-link:hover { opacity: 0.8; }
+      </style>
+      <div class="header-right">
+        <nav class="nav-desktop" aria-label="Primary" data-od-id="nav-desktop">
+          <a href="../index.html#about">About</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+            <div class="nav-dropdown-menu">
+              <a href="courses/cbse10.html">CBSE Class 10</a>
+              <a href="courses/cbse12.html">CBSE Class 12</a>
+              <a href="courses/stateboard12.html">State Board Class 12</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+            <div class="nav-dropdown-menu">
+              <a href="/pages/studyplanner/">Study Planner</a>
+              <a href="/pages/periodictable/">Periodic Table</a>
+              <a href="/pages/mindmap/">Mind Map</a>
+            </div>
+          </div>
+          <a href="../index.html#attend">How to attend</a>
+          <a href="../index.html#faq">FAQs</a>
+          <a href="../index.html#blog">Blog</a>
+          <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="btn btn-primary" href="/pages/test.html" data-od-id="header-cta">Sign Up</a>
+        </div>
+      </div>
+      <a class="btn btn-primary btn-sm nav-actions-mobile" href="/pages/test.html" data-od-id="header-cta-mobile">Sign Up</a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+    <a href="../index.html#about">About</a>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="courses/cbse10.html">CBSE Class 10</a>
+        <a href="courses/cbse12.html">CBSE Class 12</a>
+        <a href="courses/stateboard12.html">State Board Class 12</a>
+      </div>
+    </div>
+    <div class="nav-mobile-dropdown">
+      <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+      <div class="nav-mobile-dropdown-menu">
+        <a href="/pages/studyplanner/">Study Planner</a>
+        <a href="/pages/periodictable/">Periodic Table</a>
+        <a href="/pages/mindmap/">Mind Map</a>
+      </div>
+    </div>
+    <a href="../index.html#attend">How to attend</a>
+    <a href="../index.html#faq">FAQs</a>
+    <a href="../index.html#blog">Blog</a>
+    <a href="../index.html#contact">Contact</a>
+  </nav>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="section hero" data-od-id="hero" style="background-color: var(--bg);">
+      <div class="container hero-grid">
+
+        <!-- LEFT COLUMN -->
+        <div style="min-width: 0;">
+          <div class="hero-badge" data-od-id="admissions-badge"><span class="dot" aria-hidden="true"></span> PRACTICE </div>
+
+          <h1 style="white-space: normal; overflow-wrap: break-word;">Coming Soon...</h1>
+
+          <p class="hero-sub">Most students read their notes — but never sit a timed test until the real exam. That's the gap. Mock tests fix it.</p>
+          <p class="hero-sub">We're building a free, chapter-level test platform for CBSE and State Board students — MCQ quizzes, custom tests, and full-length board exam simulations. All from the same professor who teaches the course.</p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="../index.html#contact" data-wa="general">Contact Us</a>
+            <a class="btn btn-secondary" href="../index.html#courses">See Courses</a>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL — dark card, matches homepage -->
+        <aside class="hero-panel" data-od-id="hero-panel">
+
+          <h2>Practice - Mock Tests</h2>
+          <p class="panel-line">Questions crafted by Prof. Dr. S. Balaji — board-exam focused, chapter-wise, and completely free.</p>
+
+          <!-- Courses covered -->
+          <div class="course-rows">
+            <div class="course-row">
+              <span class="grade-badge">10</span>
+              <div class="course-row-inner">
+                <strong>CBSE · Science</strong>
+                <span>Physics, Chemistry &amp; Biology</span>
+              </div>
+            </div>
+            <div class="course-row">
+              <span class="grade-badge">12</span>
+              <div class="course-row-inner">
+                <strong>CBSE · Physics &amp; Chemistry</strong>
+                <span>Full NCERT syllabus</span>
+              </div>
+            </div>
+            <div class="course-row">
+              <span class="grade-badge">12</span>
+              <div class="course-row-inner">
+                <strong>State Board · Physics &amp; Chemistry</strong>
+                <span>TN State Board syllabus</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- What's inside grid — SVG icons only -->
+          <div class="feature-grid">
+            <div class="feature-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <strong>Quick MCQ Quiz</strong>
+              <span>Chapter-wise, 10–15 Qs</span>
+            </div>
+            <div class="feature-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              <strong>Chapter Tests</strong>
+              <span>Timed, marks-based</span>
+            </div>
+            <div class="feature-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+              </svg>
+              <strong>Custom Tests</strong>
+              <span>Pick chapters, set duration</span>
+            </div>
+            <div class="feature-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <strong>Full Mock Exam</strong>
+              <span>Board-pattern, 3 hours</span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div style="display:flex;gap:10px;margin-top:4px;">
+            <a class="btn btn-primary" href="../index.html#courses" style="flex:1;justify-content:center;">Ongoing Courses</a>
+            <a class="btn btn-secondary" href="../index.html#contact" data-wa="general" style="flex:1;justify-content:center;">Contact Us</a>
+          </div>
+
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ FOOTER (identical to index.html) ═══════════ -->
+  <footer class="site-footer" data-od-id="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="socials" data-od-id="socials">
+          <a href="tel:+919787692116" aria-label="Call">
+            <img src="../assets/icons/call.svg" alt="Call" />
+          </a>
+          <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business">
+            <img src="../assets/icons/google-business.svg" alt="Google Business" />
+          </a>
+          <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <img src="../assets/icons/linkedin.svg" alt="LinkedIn" />
+          </a>
+          <a href="mailto:prof@example.com" aria-label="Email">
+            <img src="../assets/icons/mail.svg" alt="Email" />
+          </a>
+          <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+            <img src="../assets/icons/google-scholar.svg" alt="Google Scholar" />
+          </a>
+          <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+            <img src="../assets/icons/substack.png" alt="Substack" />
+          </a>
+          <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <img src="../assets/icons/youtube.svg" alt="YouTube" />
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom" style="justify-content: space-between; flex-direction: column; align-items: center; gap: 8px;">
+        <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
+        <style>
+          @media (min-width: 768px) {
+            .footer-bottom { flex-direction: row; justify-content: center; }
+          }
+        </style>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
