@@ -1,0 +1,84 @@
+# robots.txt for Prof. Dr. S. Balaji Science Academy
+# Optimized for search engines and AI crawlers
+
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /node_modules/
+Disallow: *.json
+Disallow: *.map
+Allow: /assets/images/
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Allow: /pages/
+Allow: /assets/images/
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Allow: /pages/
+Allow: /assets/images/
+
+# AI Crawlers: Common AI bot identifiers
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: OpenAI
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Perplexity
+Allow: /
+Crawl-delay: 1
+
+User-agent: ia_archiver
+Allow: /
+Crawl-delay: 1
+
+# Block low-quality crawlers
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 2
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap reference
+Sitemap: https://profbalaji.in/sitemap.xml
+
+# Crawl delay (in seconds) for default crawler
+Crawl-delay: 1
+Request-rate: 30/60
+
+# Cache rules
+Cache-Control: public, max-age=604800
