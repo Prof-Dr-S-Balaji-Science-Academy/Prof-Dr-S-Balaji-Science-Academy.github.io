@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Mathematical log tables — Logarithm, Antilogarithm, Natural Sines, Cosines, Tangents and Trigonometry Ratios. Prof. Dr. S. Balaji Science Academy." />
+  <title>Log Book | Prof. Dr. S. Balaji Science Academy</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <style>
+    /* ── Page shell ─────────────────────────────────────────── */
+    .lb-page { min-height: 100vh; padding: 48px 0 80px; }
+    .lb-hero { margin-bottom: 40px; }
+    .lb-eyebrow { font-family:var(--font-body); font-size:var(--text-sm); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--space-3); }
+    .lb-title { font-family:var(--font-display); font-size:clamp(32px,5vw,56px); font-weight:400; line-height:1.0; letter-spacing:-0.01em; color:var(--fg); margin-bottom:12px; }
+    .lb-desc { font-size:16px; color:var(--muted); max-width:56ch; line-height:1.55; }
+
+    /* ── Controls ───────────────────────────────────────────── */
+    .lb-controls { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:32px; }
+    .lb-filters { display:flex; flex-wrap:wrap; gap:8px; flex:1; }
+    .lb-pill { display:inline-flex; align-items:center; height:36px; padding:0 16px; border-radius:9999px; font-size:13px; font-weight:600; border:1px solid var(--border); background:var(--bg); color:var(--fg); cursor:pointer; transition:background 150ms,color 150ms,border-color 150ms; white-space:nowrap; }
+    .lb-pill:hover { border-color:var(--accent); color:var(--accent); }
+    .lb-pill.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .lb-right-controls { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+    .lb-search-wrap { position:relative; }
+    .lb-search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
+    .lb-search { height:36px; padding:0 12px 0 36px; border-radius:9999px; border:1px solid var(--border); background:var(--bg); font-family:var(--font-body); font-size:13px; color:var(--fg); width:200px; transition:border-color 150ms,box-shadow 150ms; outline:none; }
+    .lb-search:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(0,82,255,0.1); }
+    .lb-search::placeholder { color:var(--muted); }
+    .lb-export-btn { display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 16px; border-radius:9999px; border:1px solid var(--border); background:var(--bg); font-family:var(--font-body); font-size:13px; font-weight:600; color:var(--fg); cursor:pointer; transition:background 150ms,color 150ms,border-color 150ms; white-space:nowrap; }
+    .lb-export-btn:hover { background:var(--fg); color:var(--bg); border-color:var(--fg); }
+
+    /* ── Empty state ────────────────────────────────────────── */
+    .lb-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:320px; gap:12px; text-align:center; }
+    .lb-empty-icon { width:56px; height:56px; border-radius:50%; background:var(--surface); display:grid; place-items:center; color:var(--muted); }
+    .lb-empty h3 { font-family:var(--font-display); font-size:22px; font-weight:400; color:var(--fg); }
+    .lb-empty p { font-size:14px; color:var(--muted); max-width:36ch; }
+
+    /* ── Table sections ─────────────────────────────────────── */
+    .lb-table-section { display:none; }
+    .lb-table-section.visible { display:block; }
+    .lb-table-title { font-family:var(--font-display); font-size:clamp(20px,3vw,28px); font-weight:400; color:var(--fg); margin-bottom:4px; }
+    .lb-table-subtitle { font-size:13px; color:var(--muted); margin-bottom:24px; }
+    .lb-scroll { width:100%; overflow-x:auto; border:1px solid var(--border); border-radius:12px; -webkit-overflow-scrolling:touch; }
+
+    /* ── Core table ─────────────────────────────────────────── */
+    .lb-tbl { border-collapse:collapse; font-size:12px; font-family:ui-monospace,'SF Mono','JetBrains Mono',monospace; width:100%; min-width:900px; table-layout:fixed; }
+    .lb-tbl thead tr.hdr-1 th,
+    .lb-tbl thead tr.hdr-2 th { background:var(--fg); color:var(--bg); padding:8px 6px; text-align:center; font-family:var(--font-body); font-size:11px; font-weight:700; letter-spacing:0.04em; position:sticky; top:0; z-index:10; white-space:nowrap; }
+    .lb-tbl thead tr.hdr-2 th { background:#16181c; font-size:10px; font-weight:500; padding:5px 6px; border-bottom:2px solid rgba(255,255,255,0.12); }
+    .lb-tbl thead tr.hdr-1 th.row-lbl,
+    .lb-tbl thead tr.hdr-2 th.row-lbl { text-align:left; padding-left:12px; }
+    .lb-tbl thead th.mean-head { border-left:2px solid rgba(255,255,255,0.2); }
+    .lb-tbl tbody tr { border-bottom:1px solid var(--border); transition:transform 150ms cubic-bezier(0.2,0,0,1),box-shadow 150ms cubic-bezier(0.2,0,0,1),background 100ms; position:relative; }
+    .lb-tbl tbody tr:last-child { border-bottom:none; }
+    .lb-tbl tbody tr:hover { background:var(--surface); transform:scaleY(1.015); box-shadow:0 3px 12px rgba(0,82,255,0.07); z-index:2; }
+    .lb-tbl tbody td { padding:6px 6px; text-align:center; color:var(--fg); vertical-align:middle; transition:background 80ms; white-space:nowrap; }
+    .lb-tbl tbody td.row-lbl { text-align:left; padding-left:12px; font-family:var(--font-body); font-size:12px; font-weight:700; color:var(--fg); background:var(--surface); position:sticky; left:0; z-index:1; border-right:1px solid var(--border); min-width:58px; }
+    .lb-tbl tbody td.mean-cell { border-left:1px solid var(--border); color:var(--muted); font-size:11px; }
+    .lb-tbl tbody td.mean-cell:first-of-type { border-left:2px solid var(--border); }
+    .lb-tbl tbody td.col-hover { background:rgba(0,82,255,0.06); }
+    .lb-tbl tbody tr:hover td.col-hover { background:rgba(0,82,255,0.13); }
+    .lb-tbl tbody tr.search-hidden { display:none; }
+    .lb-no-results { display:none; padding:24px; text-align:center; font-size:14px; color:var(--muted); }
+    .lb-no-results.visible { display:block; }
+    .lb-tan-note { font-size:12px; color:var(--muted); margin-top:8px; }
+
+    /* ── Trig Ratios — responsive wrapper ───────────────────── */
+    .trig-section-inner { display:grid; grid-template-columns:auto 1fr; gap:32px; align-items:start; }
+    @media(max-width:900px){ .trig-section-inner { grid-template-columns:1fr; } }
+    /* The trig ratios table needs its OWN scroll wrapper for mobile */
+    .trig-scroll { overflow-x:auto; border:1px solid var(--border); border-radius:12px; -webkit-overflow-scrolling:touch; }
+    .lb-tbl.trig-tbl { min-width:600px; table-layout:auto; }
+    .lb-tbl.trig-tbl thead tr th { padding:10px 18px; }
+    .lb-tbl.trig-tbl tbody td { padding:11px 18px; font-family:var(--font-body); font-size:14px; }
+    .lb-tbl.trig-tbl tbody td.row-lbl { font-size:14px; font-weight:700; min-width:80px; position:static; background:var(--surface); }
+    .lb-tbl.trig-tbl tbody tr:hover { transform:none; box-shadow:0 2px 8px rgba(0,82,255,0.06); background:var(--surface); }
+
+    /* ── Graph panel ────────────────────────────────────────── */
+    .trig-graph-panel { position:sticky; top:88px; background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:20px; min-width:0; }
+    .trig-graph-title { font-size:14px; font-weight:700; color:var(--fg); margin-bottom:4px; }
+    .trig-graph-subtitle { font-size:12px; color:var(--muted); margin-bottom:16px; }
+    #trig-canvas { width:100%; display:block; border-radius:8px; cursor:crosshair; }
+    .trig-graph-hint { font-size:11px; color:var(--muted); margin-top:10px; text-align:center; }
+    .trig-value-display { display:flex; gap:16px; margin-top:12px; }
+    .trig-val-item { display:flex; flex-direction:column; gap:2px; }
+    .trig-val-label { font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; }
+    .trig-val-num { font-size:16px; font-weight:600; color:var(--fg); font-family:ui-monospace,monospace; }
+
+    /* ── Print headers (screen: hidden) ────────────────────── */
+    .lb-print-header { display:none; }
+    /* Screen: hide print book */
+    .print-book { display:none; }
+
+    /* ══════════════════════════════════════════════════════════
+       PRINT — A4 portrait, 16mm/14mm margins, 50/50 split
+    ══════════════════════════════════════════════════════════ */
+    @media print {
+      @page { size: A4 portrait; margin: 16mm 14mm; }
+      * { -webkit-print-color-adjust:exact; print-color-adjust:exact; box-sizing:border-box; }
+
+      /* Hide all screen chrome */
+      .lb-controls, .lb-hero, .lb-empty, .site-header, .site-footer,
+      .nav-mobile, .trig-graph-panel, .lb-tan-note,
+      .lb-table-title, .lb-table-subtitle, .lb-no-results,
+      .trig-section-inner > .trig-scroll { display:none !important; }
+
+      body { background:white; color:black; margin:0; padding:0; }
+      .lb-page { padding:0; }
+      .container { padding:0; max-width:100%; width:100%; }
+      .lb-table-section { display:none !important; }
+      .print-book { display:block !important; }
+
+      /* ── Each sheet: force new page, NO avoid-inside (causes blank pages) ── */
+      .print-sheet {
+        display: block;
+        break-before: page;
+        page-break-before: always;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .print-sheet:first-child {
+        break-before: avoid;
+        page-break-before: avoid;
+      }
+
+      /* ── Page header ── */
+      .lb-print-header {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 6px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #0a0b0d;
+      }
+      .lb-print-header .phead-left { display:flex; flex-direction:column; gap:0; }
+      .lb-print-header .phead-academy {
+        font-size: 8px; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.06em; color: #0a0b0d; font-family: sans-serif;
+      }
+      .lb-print-header .phead-site {
+        font-size: 7px; color: #666; font-weight: 400; font-family: sans-serif;
+      }
+      .lb-print-header .phead-right { display:flex; flex-direction:column; align-items:flex-end; gap:0; }
+      .lb-print-header .phead-title {
+        font-size: 8px; font-weight: 700; color: #0a0b0d;
+        text-align: right; font-family: sans-serif;
+      }
+      .lb-print-header .phead-sub {
+        font-size: 7px; color: #555; text-align: right; font-family: sans-serif;
+      }
+
+      /* ── Table in print ── */
+      .print-tbl-wrap { width: 100%; }
+      .print-tbl-wrap .lb-tbl {
+        font-size: 7px;
+        min-width: 0; width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+      .print-tbl-wrap .lb-tbl thead tr.hdr-1 th,
+      .print-tbl-wrap .lb-tbl thead tr.hdr-2 th {
+        background: #0a0b0d !important; color: white !important;
+        position: static; font-size: 6.5px; padding: 2.5px 2px;
+        font-weight: 700; letter-spacing: 0.02em;
+      }
+      .print-tbl-wrap .lb-tbl thead tr.hdr-2 th {
+        background: #1a1c20 !important; font-size: 6px; font-weight: 500;
+      }
+      .print-tbl-wrap .lb-tbl tbody td {
+        padding: 2px 2px; font-size: 7px;
+        border-bottom: 0.4px solid #e0e0e0; text-align: center;
+      }
+      .print-tbl-wrap .lb-tbl tbody td.row-lbl {
+        position: static; background: #f2f3f5 !important;
+        font-size: 7px; padding: 2px 3px; font-weight: 700; text-align: left;
+      }
+      .print-tbl-wrap .lb-tbl tbody td.mean-cell { font-size: 6.5px; color: #444; }
+      .print-tbl-wrap .lb-tbl tbody tr { transform: none !important; box-shadow: none !important; }
+
+      /* ── Trig ratios: no min-height, just center the table horizontally ── */
+      .print-trig-sheet .print-tbl-wrap {
+        display: flex; justify-content: center; margin-top: 32px;
+      }
+      .print-trig-sheet .lb-tbl {
+        font-size: 10px; table-layout: auto;
+        min-width: 0; width: auto;
+      }
+      .print-trig-sheet .lb-tbl thead tr.hdr-1 th,
+      .print-trig-sheet .lb-tbl thead tr.hdr-2 th {
+        font-size: 9px; padding: 5px 14px;
+      }
+      .print-trig-sheet .lb-tbl tbody td {
+        font-size: 11px; padding: 7px 16px;
+      }
+      .print-trig-sheet .lb-tbl tbody td.row-lbl {
+        font-size: 11px; padding: 7px 14px; font-weight: 700;
+      }
+    }
+
+    @media(max-width:600px){
+      .lb-right-controls { width:100%; }
+      .lb-search { width:100%; flex:1; }
+      .lb-controls { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand-container">
+      <a href="/index.html" class="brand-logo-link">
+        <img src="/assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />
+      </a>
+      <a class="brand" href="/index.html">PROF. DR. S. BALAJI SCIENCE ACADEMY</a>
+    </div>
+    <style>
+      .brand-container{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-right:auto;}
+      .brand-logo{height:40px;width:40px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+      @media(min-width:480px){.brand-logo{height:44px;width:44px;}}
+      @media(min-width:896px){.brand-logo{height:48px;width:48px;}}
+      .site-header .brand{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;line-height:1.25;color:var(--fg);text-decoration:none;max-width:160px;word-break:break-word;}
+      @media(min-width:896px){.site-header .brand{font-size:14px;white-space:nowrap;max-width:none;}}
+      .brand-logo-link{display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:50%;transition:opacity 150ms;}
+      .brand-logo-link:hover{opacity:0.8;}
+    </style>
+    <div class="header-right">
+      <nav class="nav-desktop" aria-label="Primary">
+        <a href="/index.html#about">About</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Courses</button>
+          <div class="nav-dropdown-menu">
+            <a href="/pages/courses/cbse10.html">CBSE Class 10</a>
+            <a href="/pages/courses/cbse12.html">CBSE Class 12</a>
+            <a href="/pages/courses/stateboard12.html">State Board Class 12</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
+          <div class="nav-dropdown-menu">
+            <a href="/pages/periodictable/index.html">Periodic Table</a>
+            <a href="/pages/logbook/index.html">Log Book</a>
+            <a href="/pages/mindmap/index.html">Mind Map</a>
+            <a href="/pages/studyplanner/index.html">Study Planner</a>
+          </div>
+        </div>
+        <a href="/index.html#attend">How to attend</a>
+        <a href="/index.html#faq">FAQs</a>
+        <a href="/index.html#blog">Blog</a>
+        <a href="/index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-actions"><a class="btn btn-primary" href="#">Sign Up</a></div>
+    </div>
+    <a class="btn btn-primary btn-sm nav-actions-mobile" href="#">Sign Up</a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile"><span></span></button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="nav-mobile" aria-label="Mobile">
+  <a href="/index.html#about">About</a>
+  <div class="nav-mobile-dropdown">
+    <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Courses</button>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="/pages/courses/cbse10.html">CBSE Class 10</a>
+      <a href="/pages/courses/cbse12.html">CBSE Class 12</a>
+      <a href="/pages/courses/stateboard12.html">State Board Class 12</a>
+    </div>
+  </div>
+  <div class="nav-mobile-dropdown">
+    <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="/pages/periodictable/index.html">Periodic Table</a>
+      <a href="/pages/logbook/index.html">Log Book</a>
+      <a href="/pages/mindmap/index.html">Mind Map</a>
+      <a href="/pages/studyplanner/index.html">Study Planner</a>
+    </div>
+  </div>
+  <a href="/index.html#attend">How to attend</a>
+  <a href="/index.html#faq">FAQs</a>
+  <a href="/index.html#blog">Blog</a>
+  <a href="/index.html#contact">Contact</a>
+</nav>
+
+<!-- ═══ SCREEN VIEW ═══════════════════════════════════════════════ -->
+<div class="lb-page">
+  <div class="container">
+
+    <div class="lb-hero">
+      <p class="lb-eyebrow">Learning Resources</p>
+      <h1 class="lb-title">Logarithm Book</h1>
+      <p class="lb-desc">Four-figure mathematical tables for board exam use. Select a table to view logarithms, antilogarithms, natural trigonometric functions, and standard ratios.</p>
+    </div>
+
+    <div class="lb-controls">
+      <div class="lb-filters" role="group" aria-label="Select table">
+        <button class="lb-pill" data-table="log">Logarithm</button>
+        <button class="lb-pill" data-table="antilog">Antilogarithm</button>
+        <button class="lb-pill" data-table="sine">Natural Sines</button>
+        <button class="lb-pill" data-table="cosine">Natural Cosines</button>
+        <button class="lb-pill" data-table="tangent">Natural Tangents</button>
+        <button class="lb-pill" data-table="trig">Trigonometry Ratios</button>
+      </div>
+      <div class="lb-right-controls">
+        <div class="lb-search-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input class="lb-search" id="lb-search" type="text" placeholder="Search rows…" autocomplete="off" />
+        </div>
+        <button class="lb-export-btn" id="lb-export">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export PDF
+        </button>
+      </div>
+    </div>
+
+    <div class="lb-empty" id="lb-empty">
+      <div class="lb-empty-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <h3>Select a table to begin</h3>
+      <p>Choose Logarithm, Antilogarithm, Natural Sines, Cosines, Tangents, or Trigonometry Ratios above.</p>
+    </div>
+
+    <!-- LOG — single screen table -->
+    <div class="lb-table-section" id="sec-log">
+      <h2 class="lb-table-title">Logarithms</h2>
+      <p class="lb-table-subtitle">Four-figure log₁₀ table — rows 10–99, columns 0–9, mean differences 1–9</p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-log"></table></div>
+      <div class="lb-no-results" id="no-log">No rows match your search.</div>
+    </div>
+
+    <!-- ANTILOG -->
+    <div class="lb-table-section" id="sec-antilog">
+      <h2 class="lb-table-title">Antilogarithms</h2>
+      <p class="lb-table-subtitle">Four-figure antilogarithm table — rows .00–.99, columns 0–9, mean differences 1–9</p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-antilog"></table></div>
+      <div class="lb-no-results" id="no-antilog">No rows match your search.</div>
+    </div>
+
+    <!-- SINE -->
+    <div class="lb-table-section" id="sec-sine">
+      <h2 class="lb-table-title">Natural Sines</h2>
+      <p class="lb-table-subtitle">0°–90°, intervals of 6′ (0°.1), mean differences 1′–5′ (add)</p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-sine"></table></div>
+      <div class="lb-no-results" id="no-sine">No rows match your search.</div>
+    </div>
+
+    <!-- COSINE -->
+    <div class="lb-table-section" id="sec-cosine">
+      <h2 class="lb-table-title">Natural Cosines</h2>
+      <p class="lb-table-subtitle">0°–90°, intervals of 6′ (0°.1), mean differences 1′–5′ <strong>(subtract)</strong></p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-cosine"></table></div>
+      <div class="lb-no-results" id="no-cosine">No rows match your search.</div>
+    </div>
+
+    <!-- TANGENT -->
+    <div class="lb-table-section" id="sec-tangent">
+      <h2 class="lb-table-title">Natural Tangents</h2>
+      <p class="lb-table-subtitle">0°–89°, intervals of 6′ (0°.1), mean differences 1′–5′; differences cease near 90°</p>
+      <div class="lb-scroll"><table class="lb-tbl" id="tbl-tangent"></table></div>
+      <p class="lb-tan-note">* Mean differences cease to be sufficiently accurate beyond 77°.</p>
+      <div class="lb-no-results" id="no-tangent">No rows match your search.</div>
+    </div>
+
+    <!-- TRIG RATIOS -->
+    <div class="lb-table-section" id="sec-trig">
+      <h2 class="lb-table-title">Trigonometry Ratios</h2>
+      <p class="lb-table-subtitle">Exact values at standard angles — hover a row to see its curve</p>
+      <div class="trig-section-inner">
+        <div class="trig-scroll">
+          <table class="lb-tbl trig-tbl" id="tbl-trig"></table>
+        </div>
+        <div class="trig-graph-panel">
+          <div class="trig-graph-title" id="graph-title" style="color:var(--muted)">Select a function</div>
+          <div class="trig-graph-subtitle" id="graph-subtitle">Hover any row in the table to see its curve</div>
+          <canvas id="trig-canvas" height="240"></canvas>
+          <div class="trig-value-display" id="trig-val-display" style="display:none;">
+            <div class="trig-val-item"><span class="trig-val-label">Angle</span><span class="trig-val-num" id="val-angle">—</span></div>
+            <div class="trig-val-item"><span class="trig-val-label" id="val-fn-label">Value</span><span class="trig-val-num" id="val-result">—</span></div>
+          </div>
+          <p class="trig-graph-hint" id="graph-hint">Hover the graph to read values</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ PRINT-ONLY BOOK (hidden on screen) ═══════════════════════ -->
+<div class="print-book" id="print-book">
+  <!-- Sheets injected by JS at print time -->
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="socials">
+        <a href="tel:+919787692116" aria-label="Call"><img src="/assets/icons/call.svg" alt="Call" /></a>
+        <a href="https://g.co/kgs/EkVWVxL" target="_blank" rel="noopener noreferrer" aria-label="Google Business"><img src="/assets/icons/google-business.svg" alt="Google Business" /></a>
+        <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="/assets/icons/linkedin.svg" alt="LinkedIn" /></a>
+        <a href="mailto:prof@example.com" aria-label="Email"><img src="/assets/icons/mail.svg" alt="Email" /></a>
+        <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar"><img src="/assets/icons/google-scholar.svg" alt="Google Scholar" /></a>
+        <a href="https://profbalaji.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack"><img src="/assets/icons/substack.png" alt="Substack" /></a>
+        <a href="https://www.youtube.com/@CBSEdigest" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="/assets/icons/youtube.svg" alt="YouTube" /></a>
+      </div>
+    </div>
+    <div class="footer-bottom" style="justify-content:center;flex-direction:column;align-items:center;gap:8px;">
+      <span style="font-size:12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+<script src="/js/main.js" defer></script>
+
+<script>
+(function(){
+"use strict";
+
+/* ─── UTILITIES ─────────────────────────────────────────────── */
+function toRad(d){ return d*Math.PI/180; }
+
+function fmtLog(x){
+  var v=Math.log10(x), m=v-Math.floor(v);
+  var s=String(Math.round(Math.abs(m)*10000));
+  while(s.length<4) s="0"+s;
+  return s.slice(0,4);
+}
+
+function fmtAntilog(v){
+  // v in [1,10): return 4-digit e.g. 1000, 9772
+  return String(Math.round(v*1000));
+}
+
+function getDerivative(fn,rad){
+  var h=1e-7;
+  return (fn(rad+h)-fn(rad-h))/(2*h);
+}
+
+/* ─── TABLE HEADER BUILDERS ─────────────────────────────────── */
+function buildLogHead(){
+  var h='<thead><tr class="hdr-1"><th class="row-lbl" rowspan="2">No.</th>';
+  for(var i=0;i<10;i++) h+='<th>'+i+'</th>';
+  h+='<th class="mean-head" colspan="9">Mean<br><span style="font-weight:400;font-size:9px;">Differences</span></th></tr>';
+  h+='<tr class="hdr-2">';
+  for(var j=0;j<10;j++) h+='<th>'+j+'</th>';
+  for(var k=1;k<=9;k++) h+='<th class="mean-head">'+k+'</th>';
+  h+='</tr></thead>';
+  return h;
+}
+
+function buildTrigHead(label,meanCols,isSubtract){
+  var c0=["0'","6'","12'","18'","24'","30'","36'","42'","48'","54'"];
+  var c1=["0°.0","0°.1","0°.2","0°.3","0°.4","0°.5","0°.6","0°.7","0°.8","0°.9"];
+  var sub=isSubtract?' <span style="font-weight:400;font-size:9px;opacity:0.7">(Sub)</span>':'';
+  var h='<thead><tr class="hdr-1"><th class="row-lbl" rowspan="2">'+label+'</th>';
+  for(var i=0;i<10;i++) h+='<th>'+c0[i]+'</th>';
+  h+='<th class="mean-head" colspan="'+meanCols+'">Mean'+sub+'<br><span style="font-weight:400;font-size:9px;">Differences</span></th></tr>';
+  h+='<tr class="hdr-2">';
+  for(var j=0;j<10;j++) h+='<th>'+c1[j]+'</th>';
+  for(var k=1;k<=meanCols;k++) h+='<th class="mean-head">'+k+"'"+'</th>';
+  h+='</tr></thead>';
+  return h;
+}
+
+/* ─── BUILD FUNCTIONS — single full table ───────────────────── */
+function buildLog(tblId, nStart, nEnd){
+  var tbl=document.getElementById(tblId);
+  if(!tbl) return;
+  tbl.innerHTML=buildLogHead();
+  var tbody=document.createElement("tbody");
+  for(var n=nStart;n<=nEnd;n++){
+    var tr=document.createElement("tr");
+    tr.setAttribute("data-rowlabel",String(n));
+    var tdL=document.createElement("td"); tdL.className="row-lbl"; tdL.textContent=n; tr.appendChild(tdL);
+    var base=n/10;
+    for(var c=0;c<10;c++){
+      var td=document.createElement("td"); td.setAttribute("data-col",c);
+      td.textContent=fmtLog(base+c*0.01); tr.appendChild(td);
+    }
+    var midX=base+0.05, M=Math.log10(Math.E);
+    for(var k=1;k<=9;k++){
+      var diff=Math.round(M/midX*k*0.001*10000);
+      var tdM=document.createElement("td"); tdM.className="mean-cell"; tdM.setAttribute("data-mean",k);
+      tdM.textContent=diff>0?diff:"—"; tr.appendChild(tdM);
+    }
+    tbody.appendChild(tr);
+  }
+  tbl.appendChild(tbody);
+}
+
+function buildAntilog(tblId, nStart, nEnd){
+  var tbl=document.getElementById(tblId);
+  if(!tbl) return;
+  tbl.innerHTML=buildLogHead();
+  var tbody=document.createElement("tbody");
+  for(var n=nStart;n<=nEnd;n++){
+    var base=n/100;
+    var label="."+(n<10?"0":"")+n;
+    var tr=document.createElement("tr"); tr.setAttribute("data-rowlabel",label);
+    var tdL=document.createElement("td"); tdL.className="row-lbl"; tdL.textContent=label; tr.appendChild(tdL);
+    for(var c=0;c<10;c++){
+      var v=Math.pow(10,base+c*0.001);
+      var td=document.createElement("td"); td.setAttribute("data-col",c);
+      td.textContent=fmtAntilog(v); tr.appendChild(td);
+    }
+    var midX2=base+0.005, vMid=Math.pow(10,midX2);
+    for(var k=1;k<=9;k++){
+      var diff2=Math.round(vMid*Math.log(10)*k*0.001*10000);
+      var tdM=document.createElement("td"); tdM.className="mean-cell"; tdM.setAttribute("data-mean",k);
+      tdM.textContent=diff2>0?diff2:"—"; tr.appendChild(tdM);
+    }
+    tbody.appendChild(tr);
+  }
+  tbl.appendChild(tbody);
+}
+
+function buildTrigTable(tblId, fn, degStart, degEnd, meanCols, isSubtract, isTan){
+  var tbl=document.getElementById(tblId);
+  if(!tbl) return;
+  tbl.innerHTML=buildTrigHead("Deg.",meanCols,isSubtract);
+  var tbody=document.createElement("tbody");
+  for(var deg=degStart;deg<=degEnd;deg++){
+    var tr=document.createElement("tr"); tr.setAttribute("data-rowlabel",String(deg));
+    var tdL=document.createElement("td"); tdL.className="row-lbl"; tdL.textContent=deg+"°"; tr.appendChild(tdL);
+    for(var m=0;m<10;m++){
+      var rad=toRad(deg+m*6/60), val=fn(rad);
+      var td=document.createElement("td"); td.setAttribute("data-col",m);
+      if(!isFinite(val)||Math.abs(val)>999.9) td.textContent="—";
+      else if(Math.abs(val)>=10) td.textContent=val.toFixed(2);
+      else td.textContent=Math.abs(val).toFixed(4);
+      tr.appendChild(td);
+    }
+    var showMD=!(isTan&&deg>=78);
+    for(var k=1;k<=meanCols;k++){
+      var tdM=document.createElement("td"); tdM.className="mean-cell"; tdM.setAttribute("data-mean",k);
+      if(!showMD){ tdM.textContent="—"; }
+      else{
+        var midRad=toRad(deg+0.05);
+        var deriv=getDerivative(fn,midRad);
+        var md=Math.round(Math.abs(deriv)*Math.PI/180/60*k*10000);
+        tdM.textContent=(isFinite(md)&&md>0&&md<=9999)?md:"—";
+      }
+      tr.appendChild(tdM);
+    }
+    tbody.appendChild(tr);
+  }
+  tbl.appendChild(tbody);
+}
+
+/* ─── TRIG RATIOS TABLE ─────────────────────────────────────── */
+var TRIG_ROWS=[
+  {name:"sin",  fn:function(a){return Math.sin(a);}, vals:["0","1/2","1/√2","√3/2","1","0","−1","0"],   color:"#0052ff"},
+  {name:"cos",  fn:function(a){return Math.cos(a);}, vals:["1","√3/2","1/√2","1/2","0","−1","0","1"],   color:"#16a34a"},
+  {name:"tan",  fn:function(a){return Math.tan(a);}, vals:["0","1/√3","1","√3","∞","0","∞","0"],         color:"#dc2626"},
+  {name:"cot",  fn:function(a){return 1/Math.tan(a);},vals:["∞","√3","1","1/√3","0","∞","0","∞"],       color:"#9333ea"},
+  {name:"cosec",fn:function(a){return 1/Math.sin(a);},vals:["∞","2","√2","2/√3","1","∞","−1","∞"],      color:"#ea580c"},
+  {name:"sec",  fn:function(a){return 1/Math.cos(a);},vals:["1","2/√3","√2","2","∞","−1","∞","1"],      color:"#0891b2"}
+];
+var ANGLES_DEG=[0,30,45,60,90,180,270,360];
+
+function buildTrigRatios(){
+  var tbl=document.getElementById("tbl-trig");
+  if(!tbl) return;
+  var angles=["0°","30°","45°","60°","90°","180°","270°","360°"];
+  var radians=["0","π/6","π/4","π/3","π/2","π","3π/2","2π"];
+  var h='<thead><tr class="hdr-1"><th class="row-lbl">Function</th>';
+  for(var i=0;i<angles.length;i++) h+='<th>'+angles[i]+'</th>';
+  h+='</tr><tr class="hdr-2"><th class="row-lbl">Radians</th>';
+  for(var ri=0;ri<radians.length;ri++) h+='<th>'+radians[ri]+'</th>';
+  h+='</tr></thead>';
+  tbl.innerHTML=h;
+  var tbody=document.createElement("tbody");
+  for(var r=0;r<TRIG_ROWS.length;r++){
+    var row=TRIG_ROWS[r];
+    var tr=document.createElement("tr");
+    tr.setAttribute("data-rowlabel",row.name);
+    tr.setAttribute("data-fn-index",r);
+    var tdL=document.createElement("td"); tdL.className="row-lbl";
+    tdL.style.color=row.color; tdL.textContent=row.name; tr.appendChild(tdL);
+    for(var c=0;c<row.vals.length;c++){
+      var td=document.createElement("td"); td.setAttribute("data-col",c);
+      td.setAttribute("data-angle",ANGLES_DEG[c]); td.textContent=row.vals[c]; tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+  tbl.appendChild(tbody);
+  attachTrigGraphEvents();
+}
+
+/* ─── GRAPH ─────────────────────────────────────────────────── */
+var canvas=document.getElementById("trig-canvas");
+var ctx=canvas.getContext("2d");
+var currentFnIdx=-1;
+var graphMouseX=-1;
+
+function resizeCanvas(){
+  var panel=canvas.parentElement;
+  canvas.width=Math.max(panel.clientWidth-40,200);
+  canvas.height=240;
+  if(currentFnIdx>=0) drawGraph(currentFnIdx,graphMouseX);
+  else drawGraphEmpty();
+}
+
+function drawGraphEmpty(){
+  var W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle="#f4f5f7"; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="#aaa"; ctx.font="13px system-ui,sans-serif"; ctx.textAlign="center";
+  ctx.fillText("Hover a row to see the curve",W/2,H/2);
+}
+
+function drawGraph(fnIdx, mouseX){
+  var row=TRIG_ROWS[fnIdx];
+  var W=canvas.width, H=canvas.height;
+  var PL=40, PR=12, PT=14, PB=30;
+  var pW=W-PL-PR, pH=H-PT-PB;
+
+  // Y range by function
+  var YMIN=-2.5, YMAX=2.5;
+  if(row.name==="tan"||row.name==="cot") { YMIN=-5; YMAX=5; }
+  if(row.name==="cosec"||row.name==="sec") { YMIN=-4; YMAX=4; }
+
+  function tpX(deg){ return PL+(deg/360)*pW; }
+  function tpY(v){
+    v=Math.max(YMIN,Math.min(YMAX,v));
+    return PT+pH-((v-YMIN)/(YMAX-YMIN))*pH;
+  }
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle="#f8f9fb"; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="#fff"; ctx.fillRect(PL,PT,pW,pH);
+
+  // X grid & labels
+  var xMarks=[0,90,180,270,360];
+  var xLbls=["0°","90°","180°","270°","360°"];
+  for(var xi=0;xi<xMarks.length;xi++){
+    var px=tpX(xMarks[xi]);
+    ctx.strokeStyle="#e4e7ec"; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(px,PT); ctx.lineTo(px,PT+pH); ctx.stroke();
+    ctx.fillStyle="#999"; ctx.font="9px system-ui"; ctx.textAlign="center";
+    ctx.fillText(xLbls[xi],px,H-5);
+  }
+
+  // Y grid & labels
+  var yStep=(YMAX>3)?2:1;
+  for(var yv=Math.ceil(YMIN);yv<=Math.floor(YMAX);yv+=yStep){
+    var py=tpY(yv);
+    ctx.strokeStyle=yv===0?"#aaa":"#e4e7ec";
+    ctx.lineWidth=yv===0?1.5:0.7;
+    ctx.beginPath(); ctx.moveTo(PL,py); ctx.lineTo(PL+pW,py); ctx.stroke();
+    ctx.fillStyle="#999"; ctx.font="9px system-ui"; ctx.textAlign="right";
+    ctx.fillText(yv,PL-5,py+3);
+  }
+
+  // ── Draw curve — segment-based asymptote handling ──
+  ctx.save();
+  ctx.beginPath(); ctx.rect(PL,PT,pW,pH); ctx.clip();
+  ctx.strokeStyle=row.color;
+  ctx.lineWidth=2.2;
+  ctx.lineJoin="round";
+  ctx.lineCap="round";
+
+  var STEPS=2000;
+  var prevPY=null, prevV=null;
+
+  ctx.beginPath();
+  for(var s=0;s<=STEPS;s++){
+    var deg=s/STEPS*360;
+    var rad=toRad(deg);
+    var v=row.fn(rad);
+    var clamped=!isFinite(v)||Math.abs(v)>50;
+    var px2=tpX(deg);
+
+    if(clamped){
+      // draw what we have, then stroke and restart after the gap
+      ctx.stroke(); ctx.beginPath();
+      prevPY=null; prevV=null;
+      continue;
+    }
+
+    // Asymptote detection: if sign flipped AND magnitude was large before,
+    // it's a discontinuity — break the path
+    if(prevV!==null && Math.abs(prevV)>1.5 && Math.abs(v)>1.5 && prevV*v<0){
+      ctx.stroke(); ctx.beginPath();
+      prevPY=null; prevV=null;
+    }
+
+    var py2=tpY(v);
+
+    // Also break if pixel jump is huge (catches numerical near-asymptotes)
+    if(prevPY!==null && Math.abs(py2-prevPY)>pH*0.75){
+      ctx.stroke(); ctx.beginPath();
+      prevPY=null; prevV=null;
+    }
+
+    if(prevPY===null) ctx.moveTo(px2,py2);
+    else ctx.lineTo(px2,py2);
+
+    prevPY=py2; prevV=v;
+  }
+  ctx.stroke();
+
+  // Asymptote dashed lines for tan/cot/cosec/sec
+  if(row.name==="tan"||row.name==="cosec"){
+    ctx.strokeStyle="rgba(0,0,0,0.1)"; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+    [90,270].forEach(function(a){
+      var apx=tpX(a);
+      ctx.beginPath(); ctx.moveTo(apx,PT); ctx.lineTo(apx,PT+pH); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+  }
+  if(row.name==="cot"||row.name==="sec"){
+    ctx.strokeStyle="rgba(0,0,0,0.1)"; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+    [0,180,360].forEach(function(a){
+      var apx=tpX(a);
+      ctx.beginPath(); ctx.moveTo(apx,PT); ctx.lineTo(apx,PT+pH); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+  }
+
+  ctx.restore();
+
+  // Standard-angle dots
+  var dotAngles=[0,30,45,60,90,180,270,360];
+  for(var di=0;di<dotAngles.length;di++){
+    var dv=row.fn(toRad(dotAngles[di]));
+    if(!isFinite(dv)||Math.abs(dv)>50) continue;
+    var dpx=tpX(dotAngles[di]), dpy=tpY(dv);
+    ctx.beginPath(); ctx.arc(dpx,dpy,3.5,0,Math.PI*2);
+    ctx.fillStyle=row.color; ctx.fill();
+    ctx.strokeStyle="#fff"; ctx.lineWidth=1.5; ctx.stroke();
+  }
+
+  // Mouse hairline + dot
+  if(mouseX>=PL && mouseX<=PL+pW){
+    var mouseDeg=((mouseX-PL)/pW)*360;
+    var mouseV=row.fn(toRad(mouseDeg));
+    ctx.strokeStyle="rgba(0,0,0,0.2)"; ctx.lineWidth=1; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(mouseX,PT); ctx.lineTo(mouseX,PT+pH); ctx.stroke();
+    ctx.setLineDash([]);
+    if(isFinite(mouseV)&&Math.abs(mouseV)<=50){
+      var mpy=tpY(mouseV);
+      ctx.beginPath(); ctx.arc(mouseX,mpy,6,0,Math.PI*2);
+      ctx.fillStyle=row.color; ctx.fill();
+      ctx.strokeStyle="#fff"; ctx.lineWidth=2.5; ctx.stroke();
+      document.getElementById("trig-val-display").style.display="flex";
+      document.getElementById("val-angle").textContent=mouseDeg.toFixed(1)+"°";
+      document.getElementById("val-fn-label").textContent=row.name;
+      document.getElementById("val-result").textContent=mouseV.toFixed(4);
+      document.getElementById("graph-hint").style.display="none";
+    }
+  }
+
+  // Border
+  ctx.strokeStyle="#dee1e6"; ctx.lineWidth=1;
+  ctx.strokeRect(PL,PT,pW,pH);
+}
+
+function attachTrigGraphEvents(){
+  var tbl=document.getElementById("tbl-trig");
+  if(!tbl) return;
+  var rows=tbl.querySelectorAll("tbody tr");
+  rows.forEach(function(tr){
+    tr.addEventListener("mouseenter",function(){
+      var idx=parseInt(tr.getAttribute("data-fn-index"));
+      currentFnIdx=idx; graphMouseX=-1;
+      var row=TRIG_ROWS[idx];
+      document.getElementById("graph-title").textContent=row.name+"(θ)";
+      document.getElementById("graph-title").style.color=row.color;
+      document.getElementById("graph-subtitle").textContent="Showing curve for "+row.name;
+      document.getElementById("trig-val-display").style.display="none";
+      document.getElementById("graph-hint").style.display="block";
+      resizeCanvas(); drawGraph(idx,-1);
+    });
+    tr.addEventListener("mouseleave",function(){
+      if(currentFnIdx>=0){
+        drawGraph(currentFnIdx,-1);
+        document.getElementById("trig-val-display").style.display="none";
+        document.getElementById("graph-hint").style.display="block";
+      }
+    });
+    // Cell-level hover pins dot
+    tr.querySelectorAll("td[data-angle]").forEach(function(cell){
+      cell.addEventListener("mouseenter",function(){
+        if(currentFnIdx<0) return;
+        var ang=parseFloat(cell.getAttribute("data-angle"));
+        var px=PL_GLOBAL+(ang/360)*(canvas.width-PL_GLOBAL-12);
+        graphMouseX=px; drawGraph(currentFnIdx,px);
+      });
+    });
+  });
+  canvas.addEventListener("mousemove",function(e){
+    if(currentFnIdx<0) return;
+    var rect=canvas.getBoundingClientRect();
+    graphMouseX=(e.clientX-rect.left)*(canvas.width/rect.width);
+    drawGraph(currentFnIdx,graphMouseX);
+  });
+  canvas.addEventListener("mouseleave",function(){
+    if(currentFnIdx<0) return;
+    graphMouseX=-1; drawGraph(currentFnIdx,-1);
+    document.getElementById("trig-val-display").style.display="none";
+    document.getElementById("graph-hint").style.display="block";
+  });
+}
+var PL_GLOBAL=40;
+
+/* ─── COLUMN HIGHLIGHT ──────────────────────────────────────── */
+function attachColHighlight(tbl){
+  if(!tbl) return;
+  var cur=-1;
+  tbl.addEventListener("mouseover",function(e){
+    var td=e.target.closest("td");
+    if(!td) return;
+    var col=td.getAttribute("data-col");
+    var n=col!==null?parseInt(col):-1;
+    if(n===cur) return; cur=n;
+    tbl.querySelectorAll("td.col-hover").forEach(function(c){c.classList.remove("col-hover");});
+    if(n<0) return;
+    tbl.querySelectorAll("td[data-col='"+n+"']").forEach(function(c){c.classList.add("col-hover");});
+  });
+  tbl.addEventListener("mouseleave",function(){
+    cur=-1;
+    tbl.querySelectorAll("td.col-hover").forEach(function(c){c.classList.remove("col-hover");});
+  });
+}
+
+/* ─── SEARCH ────────────────────────────────────────────────── */
+var searchInput=document.getElementById("lb-search");
+var activeTable=null;
+
+var tableMap={
+  log:     {sec:"sec-log",    tbl:"tbl-log",     no:"no-log"},
+  antilog: {sec:"sec-antilog",tbl:"tbl-antilog", no:"no-antilog"},
+  sine:    {sec:"sec-sine",   tbl:"tbl-sine",    no:"no-sine"},
+  cosine:  {sec:"sec-cosine", tbl:"tbl-cosine",  no:"no-cosine"},
+  tangent: {sec:"sec-tangent",tbl:"tbl-tangent", no:"no-tangent"},
+  trig:    {sec:"sec-trig",   tbl:"tbl-trig",    no:null}
+};
+
+function doSearch(q){
+  if(!activeTable) return;
+  var info=tableMap[activeTable];
+  var tbl=document.getElementById(info.tbl);
+  if(!tbl) return;
+  var q2=q.trim().toLowerCase(), anyVisible=false;
+  tbl.querySelectorAll("tbody tr").forEach(function(tr){
+    var lbl=(tr.getAttribute("data-rowlabel")||"").toLowerCase();
+    if(!q2||lbl.indexOf(q2)!==-1){ tr.classList.remove("search-hidden"); anyVisible=true; }
+    else tr.classList.add("search-hidden");
+  });
+  if(info.no){
+    var noEl=document.getElementById(info.no);
+    if(noEl) noEl.classList.toggle("visible",!anyVisible&&q2.length>0);
+  }
+}
+searchInput.addEventListener("input",function(){ doSearch(searchInput.value); });
+
+/* ─── PILL FILTER ───────────────────────────────────────────── */
+var pills=document.querySelectorAll(".lb-pill");
+var emptyEl=document.getElementById("lb-empty");
+
+pills.forEach(function(pill){
+  pill.addEventListener("click",function(){
+    var key=pill.getAttribute("data-table");
+    if(pill.classList.contains("active")){
+      pill.classList.remove("active"); activeTable=null;
+      Object.keys(tableMap).forEach(function(k){ document.getElementById(tableMap[k].sec).classList.remove("visible"); });
+      emptyEl.style.display=""; return;
+    }
+    pills.forEach(function(p){p.classList.remove("active");});
+    pill.classList.add("active"); activeTable=key;
+    Object.keys(tableMap).forEach(function(k){
+      document.getElementById(tableMap[k].sec).classList.toggle("visible",k===key);
+    });
+    emptyEl.style.display="none";
+    searchInput.value=""; doSearch("");
+    if(key==="trig") setTimeout(function(){ resizeCanvas(); drawGraphEmpty(); },50);
+  });
+});
+
+/* ─── PDF EXPORT ─────────────────────────────────────────────────
+   Builds a completely separate hidden print-book DOM.
+   Each sheet gets:
+     LEFT  — PROF. DR. S. BALAJI SCIENCE ACADEMY  +  profbalaji.in
+     RIGHT — Table name  +  page info
+   A4 portrait, default margins, 50/50 row split per table.
+─────────────────────────────────────────────────────────────── */
+/* pageNum counter — incremented for each sheet, stamped into header right side */
+var _pageNum = 0;
+
+function makeHeader(title){
+  _pageNum++;
+  var hdr=document.createElement("div");
+  hdr.className="lb-print-header";
+  hdr.innerHTML=
+    '<div class="phead-left">'
+      +'<span class="phead-academy">PROF. DR. S. BALAJI SCIENCE ACADEMY</span>'
+      +'<span class="phead-site">profbalaji.in</span>'
+    +'</div>'
+    +'<div class="phead-right">'
+      +'<span class="phead-title">'+title+'</span>'
+      +'<span class="phead-sub">Page '+_pageNum+'</span>'
+    +'</div>';
+  return hdr;
+}
+
+function makePrintSheet(title, tableEl){
+  var sheet=document.createElement("div");
+  sheet.className="print-sheet";
+  sheet.appendChild(makeHeader(title));
+  var wrap=document.createElement("div");
+  wrap.className="print-tbl-wrap";
+  wrap.appendChild(tableEl.cloneNode(true));
+  sheet.appendChild(wrap);
+  return sheet;
+}
+
+function makePrintSheetTrig(tableEl){
+  var sheet=document.createElement("div");
+  sheet.className="print-sheet print-trig-sheet";
+  sheet.appendChild(makeHeader("Trigonometry Ratios — Standard Angles"));
+  var wrap=document.createElement("div");
+  wrap.className="print-tbl-wrap";
+  wrap.appendChild(tableEl.cloneNode(true));
+  sheet.appendChild(wrap);
+  return sheet;
+}
+
+/* Clone rows by index range (0-based position in tbody),
+   NOT by row label value — avoids parseFloat issues with .00/.50 labels */
+function cloneTableRowsByIndex(srcTbl, iStart, iEnd){
+  var newTbl=document.createElement("table");
+  newTbl.className=srcTbl.className;
+  var thead=srcTbl.querySelector("thead");
+  if(thead) newTbl.appendChild(thead.cloneNode(true));
+  var tbody=document.createElement("tbody");
+  var allRows=srcTbl.querySelectorAll("tbody tr");
+  for(var i=iStart; i<=iEnd && i<allRows.length; i++){
+    tbody.appendChild(allRows[i].cloneNode(true));
+  }
+  newTbl.appendChild(tbody);
+  return newTbl;
+}
+
+document.getElementById("lb-export").addEventListener("click",function(){
+  var book=document.getElementById("print-book");
+  book.innerHTML="";
+  _pageNum=0; // reset counter
+
+  // Each full table has these row counts:
+  // Log: 90 rows (10-99), split at index 45 → rows 10-54 / 55-99
+  // Antilog: 100 rows (0-99), split at index 50 → .00-.49 / .50-.99
+  // Sine/Cosine/Tangent: 91 rows (0-90), split at index 45 → 0-44 / 45-90
+
+  var logTbl=document.getElementById("tbl-log");
+  book.appendChild(makePrintSheet("Logarithms (log₁₀)", cloneTableRowsByIndex(logTbl,0,44)));
+  book.appendChild(makePrintSheet("Logarithms (log₁₀)", cloneTableRowsByIndex(logTbl,45,89)));
+
+  var altTbl=document.getElementById("tbl-antilog");
+  book.appendChild(makePrintSheet("Antilogarithms", cloneTableRowsByIndex(altTbl,0,49)));
+  book.appendChild(makePrintSheet("Antilogarithms", cloneTableRowsByIndex(altTbl,50,99)));
+
+  var sinTbl=document.getElementById("tbl-sine");
+  book.appendChild(makePrintSheet("Natural Sines", cloneTableRowsByIndex(sinTbl,0,44)));
+  book.appendChild(makePrintSheet("Natural Sines", cloneTableRowsByIndex(sinTbl,45,90)));
+
+  var cosTbl=document.getElementById("tbl-cosine");
+  book.appendChild(makePrintSheet("Natural Cosines (subtract mean differences)", cloneTableRowsByIndex(cosTbl,0,44)));
+  book.appendChild(makePrintSheet("Natural Cosines (subtract mean differences)", cloneTableRowsByIndex(cosTbl,45,90)));
+
+  var tanTbl=document.getElementById("tbl-tangent");
+  book.appendChild(makePrintSheet("Natural Tangents", cloneTableRowsByIndex(tanTbl,0,44)));
+  book.appendChild(makePrintSheet("Natural Tangents", cloneTableRowsByIndex(tanTbl,45,90)));
+
+  book.appendChild(makePrintSheetTrig(document.getElementById("tbl-trig")));
+
+  window.print();
+  setTimeout(function(){ book.innerHTML=""; _pageNum=0; },3000);
+});
+
+/* ─── INIT ──────────────────────────────────────────────────── */
+buildLog("tbl-log",10,99);
+buildAntilog("tbl-antilog",0,99);
+buildTrigTable("tbl-sine",   Math.sin, 0,90, 5, false, false);
+buildTrigTable("tbl-cosine", Math.cos, 0,90, 5, true,  false);
+buildTrigTable("tbl-tangent",Math.tan, 0,90, 5, false, true);
+buildTrigRatios();
+
+["tbl-log","tbl-antilog","tbl-sine","tbl-cosine","tbl-tangent","tbl-trig"].forEach(function(id){
+  attachColHighlight(document.getElementById(id));
+});
+
+window.addEventListener("resize",function(){
+  if(currentFnIdx>=0) resizeCanvas();
+  else{
+    var p=canvas.parentElement;
+    if(p){ canvas.width=Math.max(p.clientWidth-40,200); canvas.height=240; }
+  }
+});
+drawGraphEmpty();
+
+})();
+</script>
+</body>
+</html>

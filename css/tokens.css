@@ -1,0 +1,95 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * design-systems/coinbase/tokens.css
+ * ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --bg:           #ffffff;
+  --surface:      #eef0f3;
+  --surface-warm: var(--surface);
+  --fg:           #0a0b0d;
+  --fg-2:         var(--fg);
+  --muted:        #5b616e;
+  --meta:         var(--muted);
+  --border:       rgba(91, 97, 110, 0.2);
+  --border-soft:  var(--border);
+  --accent:       #0052ff;
+  --accent-on:    #ffffff;
+  --accent-hover: #578bfa;
+  --accent-active: #0667d0;
+  --success:      #16a34a;
+  --warn:         #eab308;
+  --danger:       #dc2626;
+  --font-display: "CoinbaseDisplay", "Coinbase Display", "Inter", sans-serif;
+  --font-body:    "CoinbaseText", "CoinbaseSans", "Coinbase Sans", "Inter", sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", monospace;
+  --text-xs:      12px;
+  --text-sm:      14px;
+  --text-base:    16px;
+  --text-lg:      18px;
+  --text-xl:      32px;
+  --text-2xl:     36px;
+  --text-3xl:     52px;
+  --text-4xl:     80px;
+  --leading-body: 1.5;
+  --leading-tight: 1.0;
+  --tracking-display: -0.01em;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   32px;
+  --radius-pill: 9999px;
+  --elev-flat:   none;
+  --elev-ring:   0 0 0 1px var(--border);
+  --elev-raised: 0 1px 2px color-mix(in oklab, var(--fg), transparent 92%);
+  --focus-ring:  0 0 0 2px var(--fg);
+  --motion-fast:   150ms;
+  --motion-base:   200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: var(--leading-body);
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--accent-on);
+  border-radius: var(--radius-pill);
+  padding: 16px 32px;
+  font-weight: 600;
+  transition: background-color var(--motion-fast) var(--ease-standard);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+  background-color: var(--surface);
+  color: var(--fg);
+  border-radius: var(--radius-pill);
+  padding: 16px 32px;
+  font-weight: 600;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.section-dark {
+  background-color: var(--fg);
+  color: var(--bg);
+}
+
+.section-surface {
+  background-color: var(--surface);
+}
