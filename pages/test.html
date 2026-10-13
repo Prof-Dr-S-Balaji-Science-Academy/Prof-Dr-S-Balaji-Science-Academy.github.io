@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Free mock tests for CBSE Class 10 Science, CBSE Class 12 Physics & Chemistry, and State Board Class 12. Chapter-level MCQs, full-length board exam tests — launching soon." />
-  <title>Free Mock Tests · Coming Soon | Prof. Dr. S. Balaji Science Academy</title>
+  <meta name="description" content="Chapter-wise practice questions and mock tests for CBSE Class 10 Science, CBSE Class 12 Physics and Chemistry, and State Board Class 12, written by Prof. Dr. S. Balaji. Sign up to get started." />
+  <title>Practice &amp; Mock Tests | Prof. Dr. S. Balaji Science Academy</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/assets/icons/icon-192.png" />
@@ -154,6 +154,38 @@
     /* Lock hero-grid to equal columns and allow cells to shrink */
     .hero-grid { grid-template-columns: 1fr 1fr !important; align-items: start !important; }
     .hero-grid > * { min-width: 0 !important; }
+
+    /* ── Pricing ── */
+    .pr-section { background: var(--surface-soft, #f7f7f7); padding: 96px 0; }
+    .pr-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+    .pr-eyebrow { display: inline-block; background: var(--surface); color: var(--fg); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 12px; border-radius: var(--radius-pill); margin-bottom: 16px; }
+    .pr-head h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 400; line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 16px; color: var(--fg); }
+    .pr-head p { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 0; }
+    .pr-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 920px; margin: 0 auto; }
+    @media (min-width: 768px) { .pr-grid { grid-template-columns: 1fr 1fr; align-items: stretch; } }
+    .pr-card { display: flex; flex-direction: column; background: #ffffff; color: var(--fg); border: 1px solid var(--border); border-radius: 24px; padding: 32px; min-width: 0; }
+    .pr-featured { background: #0a0b0d; color: #ffffff; border-color: #0a0b0d; }
+    .pr-tag { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 14px; border-radius: var(--radius-pill); margin-bottom: 24px; background: var(--surface); color: var(--fg); }
+    .pr-featured .pr-tag { background: var(--accent); color: #ffffff; }
+    .pr-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin: 0 0 8px; }
+    .pr-old { font-size: clamp(22px, 4vw, 30px); font-weight: 400; color: #a8acb3; text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: #cf202f; }
+    .pr-new { font-size: clamp(64px, 12vw, 96px); font-weight: 400; line-height: 1; letter-spacing: -0.04em; }
+    .pr-amount { font-size: clamp(40px, 7vw, 56px); font-weight: 400; line-height: 1; letter-spacing: -0.03em; }
+    .pr-per { font-size: 14px; color: var(--muted); }
+    .pr-featured .pr-per { color: #a8acb3; }
+    .pr-save { display: inline-block; font-size: 13px; font-weight: 600; color: #05b169; margin: 0 0 24px; }
+    .pr-lead { font-size: 15px; line-height: 1.6; color: var(--muted); margin: 8px 0 24px; }
+    .pr-featured .pr-lead { color: #a8acb3; }
+    .pr-list { list-style: none; margin: 0 0 32px; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .pr-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; }
+    .pr-list svg { flex-shrink: 0; margin-top: 2px; color: var(--accent); }
+    .pr-featured .pr-list svg { color: #ffffff; }
+    .pr-card .btn { margin-top: auto; width: 100%; box-sizing: border-box; }
+    .pr-card .btn-secondary { border: 1px solid var(--border); background: #ffffff; }
+    .pr-card .btn-secondary:hover { background: var(--surface); color: var(--fg); }
+    .pr-note { text-align: center; font-size: 12px; color: var(--muted); margin: 24px auto 0; max-width: 640px; }
+    [data-auth-cta] { white-space: nowrap; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   </style>
 </head>
 <body id="home">
@@ -197,6 +229,7 @@
             <div class="nav-dropdown">
               <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>
               <div class="nav-dropdown-menu">
+                <a href="../pages/test.html">Mock Tests</a>
                 <a href="../pages/studyplanner/">Study Planner</a>
                 <a href="../pages/periodictable/">Periodic Table</a>
                 <a href="../pages/mindmap/">Mind Map</a>
@@ -208,10 +241,10 @@
             <a href="../index.html#contact">Contact</a>
           </nav>
           <div class="nav-actions">
-            <a class="btn btn-primary" href="#" data-od-id="header-cta">Sign Up</a>
+            <a class="btn btn-primary" href="../auth/" data-od-id="header-cta">Sign In</a>
           </div>
         </div>
-        <a class="btn btn-primary btn-sm nav-actions-mobile" href="#" data-od-id="header-cta-mobile">Sign Up</a>
+        <a class="btn btn-primary btn-sm nav-actions-mobile" href="../auth/" data-od-id="header-cta-mobile">Sign In</a>
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">
           <span></span>
         </button>
@@ -230,6 +263,7 @@
       <div class="nav-mobile-dropdown">
         <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>
         <div class="nav-mobile-dropdown-menu">
+          <a href="../pages/test.html">Mock Tests</a>
           <a href="../pages/studyplanner/">Study Planner</a>
           <a href="../pages/periodictable/">Periodic Table</a>
           <a href="../pages/mindmap/">Mind Map</a>
@@ -252,15 +286,15 @@
 
         <!-- LEFT COLUMN -->
         <div style="min-width: 0;">
-          <div class="hero-badge" data-od-id="admissions-badge"><span class="dot" aria-hidden="true"></span> PRACTICE </div>
+          <div class="hero-badge" data-od-id="admissions-badge"><span class="dot" aria-hidden="true"></span> PRACTICE &amp; MOCK TESTS </div>
 
-          <h1 style="white-space: normal; overflow-wrap: break-word;">Coming Soon...</h1>
+          <h1 style="white-space: normal; overflow-wrap: break-word;">Practise like it is the board exam.</h1>
 
-          <p class="hero-sub">Most students read their notes — but never sit a timed test until the real exam. That's the gap. Mock tests fix it.</p>
-          <p class="hero-sub">We're building a free, chapter-level test platform for CBSE and State Board students — MCQ quizzes, custom tests, and full-length board exam simulations. All from the same professor who teaches the course.</p>
+          <p class="hero-sub">Most students read their notes but never sit a proper test until the real exam. Chapter-wise practice and timed mock tests close that gap.</p>
+          <p class="hero-sub">Every question is written by Prof. Dr. S. Balaji, the professor who teaches the course, and is organised by board, class, subject and chapter. Sign up with your Google account, choose your class and subjects, and the academy will activate your access.</p>
 
           <div class="hero-cta">
-            <a class="btn btn-primary" href="../index.html#contact" data-wa="general">Contact Us</a>
+            <a class="btn btn-primary" href="../auth/" data-od-id="test-signup" data-auth-cta>Sign Up</a>
             <a class="btn btn-secondary" href="../index.html#courses">See Courses</a>
           </div>
         </div>
@@ -268,8 +302,8 @@
         <!-- RIGHT PANEL — dark card, matches homepage -->
         <aside class="hero-panel" data-od-id="hero-panel">
 
-          <h2>Practice - Mock Tests</h2>
-          <p class="panel-line">Questions crafted by Prof. Dr. S. Balaji — board-exam focused, chapter-wise, and completely free.</p>
+          <h2>What you get</h2>
+          <p class="panel-line">Questions crafted by Prof. Dr. S. Balaji, board-exam focused and organised chapter by chapter.</p>
 
           <!-- Courses covered -->
           <div class="course-rows">
@@ -277,21 +311,21 @@
               <span class="grade-badge">10</span>
               <div class="course-row-inner">
                 <strong>CBSE · Science</strong>
-                <span>Physics, Chemistry &amp; Biology</span>
+                <span>Class 10</span>
               </div>
             </div>
             <div class="course-row">
               <span class="grade-badge">12</span>
               <div class="course-row-inner">
                 <strong>CBSE · Physics &amp; Chemistry</strong>
-                <span>Full NCERT syllabus</span>
+                <span>Class 12</span>
               </div>
             </div>
             <div class="course-row">
               <span class="grade-badge">12</span>
               <div class="course-row-inner">
                 <strong>State Board · Physics &amp; Chemistry</strong>
-                <span>TN State Board syllabus</span>
+                <span>Class 12</span>
               </div>
             </div>
           </div>
@@ -299,42 +333,76 @@
           <!-- What's inside grid — SVG icons only -->
           <div class="feature-grid">
             <div class="feature-item">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-              </svg>
-              <strong>Quick MCQ Quiz</strong>
-              <span>Chapter-wise, 10–15 Qs</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <strong>Chapter-wise practice</strong>
+              <span>Pick a chapter, difficulty and question type</span>
             </div>
             <div class="feature-item">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-              </svg>
-              <strong>Chapter Tests</strong>
-              <span>Timed, marks-based</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <strong>Instant answers</strong>
+              <span>See the answer and explanation after each question</span>
             </div>
             <div class="feature-item">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-              </svg>
-              <strong>Custom Tests</strong>
-              <span>Pick chapters, set duration</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <strong>Many question types</strong>
+              <span>MCQ, numerical, match, case-based and written</span>
             </div>
             <div class="feature-item">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-              <strong>Full Mock Exam</strong>
-              <span>Board-pattern, 3 hours</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <strong>Timed mock tests</strong>
+              <span>Coming soon, with answers shown after you submit</span>
             </div>
           </div>
 
           <!-- CTAs -->
           <div style="display:flex;gap:10px;margin-top:4px;">
-            <a class="btn btn-primary" href="../index.html#courses" style="flex:1;justify-content:center;">Ongoing Courses</a>
+            <a class="btn btn-primary" href="../auth/" style="flex:1;justify-content:center;" data-auth-cta>Sign Up</a>
             <a class="btn btn-secondary" href="../index.html#contact" data-wa="general" style="flex:1;justify-content:center;">Contact Us</a>
           </div>
 
         </aside>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pr-section" id="pricing" data-od-id="pricing">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Pricing</span>
+          <h2>One simple annual fee. Free for my students.</h2>
+          <p>Full access to practice questions and mock tests for ₹1,000 per academic year, and ₹0 for students of my classroom and online course.</p>
+        </div>
+
+        <div class="pr-grid">
+          <article class="pr-card pr-featured" data-od-id="pricing-students">
+            <span class="pr-tag">Classroom &amp; online students</span>
+            <p class="pr-price">
+              <span class="sr-only">Regular price ₹1,000 per academic year, now ₹0.</span>
+              <s class="pr-old" aria-hidden="true">₹1,000</s>
+              <strong class="pr-new" aria-hidden="true">₹0</strong>
+              <span class="pr-per">per academic year</span>
+            </p>
+            <span class="pr-save">You save ₹1,000</span>
+            <ul class="pr-list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Chapter-wise practice with instant answers and explanations</span></li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Timed mock tests, with answers shown after you submit</span></li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Questions written by Prof. Dr. S. Balaji, organised by chapter</span></li>
+            </ul>
+            <a class="btn btn-primary" href="../auth/" data-auth-cta>Sign Up</a>
+          </article>
+
+          <article class="pr-card" data-od-id="pricing-others">
+            <span class="pr-tag">Everyone else</span>
+            <p class="pr-price">
+              <strong class="pr-amount">₹1,000</strong>
+              <span class="pr-per">per academic year</span>
+            </p>
+            <p class="pr-lead">Not attending my classroom or online course? Email me and I will tell you how to get access to the practice and mock test modules.</p>
+            <a class="btn btn-secondary" href="mailto:contact@profbalaji.in?subject=Mock%20test%20access%20enquiry">Email contact@profbalaji.in</a>
+          </article>
+        </div>
+
+        <p class="pr-note">Access is activated by the academy after you sign up and your enrolment is confirmed.</p>
       </div>
     </section>
 
@@ -360,7 +428,7 @@
             <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <img src="../assets/icons/linkedin.svg" alt="LinkedIn" />
             </a>
-            <a href="mailto:prof@example.com" aria-label="Email">
+            <a href="mailto:contact@profbalaji.in" aria-label="Email">
               <img src="../assets/icons/mail.svg" alt="Email" />
             </a>
             <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
@@ -376,6 +444,7 @@
         </div>
         <div class="footer-bottom" style="justify-content: space-between; flex-direction: column; align-items: center; gap: 8px;">
           <span style="font-size: 12px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy . All Rights Reserved.</span>
+          <span class="footer-legal" style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;font-size:12px;"><a href="../pages/privacy.html">Privacy Policy</a><a href="../pages/terms.html">Terms of Use</a></span>
         </div>
       </div>
     </footer>
@@ -383,6 +452,26 @@
   <!-- ═══ END STATIC FALLBACK FOOTER ═══ -->
 
   <!-- Load shared header/footer (replaces slot divs above) then page logic -->
+  <script>
+    /* Signed-in visitors: the Sign Up buttons become "Dashboard". Uses the same
+       sign-in hint and pb-auth event as the shared header (no extra reads). */
+    (function () {
+      var btns = document.querySelectorAll("[data-auth-cta]");
+      function set(signedIn) {
+        btns.forEach(function (a) {
+          if (!a.dataset.hrefOut) { a.dataset.hrefOut = a.getAttribute("href"); a.dataset.textOut = a.textContent; }
+          a.setAttribute("href", signedIn ? "dashboard/" : a.dataset.hrefOut);
+          a.textContent = signedIn ? "Dashboard" : a.dataset.textOut;
+        });
+      }
+      try {
+        var h = JSON.parse(localStorage.getItem("pb_user_hint") || "null");
+        if (h && (h.name || h.email)) set(true);
+      } catch (e) {}
+      window.addEventListener("pb-auth", function (e) { set(!!(e.detail && e.detail.user)); });
+      if (window.PB_AUTH && window.PB_AUTH.ready) set(!!window.PB_AUTH.user);
+    })();
+  </script>
   <script src="../js/header-footer-loader.js"></script>
   <script src="../js/main.js" defer></script>
 </body>

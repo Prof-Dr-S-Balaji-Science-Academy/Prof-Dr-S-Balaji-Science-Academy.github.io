@@ -71,6 +71,19 @@
       '  #brand-text { font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--fg); text-decoration:none; line-height:1.25; flex-shrink:1; }',
       '  #brand-text:hover { color:var(--fg); }',
       '  @media (min-width:896px) { #brand-text br { display:none; } #brand-text { white-space:nowrap; font-size:13px; } }',
+      '  .user-menu { position:relative; }',
+      '  .user-menu-btn { display:inline-flex; align-items:center; gap:8px; min-height:40px; padding:4px 14px 4px 4px; border-radius:9999px; background:var(--surface); color:var(--fg); font-family:var(--font-body); font-size:14px; font-weight:600; border:1px solid transparent; cursor:pointer; transition:background 150ms; }',
+      '  .user-menu-btn:hover { background:color-mix(in oklab, var(--surface), var(--fg) 6%); }',
+      '  .user-avatar { width:32px; height:32px; border-radius:50%; background:var(--accent); color:var(--accent-on); display:grid; place-items:center; font-size:14px; font-weight:600; flex-shrink:0; }',
+      '  .user-name { max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }',
+      '  .user-menu-panel { display:none; position:absolute; right:0; top:calc(100% + 8px); min-width:224px; background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:8px; box-shadow:0 4px 12px rgba(0,0,0,0.04); z-index:120; }',
+      '  .user-menu-btn[aria-expanded="true"] + .user-menu-panel { display:block; }',
+      '  .user-menu-id { display:flex; flex-direction:column; gap:2px; padding:8px 12px 12px; margin-bottom:4px; border-bottom:1px solid var(--border); font-size:14px; }',
+      '  .user-menu-id strong { font-weight:600; overflow-wrap:anywhere; }',
+      '  .user-menu-id span { color:var(--muted); font-size:12px; overflow-wrap:anywhere; }',
+      '  .user-menu-panel a, .user-menu-panel button { display:block; width:100%; text-align:left; padding:10px 12px; border-radius:8px; font-family:var(--font-body); font-size:14px; font-weight:500; color:var(--fg); text-decoration:none; background:none; border:0; cursor:pointer; }',
+      '  .user-menu-panel a:hover, .user-menu-panel button:hover { background:var(--surface); }',
+      '  @media (max-width:895px) { .user-name { display:none; } .user-menu-btn { width:40px; padding:4px; justify-content:center; } }',
       '</style>',
 
       '<header class="site-header" data-od-id="site-header">',
@@ -96,6 +109,7 @@
       '        <div class="nav-dropdown">',
       '          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Resources</button>',
       '          <div class="nav-dropdown-menu">',
+      '            <a href="' + prefix + 'pages/test.html">Mock Tests</a>',
       '            <a href="' + prefix + 'pages/studyplanner/">Study Planner</a>',
       '            <a href="' + prefix + 'pages/periodictable/">Periodic Table</a>',
       '            <a href="' + prefix + 'pages/mindmap/">Mind Map</a>',
@@ -107,11 +121,11 @@
       '        <a href="' + homeLink("#contact", prefix) + '">Contact</a>',
       '      </nav>',
       '      <div class="nav-actions">',
-      '        <a class="btn btn-primary" href="#" data-od-id="header-cta">Sign Up</a>',
+      '        <a class="btn btn-primary" href="' + prefix + 'auth/" data-od-id="header-cta">Sign In</a>',
       '      </div>',
       '    </div>',
 
-      '    <a class="btn btn-primary btn-sm nav-actions-mobile" href="#" data-od-id="header-cta-mobile">Sign Up</a>',
+      '    <a class="btn btn-primary btn-sm nav-actions-mobile" href="' + prefix + 'auth/" data-od-id="header-cta-mobile">Sign In</a>',
       '    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" data-od-id="menu-toggle">',
       '      <span></span>',
       '    </button>',
@@ -131,6 +145,7 @@
       '  <div class="nav-mobile-dropdown">',
       '    <button class="nav-mobile-dropdown-trigger" type="button" aria-expanded="false">Resources</button>',
       '    <div class="nav-mobile-dropdown-menu">',
+      '      <a href="' + prefix + 'pages/test.html">Mock Tests</a>',
       '      <a href="' + prefix + 'pages/studyplanner/">Study Planner</a>',
       '      <a href="' + prefix + 'pages/periodictable/">Periodic Table</a>',
       '      <a href="' + prefix + 'pages/mindmap/">Mind Map</a>',
@@ -160,7 +175,7 @@
       '        <a href="https://www.linkedin.com/in/profdrsbalaji" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">',
       '          <img src="' + prefix + 'assets/icons/linkedin.svg" alt="LinkedIn" />',
       '        </a>',
-      '        <a href="mailto:prof@example.com" aria-label="Email">',
+      '        <a href="mailto:contact@profbalaji.in" aria-label="Email">',
       '          <img src="' + prefix + 'assets/icons/mail.svg" alt="Email" />',
       '        </a>',
       '        <a href="https://scholar.google.co.kr/citations?hl=en&pli=1&user=9NAUZ5MAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">',
@@ -176,6 +191,9 @@
       '    </div>',
       '    <div class="footer-bottom" style="justify-content:space-between;flex-direction:column;align-items:center;gap:8px;">',
       '      <span style="font-size:11px;">© <span id="y"></span> Prof. Dr. S. Balaji Science Academy | All Rights Reserved.</span>',
+      '      <span class="footer-legal" style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;font-size:12px;">'
+        + '<a href="' + prefix + 'pages/privacy.html">Privacy Policy</a>'
+        + '<a href="' + prefix + 'pages/terms.html">Terms of Use</a></span>',
       '    </div>',
       '  </div>',
       '</footer>'
@@ -277,6 +295,102 @@
     applyFade();
   }
 
+  /* ── 8b. Sign-in state in the header ─────────────────────────
+   * Header shows "Sign In" until Firebase reports a signed-in user, then
+   * swaps to a user menu (Dashboard, Sign Out). Header needs no database
+   * reads: the Dashboard link routes students/admins to the right place.
+   * A tiny localStorage hint avoids a "Sign In" flash for returning users.
+   * ─────────────────────────────────────────────────────────────── */
+  var loginHref = "";
+  var dashHref = "";
+
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function userMenuHTML(u) {
+    var label = u.name || (u.email ? u.email.split("@")[0] : "Account");
+    var initial = esc(label.charAt(0).toUpperCase());
+    return [
+      '<div class="user-menu" data-user-menu>',
+      '  <button class="user-menu-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu">',
+      '    <span class="user-avatar" aria-hidden="true">' + initial + '</span>',
+      '    <span class="user-name">' + esc(label) + '</span>',
+      '  </button>',
+      '  <div class="user-menu-panel">',
+      '    <div class="user-menu-id"><strong>' + esc(label) + '</strong><span>' + esc(u.email || "") + '</span></div>',
+      '    <a href="' + dashHref + '">Dashboard</a>',
+      '    <button type="button" data-signout>Sign Out</button>',
+      '  </div>',
+      '</div>'
+    ].join("");
+  }
+
+  function applyAuth(user) {
+    var desktop = document.querySelector(".nav-actions");
+    var mobile = document.querySelector('[data-od-id="header-cta-mobile"]');
+    if (!desktop || !mobile) return;
+    if (user) {
+      desktop.innerHTML = userMenuHTML(user);
+      mobile.outerHTML = '<div class="nav-actions-mobile" data-od-id="header-cta-mobile">' + userMenuHTML(user) + '</div>';
+    } else {
+      desktop.innerHTML = '<a class="btn btn-primary" href="' + loginHref + '" data-od-id="header-cta">Sign In</a>';
+      mobile.outerHTML = '<a class="btn btn-primary btn-sm nav-actions-mobile" href="' + loginHref + '" data-od-id="header-cta-mobile">Sign In</a>';
+    }
+  }
+
+  function readHint() {
+    try {
+      var h = JSON.parse(localStorage.getItem("pb_user_hint") || "null");
+      return h && (h.name || h.email) ? h : null;
+    } catch (e) { return null; }
+  }
+
+  function initAuthHeader(prefix) {
+    loginHref = prefix + "auth/";
+    dashHref = prefix + "pages/dashboard/";
+
+    /* One delegated handler covers both the desktop and mobile menus */
+    document.addEventListener("click", function (e) {
+      var btn = e.target.closest ? e.target.closest(".user-menu-btn") : null;
+      document.querySelectorAll(".user-menu-btn").forEach(function (b) {
+        if (b === btn) {
+          b.setAttribute("aria-expanded", String(b.getAttribute("aria-expanded") !== "true"));
+        } else {
+          b.setAttribute("aria-expanded", "false");
+        }
+      });
+      if (e.target.closest && e.target.closest("[data-signout]")) {
+        if (window.PB_AUTH && window.PB_AUTH.signOut) window.PB_AUTH.signOut();
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".user-menu-btn").forEach(function (b) {
+          b.setAttribute("aria-expanded", "false");
+        });
+      }
+    });
+
+    window.addEventListener("pb-auth", function (e) { applyAuth(e.detail.user); });
+
+    if (window.PB_AUTH && window.PB_AUTH.ready) {
+      applyAuth(window.PB_AUTH.user);
+    } else {
+      var hint = readHint();
+      if (hint) applyAuth(hint);
+    }
+
+    /* Firebase must come from an injected module script (a dynamic import()
+     * inside this classic script fails silently for the CDN modules). */
+    var m = document.createElement("script");
+    m.type = "module";
+    m.src = prefix + "js/auth-core.js";
+    document.head.appendChild(m);
+  }
+
   /* ── 9. Inject into the DOM ──────────────────────────────────── */
   function inject() {
     var prefix = getPrefix();
@@ -296,6 +410,7 @@
     attachNavListeners();
     setCopyrightYear();
     attachBrandFade();
+    initAuthHeader(prefix);
   }
 
   /* Run after DOM is ready */
