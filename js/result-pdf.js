@@ -5,18 +5,21 @@
  * (a heading block, then one block per question). Each block is drawn with
  * its maths exactly as on screen, then placed on A4 pages without being cut
  * in the middle (a block taller than a page is sliced).
- * The two libraries are loaded from cdnjs only when a student asks for a PDF.
+ * The two libraries are loaded from jsDelivr (pinned versions, integrity-checked) only when a student asks for a PDF.
  * ───────────────────────────────────────────────────────────────────── */
 const LIBS = [
-  "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+  { src: "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+    integrity: "sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" },
+  { src: "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js",
+    integrity: "sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk" }
 ];
 let libsPromise = null;
 
-function loadScript(src) {
+function loadScript(lib) {
+  const src = lib.src;
   return new Promise((resolve, reject) => {
     const s = document.createElement("script");
-    s.src = src; s.async = true;
+    s.src = src; s.integrity = lib.integrity; s.crossOrigin = "anonymous"; s.async = true;
     s.onload = () => resolve();
     s.onerror = () => reject(new Error("Could not load " + src));
     document.head.appendChild(s);

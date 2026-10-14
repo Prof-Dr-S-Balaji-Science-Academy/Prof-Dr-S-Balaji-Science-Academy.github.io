@@ -16,6 +16,7 @@ import * as Cat from "./catalog-core.js";
 import { validateLatex } from "./latex-tools.js";
 
 const EXCELJS_URL = "https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js";
+const EXCELJS_SRI = "sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz";
 const XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const CHUNK = 25;   // questions saved per step (images are uploaded for one step at a time)
@@ -33,7 +34,7 @@ function loadExcel() {
   if (!excelPromise) {
     excelPromise = new Promise((resolve, reject) => {
       const s = document.createElement("script");
-      s.src = EXCELJS_URL;
+      s.src = EXCELJS_URL; s.integrity = EXCELJS_SRI; s.crossOrigin = "anonymous";
       s.onload = () => (window.ExcelJS ? resolve(window.ExcelJS) : reject(new Error("The spreadsheet tool did not start.")));
       s.onerror = () => { excelPromise = null; reject(new Error("The spreadsheet tool could not be loaded. Check your internet connection and try again.")); };
       document.head.append(s);

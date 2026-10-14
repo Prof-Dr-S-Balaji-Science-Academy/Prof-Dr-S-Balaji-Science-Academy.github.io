@@ -113,6 +113,8 @@
       '            <a href="' + prefix + 'pages/studyplanner/">Study Planner</a>',
       '            <a href="' + prefix + 'pages/periodictable/">Periodic Table</a>',
       '            <a href="' + prefix + 'pages/mindmap/">Mind Map</a>',
+      '            <a href="' + prefix + 'pages/physicsformulas/">Physics Formula Sheet</a>',
+      '            <a href="' + prefix + 'pages/chemistryequations/">Chemistry Equations Bank</a>',
       '          </div>',
       '        </div>',
       '        <a href="' + homeLink("#attend", prefix) + '">How to attend</a>',
@@ -149,6 +151,8 @@
       '      <a href="' + prefix + 'pages/studyplanner/">Study Planner</a>',
       '      <a href="' + prefix + 'pages/periodictable/">Periodic Table</a>',
       '      <a href="' + prefix + 'pages/mindmap/">Mind Map</a>',
+      '      <a href="' + prefix + 'pages/physicsformulas/">Physics Formula Sheet</a>',
+      '      <a href="' + prefix + 'pages/chemistryequations/">Chemistry Equations Bank</a>',
       '    </div>',
       '  </div>',
       '  <a href="' + homeLink("#attend", prefix) + '">How to attend</a>',
@@ -352,6 +356,18 @@
     loginHref = prefix + "auth/";
     dashHref = prefix + "pages/dashboard/";
 
+    /* Firebase must come from an injected module script (a dynamic import()
+     * inside this classic script fails silently for the CDN modules). */
+    var authStarted = false, pendingSignOut = false;
+    function startAuth() {
+      if (authStarted) return;
+      authStarted = true;
+      var m = document.createElement("script");
+      m.type = "module";
+      m.src = prefix + "js/auth-core.js";
+      document.head.appendChild(m);
+    }
+
     /* One delegated handler covers both the desktop and mobile menus */
     document.addEventListener("click", function (e) {
       var btn = e.target.closest ? e.target.closest(".user-menu-btn") : null;
@@ -364,6 +380,7 @@
       });
       if (e.target.closest && e.target.closest("[data-signout]")) {
         if (window.PB_AUTH && window.PB_AUTH.signOut) window.PB_AUTH.signOut();
+        else { pendingSignOut = true; startAuth(); }   /* clicked before the sign-in service finished loading */
       }
     });
     document.addEventListener("keydown", function (e) {
@@ -374,7 +391,10 @@
       }
     });
 
-    window.addEventListener("pb-auth", function (e) { applyAuth(e.detail.user); });
+    window.addEventListener("pb-auth", function (e) {
+      applyAuth(e.detail.user);
+      if (pendingSignOut && window.PB_AUTH && window.PB_AUTH.signOut) { pendingSignOut = false; window.PB_AUTH.signOut(); }
+    });
 
     if (window.PB_AUTH && window.PB_AUTH.ready) {
       applyAuth(window.PB_AUTH.user);
@@ -383,12 +403,15 @@
       if (hint) applyAuth(hint);
     }
 
-    /* Firebase must come from an injected module script (a dynamic import()
-     * inside this classic script fails silently for the CDN modules). */
-    var m = document.createElement("script");
-    m.type = "module";
-    m.src = prefix + "js/auth-core.js";
-    document.head.appendChild(m);
+    /* The sign-in pages load the service at once; public pages wait until the
+     * browser is idle so the first paint is not delayed. */
+    if (/\/(auth|pages\/dashboard|pages\/admin)(\/|$)/.test(location.pathname)) {
+      startAuth();
+    } else if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(startAuth, { timeout: 1500 });
+    } else {
+      setTimeout(startAuth, 800);
+    }
   }
 
   /* ── 9. Inject into the DOM ──────────────────────────────────── */
