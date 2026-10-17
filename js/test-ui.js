@@ -146,26 +146,26 @@ function buildReport(r) {
   const root = el("div", "rp-root");
   root.setAttribute("aria-hidden", "true");
 
-  const head = el("div", "rp-block rp-head");
-  head.append(el("div", "rp-brand", "Prof. Dr. S. Balaji Science Academy"),
-    el("div", "rp-title", session.paperTitle || "Mock test"),
-    el("div", "rp-sub", "Mock test result"));
-  const rows = el("div", "rp-rows");
-  const row = (k, v) => { const d = el("div", "rp-row"); d.append(el("span", "rp-k", k), el("span", "rp-v", v)); rows.append(d); };
-  row("Student", student.name || "–");
-  row("Email", student.email || "–");
-  row("Subject", Cat.scopeLabel(session.board, session.cls, session.subject));
-  if (session.attemptNo) row("Attempt", String(session.attemptNo));
-  row("Submitted", fmtWhen(session.submittedAt) || "–");
-  row("Score (marked on screen)", res.evalMax > 0 ? res.score + " / " + res.evalMax : "–");
-  row("Correct \u00b7 Wrong \u00b7 Not answered", res.correct + " \u00b7 " + res.wrong + " \u00b7 " + res.unanswered);
-  if (res.selfCount) row("Written on paper", res.selfCount + (res.selfCount === 1 ? " question" : " questions") + " \u00b7 " + marksText(res.selfMarks));
-  if (session.late) row("Submitted after the time limit", "Yes");
-  head.append(rows);
-  if ((session.negativeMarking || 0) > 0) head.append(el("div", "rp-note", "Negative marking applied: a wrong answer loses " + L.round2((session.negativeMarking || 0) * 100) + "% of that question's marks."));
-  if (res.selfCount) head.append(el("div", "rp-note", "Questions written on paper are not marked here and are not listed below."));
-  if (!showKeys) head.append(el("div", "rp-note", "The answer key is not shown for this paper."));
-  root.append(head);
+  const meta = [["Student", student.name || "–"], ["Email", student.email || "–"],
+    ["Subject", Cat.scopeLabel(session.board, session.cls, session.subject)]];
+  if (session.attemptNo) meta.push(["Attempt", String(session.attemptNo)]);
+  meta.push(["Submitted", fmtWhen(session.submittedAt) || "–"]);
+  if (res.selfCount) meta.push(["Written on paper", res.selfCount + (res.selfCount === 1 ? " question" : " questions") + " \u00b7 " + marksText(res.selfMarks)]);
+  if (session.late) meta.push(["Submitted after the time limit", "Yes"]);
+  const notes = [];
+  if ((session.negativeMarking || 0) > 0) notes.push("Negative marking applied: a wrong answer loses " + L.round2((session.negativeMarking || 0) * 100) + "% of that question's marks.");
+  if (res.selfCount) notes.push("Questions written on paper are not marked here and are not listed below.");
+  if (!showKeys) notes.push("The answer key is not shown for this paper.");
+  root.append(PDF.reportHead({
+    title: session.paperTitle || "Mock test", subtitle: "Mock test result",
+    stats: [
+      { value: res.evalMax > 0 ? res.score + " / " + res.evalMax : "–", label: "Score" },
+      { value: String(res.correct), label: "Correct", tone: "correct" },
+      { value: String(res.wrong), label: "Wrong", tone: "wrong" },
+      { value: String(res.unanswered), label: "Not answered" }
+    ],
+    meta: meta, notes: notes
+  }));
 
   (session.questionIds || []).forEach((id, i) => {
     const q = qs[id];

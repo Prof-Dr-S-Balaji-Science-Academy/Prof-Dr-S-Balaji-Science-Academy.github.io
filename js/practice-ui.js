@@ -294,22 +294,21 @@ function buildPracticeReport(r) {
   const { chapter, subjectLabel, rows, answers, keys, marks, status, summary, student } = r;
   const root = el("div", "rp-root");
   root.setAttribute("aria-hidden", "true");
-  const head = el("div", "rp-block rp-head");
-  head.append(el("div", "rp-brand", "Prof. Dr. S. Balaji Science Academy"),
-    el("div", "rp-title", "Chapter " + chapter.chapterNumber + ": " + chapter.chapterName),
-    el("div", "rp-sub", "Practice result"));
-  const list = el("div", "rp-rows");
-  const row = (k, v) => { const d = el("div", "rp-row"); d.append(el("span", "rp-k", k), el("span", "rp-v", v)); list.append(d); };
-  row("Student", student.name || "–");
-  row("Email", student.email || "–");
-  row("Subject", subjectLabel);
-  row("Date", new Date().toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" }));
-  row("Questions", String(rows.length));
-  row("Correct (auto-marked)", summary.scored ? summary.correct + " / " + summary.scored + " (" + pct(summary.correct, summary.scored) + ")" : "–");
-  row("Correct \u00b7 Wrong \u00b7 Not answered", summary.correct + " \u00b7 " + summary.wrong + " \u00b7 " + summary.unanswered);
-  head.append(list);
-  head.append(el("div", "rp-note", "Practice results are not saved by the academy. This PDF is your own copy."));
-  root.append(head);
+  root.append(PDF.reportHead({
+    title: "Chapter " + chapter.chapterNumber + ": " + chapter.chapterName, subtitle: "Practice result",
+    stats: [
+      { value: summary.scored ? summary.correct + " / " + summary.scored + " (" + pct(summary.correct, summary.scored) + ")" : "–", label: "Score (auto-marked)" },
+      { value: String(summary.correct), label: "Correct", tone: "correct" },
+      { value: String(summary.wrong), label: "Wrong", tone: "wrong" },
+      { value: String(summary.unanswered), label: "Not answered" }
+    ],
+    meta: [
+      ["Student", student.name || "–"], ["Email", student.email || "–"], ["Subject", subjectLabel],
+      ["Date", new Date().toLocaleString("en-IN", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" })],
+      ["Questions", String(rows.length)]
+    ],
+    notes: ["Practice results are not saved by the academy. This PDF is your own copy."]
+  }));
 
   rows.forEach((q, i) => {
     const card = el("div", "rp-block rp-q");

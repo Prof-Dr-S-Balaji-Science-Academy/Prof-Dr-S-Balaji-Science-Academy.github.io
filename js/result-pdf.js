@@ -46,6 +46,18 @@ async function prepare(root) {
   await Promise.all(imgs.map((im) => (im.complete ? null : new Promise((res) => { im.onload = res; im.onerror = res; }))));
 }
 
+/* html2canvas finds where the text baseline sits by placing a tiny unclassed <img> next to a sample word, in a
+ * hidden <div> directly under <body> of the live page. The site-wide rule "img { display: block }" pushes that
+ * probe onto its own line, so every line of text was drawn too low inside its box (pills, option rows, tiles).
+ * While the PDF is being drawn, this one rule puts only that probe back to a normal inline image. */
+function addBaselineFix() {
+  const st = document.createElement("style");
+  st.id = "rp-baseline-fix";
+  st.textContent = 'body > div[style*="hidden"] > img { display: inline !important; max-width: none !important; }';
+  document.head.appendChild(st);
+  return st;
+}
+
 /* root: the report element (already in the page, off-screen). Returns a PDF Blob. */
 export async function reportToPdf(root, onStep) {
   await loadPdfLibs();
@@ -56,6 +68,8 @@ export async function reportToPdf(root, onStep) {
   const W = PAGE_W - 2 * MARGIN, MAXY = PAGE_H - MARGIN;
   let y = MARGIN;
   const blocks = Array.from(root.querySelectorAll(":scope > .rp-block"));
+  const baselineFix = addBaselineFix();
+  try {
   for (let i = 0; i < blocks.length; i++) {
     if (onStep) onStep(i + 1, blocks.length);
     const canvas = await window.html2canvas(blocks[i], {
@@ -81,6 +95,7 @@ export async function reportToPdf(root, onStep) {
       }
     }
   }
+  } finally { baselineFix.remove(); }
   /* Page numbers */
   const pages = pdf.getNumberOfPages();
   pdf.setFontSize(8);
@@ -90,6 +105,31 @@ export async function reportToPdf(root, onStep) {
     pdf.text("Page " + p + " of " + pages, PAGE_W / 2, PAGE_H - 4, { align: "center" });
   }
   return pdf.output("blob");
+}
+
+/* The summary block at the top of every result PDF (mock and practice share it).
+ * opts: { title, subtitle, stats: [{ value, label, tone }], meta: [[label, value], ...], notes: [text, ...] }
+ * tone is "correct" or "wrong" (colours the number only). Returns the block element. */
+export function reportHead(opts) {
+  const mk = (cls, text) => { const d = document.createElement("div"); d.className = cls; if (text != null) d.textContent = text; return d; };
+  const head = mk("rp-block rp-head");
+  head.append(mk("rp-brand", "Prof. Dr. S. Balaji Science Academy"), mk("rp-title", opts.title), mk("rp-sub", opts.subtitle));
+  const stats = mk("rp-stats");
+  (opts.stats || []).forEach((st) => {
+    const t = mk("rp-stat" + (st.tone ? " rp-" + st.tone : ""));
+    t.append(mk("rp-stat-v", st.value), mk("rp-stat-k", st.label));
+    stats.append(t);
+  });
+  head.append(stats);
+  const meta = mk("rp-meta");
+  (opts.meta || []).forEach((m) => {
+    const c = mk("rp-m");
+    c.append(mk("rp-m-k", m[0]), mk("rp-m-v", m[1]));
+    meta.append(c);
+  });
+  head.append(meta);
+  (opts.notes || []).forEach((n) => head.append(mk("rp-note", n)));
+  return head;
 }
 
 export function pdfFileName(title) {

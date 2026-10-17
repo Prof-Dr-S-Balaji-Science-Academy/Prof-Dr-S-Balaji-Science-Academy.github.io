@@ -79,3 +79,4 @@
 .pq-self { margin-top: 16px; }
 .pq-savestate { margin-top: 12px; font-size: 14px; color: var(--muted); }
 .pq-review { margin-top: 16px; }
+a.pq-back { text-decoration: none; }
