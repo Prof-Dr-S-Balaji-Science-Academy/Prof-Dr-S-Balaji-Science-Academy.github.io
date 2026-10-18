@@ -90,7 +90,7 @@
       '  <div class="container header-inner">',
       '    <div class="brand-container">',
       '      <a href="' + brandHref + '" class="brand-logo-link" data-od-id="brand-logo-link">',
-      '        <img src="' + prefix + 'assets/images/logo.jpg" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" />',
+      '        <img src="' + prefix + 'assets/images/logo.webp" alt="Prof. Dr. S. Balaji Science Academy" class="brand-logo" width="48" height="48" />',
       '      </a>',
       '      <a class="brand" href="' + brandHref + '" data-od-id="brand" id="brand-text">PROF. DR. S. BALAJI <br>SCIENCE ACADEMY</a>',
       '    </div>',

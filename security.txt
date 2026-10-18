@@ -1,0 +1,5 @@
+Contact: mailto:contact@profbalaji.in
+Expires: 2027-10-18T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://profbalaji.in/security.txt
+Policy: https://profbalaji.in/pages/privacy.html
