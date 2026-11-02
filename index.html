@@ -27,6 +27,26 @@
   <meta name="twitter:image" content="https://profbalaji.in/assets/images/preview.jpg" />
   <meta name="twitter:image:alt" content="Score High in Board Exams: CBSE and TN State Board Class 12 Physics and Chemistry by Prof. Dr. S. Balaji Science Academy" />
   <link rel="dns-prefetch" href="https://www.gstatic.com" />
+  <script>
+    /* Signed-in visitors arriving fresh (typed address, bookmark, search result or a link
+       from another website) go straight to their dashboard. Uses the same sign-in hint as the
+       shared header, so no wait for Firebase and no extra reads. Not applied when the visitor
+       came from a page of this site (logo or Home link), so the home page stays reachable.
+       The dashboard sends ProfAdmin to the admin page and unfinished sign-ups to onboarding.
+       Search crawlers have no hint and always get the full home page. */
+    (function () {
+      try {
+        var h = JSON.parse(localStorage.getItem("pb_user_hint") || "null");
+        if (!h || !(h.name || h.email)) return;
+        if (document.referrer) {
+          var r = document.createElement("a");
+          r.href = document.referrer;
+          if (r.host === location.host) return;
+        }
+        location.replace("pages/dashboard/");
+      } catch (e) { /* storage unavailable: stay on the home page */ }
+    })();
+  </script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
